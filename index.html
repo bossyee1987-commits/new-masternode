@@ -140,11 +140,11 @@
         /* ===== Dashboard Grid - 4 Card Sejajar ===== */
         .dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
 
-        /* Redeem Card - Flex Column agar bisa dorong ke bawah */
+        /* Redeem Card - Flex Column */
         .redeem-card { 
             background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); 
             border: 1px solid #1a3a5c; border-radius: 10px; padding: 18px; 
-            display: flex; flex-direction: column; min-height: 280px;
+            display: flex; flex-direction: column; min-height: 340px;
         }
         .redeem-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .redeem-card-title { font-size: 15px; font-weight: bold; color: #fff; }
@@ -159,7 +159,6 @@
         .redeem-footer { text-align: center; margin-top: 12px; font-size: 11px; color: #b0bec5; }
         .redeem-footer a { color: #00e5ff; text-decoration: none; cursor: pointer; }
         .redeem-footer a:hover { text-decoration: underline; }
-        /* Wrapper untuk mendorong input+button ke bawah */
         .redeem-action-wrapper { margin-top: auto; }
 
         /* Reward Validasi Card - Flex Column */
@@ -167,23 +166,33 @@
             background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); 
             border: 1px solid #1a5276; border-radius: 12px; padding: 18px; 
             box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
-            display: flex; flex-direction: column; min-height: 280px;
+            display: flex; flex-direction: column; min-height: 340px;
         }
         .reward-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .reward-card-title { font-size: 15px; font-weight: bold; color: #fff; }
         .reward-card-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
         .reward-card-icon svg { width: 20px; height: 20px; fill: #00e5ff; }
-        .reward-amount { font-size: 22px; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; margin-bottom: 15px; letter-spacing: 0.5px; transition: transform 0.3s ease; }
+        .reward-amount { 
+            font-size: 26px; font-weight: bold; color: #00ff88; 
+            font-family: 'Courier New', monospace; 
+            margin-bottom: 15px; letter-spacing: 0.5px; 
+            transition: transform 0.3s ease;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+        }
         .reward-countdown { font-size: 12px; color: #00e5ff; margin-bottom: 12px; }
         .reward-countdown span { font-weight: bold; }
         .btn-claim { width: 100%; padding: 11px; background-color: #00e5ff; color: #0a1628; border: none; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; }
         .btn-claim:hover { background-color: #00c4d9; transform: translateY(-1px); }
         .btn-claim svg { width: 16px; height: 16px; fill: #0a1628; }
-        /* Wrapper untuk mendorong countdown+button ke bawah */
         .reward-action-wrapper { margin-top: auto; }
 
         /* My Wallet Balance Card */
-        .wallet-card { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 18px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
+        .wallet-card { 
+            background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); 
+            border: 1px solid #1a5276; border-radius: 12px; padding: 18px; 
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+            min-height: 340px;
+        }
         .wallet-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .wallet-card-title { font-size: 15px; font-weight: bold; color: #fff; }
         .wallet-card-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
@@ -193,18 +202,23 @@
         .wallet-subcard:hover { border-color: #00e5ff; }
         .wallet-subcard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .wallet-token-info { display: flex; align-items: center; gap: 8px; }
-        .wallet-token-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .wallet-token-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .wallet-token-icon.usdt { background-color: rgba(38, 161, 123, 0.15); }
         .wallet-token-icon.usdt svg { width: 16px; height: 16px; fill: #26a17b; }
         .wallet-token-icon.bossx { background-color: rgba(0, 229, 255, 0.15); }
-        .wallet-token-icon.bossx svg { width: 16px; height: 16px; fill: #00e5ff; }
+        .wallet-token-icon.bossx img { width: 24px; height: 24px; object-fit: contain; }
         .wallet-token-name { font-size: 13px; font-weight: bold; color: #fff; }
         .wallet-token-network { font-size: 10px; color: #2ecc71; }
         .wallet-balance { font-size: 18px; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; }
         .wallet-balance .currency { font-size: 12px; color: #b0bec5; margin-left: 4px; }
 
         /* Validator Dial Card */
-        .validator-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        .validator-card { 
+            background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); 
+            border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; 
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 340px;
+        }
         .validator-card-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding-bottom: 8px; border-bottom: 1px solid #1a3a5c; }
         .validator-title { font-size: 14px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 8px; }
         .validator-title svg { width: 18px; height: 18px; fill: #f0a500; }
@@ -390,7 +404,6 @@
                                 <svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
                             </div>
                         </div>
-                        <!-- Wrapper ini yang mendorong input+button ke bawah -->
                         <div class="redeem-action-wrapper">
                             <input type="text" class="redeem-input" placeholder="REDEEM KEY">
                             <button class="btn-redeem">
@@ -438,7 +451,6 @@
                             </div>
                         </div>
                         <div class="reward-amount" id="rewardAmount">0.000000000 BossX</div>
-                        <!-- Wrapper ini yang mendorong countdown+button ke bawah -->
                         <div class="reward-action-wrapper">
                             <div class="reward-countdown">Auto claim in: <span id="countdownTimer">60</span>s</div>
                             <button class="btn-claim" onclick="manualClaim()">
@@ -472,7 +484,7 @@
                             <div class="wallet-subcard-header">
                                 <div class="wallet-token-info">
                                     <div class="wallet-token-icon bossx">
-                                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                        <img src="https://i.ibb.co/qYBkPDH3/Picsart-25-04-01-16-25-47-054.png" alt="BossX Logo">
                                     </div>
                                     <div class="wallet-token-name">BOSSX</div>
                                 </div>
