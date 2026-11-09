@@ -32,6 +32,7 @@
         }
         .sidebar.collapsed .menu li a { justify-content: center; padding: 12px 10px; }
         .sidebar .menu li a:hover { background-color: #34495e; }
+        .sidebar .menu li a.active { background-color: #34495e; border-left: 3px solid #00e5ff; }
         .sidebar .menu li a .menu-icon { flex-shrink: 0; }
         .sidebar .menu li a .menu-icon svg { width: 22px; height: 22px; fill: #f39c12; }
         .sidebar.collapsed .menu-text { display: none; }
@@ -108,7 +109,118 @@
         }
         .page-header-icon svg { width: 26px; height: 26px; fill: #00e5ff; }
 
-        /* Tabs */
+        /* Dashboard Welcome */
+        .welcome-banner {
+            background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%);
+            border: 1px solid #1a5276; border-radius: 10px; padding: 25px; margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .welcome-text h2 { color: #fff; font-size: 22px; margin-bottom: 5px; }
+        .welcome-text p { color: #b0bec5; font-size: 14px; }
+        .welcome-text .highlight { color: #00e5ff; font-weight: bold; }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 20px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
+            border: 1px solid #1a3a5c; border-radius: 10px; padding: 20px;
+            position: relative; transition: transform 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-3px); border-color: #00e5ff; }
+        .stat-card-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;
+        }
+        .stat-card-title { font-size: 13px; color: #b0bec5; }
+        .stat-card-icon {
+            width: 36px; height: 36px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .stat-card-icon svg { width: 20px; height: 20px; }
+        .stat-card-icon.balance { background-color: rgba(0, 229, 255, 0.15); }
+        .stat-card-icon.balance svg { fill: #00e5ff; }
+        .stat-card-icon.staked { background-color: rgba(155, 89, 182, 0.15); }
+        .stat-card-icon.staked svg { fill: #9b59b6; }
+        .stat-card-icon.nodes { background-color: rgba(46, 204, 113, 0.15); }
+        .stat-card-icon.nodes svg { fill: #2ecc71; }
+        .stat-card-icon.rewards { background-color: rgba(243, 156, 18, 0.15); }
+        .stat-card-icon.rewards svg { fill: #f39c12; }
+        .stat-card-value { font-size: 26px; font-weight: bold; color: #fff; margin-bottom: 5px; }
+        .stat-card-desc { font-size: 12px; color: #b0bec5; }
+        .stat-card-desc.positive { color: #2ecc71; }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid; grid-template-columns: 2fr 1fr; gap: 20px;
+        }
+        .panel {
+            background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
+            border: 1px solid #1a3a5c; border-radius: 10px; padding: 20px;
+        }
+        .panel-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+        }
+        .panel-title {
+            font-size: 16px; font-weight: bold; color: #fff;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .panel-title svg { width: 18px; height: 18px; fill: #00e5ff; }
+        .btn-view-all {
+            background: none; border: 1px solid #1a5276; color: #00e5ff;
+            padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-view-all:hover { background-color: #1a3a5c; }
+
+        /* Transactions Table */
+        .tx-table { width: 100%; border-collapse: collapse; }
+        .tx-table th {
+            text-align: left; padding: 10px 12px; font-size: 12px;
+            color: #b0bec5; border-bottom: 1px solid #1a3a5c; font-weight: normal;
+        }
+        .tx-table td {
+            padding: 12px; font-size: 13px; color: #fff;
+            border-bottom: 1px solid #1a3a5c; vertical-align: middle;
+        }
+        .tx-table tr:last-child td { border-bottom: none; }
+        .tx-type {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: bold;
+        }
+        .tx-type.stake { background-color: rgba(155, 89, 182, 0.15); color: #9b59b6; }
+        .tx-type.reward { background-color: rgba(46, 204, 113, 0.15); color: #2ecc71; }
+        .tx-type.generate { background-color: rgba(0, 229, 255, 0.15); color: #00e5ff; }
+        .tx-amount { font-weight: bold; }
+        .tx-amount.positive { color: #2ecc71; }
+        .tx-amount.negative { color: #e74c3c; }
+
+        /* Quick Actions */
+        .quick-actions { display: flex; flex-direction: column; gap: 10px; }
+        .action-btn {
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px;
+            background-color: #0d2137; border: 1px solid #1a5276; border-radius: 8px;
+            color: #fff; cursor: pointer; transition: all 0.3s; text-align: left;
+        }
+        .action-btn:hover { background-color: #1a3a5c; border-color: #00e5ff; }
+        .action-btn .action-icon {
+            width: 36px; height: 36px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .action-btn .action-icon svg { width: 18px; height: 18px; }
+        .action-btn .action-icon.cyan { background-color: rgba(0, 229, 255, 0.15); }
+        .action-btn .action-icon.cyan svg { fill: #00e5ff; }
+        .action-btn .action-icon.green { background-color: rgba(46, 204, 113, 0.15); }
+        .action-btn .action-icon.green svg { fill: #2ecc71; }
+        .action-btn .action-icon.purple { background-color: rgba(155, 89, 182, 0.15); }
+        .action-btn .action-icon.purple svg { fill: #9b59b6; }
+        .action-btn .action-icon.orange { background-color: rgba(243, 156, 18, 0.15); }
+        .action-btn .action-icon.orange svg { fill: #f39c12; }
+        .action-btn-text { flex: 1; }
+        .action-btn-title { font-size: 13px; font-weight: bold; color: #fff; }
+        .action-btn-desc { font-size: 11px; color: #b0bec5; margin-top: 2px; }
+
+        /* Tabs (Access Key) */
         .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
         .tab-btn {
             display: flex; align-items: center; gap: 8px; padding: 10px 20px;
@@ -124,28 +236,7 @@
         }
         .tab-btn.active .tab-badge { background-color: #0a1628; color: #00e5ff; }
 
-        /* Panel */
-        .panel {
-            background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
-            border: 1px solid #1a3a5c; border-radius: 10px; padding: 20px; margin-bottom: 20px;
-        }
-        .panel-header {
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-        }
-        .panel-title {
-            font-size: 18px; font-weight: bold; color: #fff;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .panel-title svg { width: 20px; height: 20px; fill: #00e5ff; }
-        .btn-refresh {
-            display: flex; align-items: center; gap: 6px; background-color: #0d2137;
-            border: 1px solid #1a5276; color: #fff; padding: 8px 14px; border-radius: 6px;
-            font-size: 13px; cursor: pointer; transition: all 0.3s;
-        }
-        .btn-refresh:hover { background-color: #1a3a5c; }
-        .btn-refresh svg { width: 14px; height: 14px; fill: #fff; }
-
-        /* Table */
+        /* Access Key Panel */
         .key-table { width: 100%; border-collapse: collapse; }
         .key-table th {
             text-align: left; padding: 12px 15px; font-size: 13px;
@@ -156,19 +247,12 @@
             border-bottom: 1px solid #1a3a5c; vertical-align: middle;
         }
         .key-table tr:last-child td { border-bottom: none; }
-        .key-table tr { background-color: rgba(0, 229, 255, 0.03); }
-        .key-value {
-            font-family: monospace; color: #00e5ff; font-weight: bold;
-            font-size: 13px; letter-spacing: 0.5px;
-        }
+        .key-value { font-family: monospace; color: #00e5ff; font-weight: bold; font-size: 13px; letter-spacing: 0.5px; }
         .stake-value { font-weight: bold; color: #fff; }
         .fee-value { font-size: 11px; color: #e74c3c; margin-top: 3px; }
         .date-value { display: flex; align-items: center; gap: 6px; color: #b0bec5; font-size: 13px; }
         .date-value svg { width: 14px; height: 14px; fill: #b0bec5; }
-        .status-badge {
-            display: inline-flex; align-items: center; gap: 6px;
-            color: #2ecc71; font-size: 12px; font-weight: bold;
-        }
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; color: #2ecc71; font-size: 12px; font-weight: bold; }
         .status-badge svg { width: 14px; height: 14px; fill: #2ecc71; }
         .btn-copy {
             display: inline-flex; align-items: center; gap: 6px;
@@ -179,23 +263,21 @@
         .btn-copy:hover { background-color: #00c4d9; }
         .btn-copy svg { width: 12px; height: 12px; fill: #0a1628; }
 
-        /* Stats Cards */
-        .stats-grid {
+        .stats-grid-small {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px;
         }
-        .stat-card {
+        .stat-card-small {
             background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
             border: 1px solid #1a3a5c; border-radius: 10px; padding: 20px;
-            position: relative;
         }
-        .stat-card-header {
+        .stat-card-small-header {
             display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;
         }
-        .stat-card-title { font-size: 14px; color: #b0bec5; }
-        .stat-card-icon svg { width: 20px; height: 20px; fill: #00e5ff; }
-        .stat-card-value { font-size: 28px; font-weight: bold; color: #fff; margin-bottom: 5px; }
-        .stat-card-desc { font-size: 12px; color: #b0bec5; }
-        .stat-card.available .stat-card-desc { color: #2ecc71; }
+        .stat-card-small-title { font-size: 14px; color: #b0bec5; }
+        .stat-card-small-icon svg { width: 20px; height: 20px; fill: #00e5ff; }
+        .stat-card-small-value { font-size: 28px; font-weight: bold; color: #fff; margin-bottom: 5px; }
+        .stat-card-small-desc { font-size: 12px; color: #b0bec5; }
+        .stat-card-small.available .stat-card-small-desc { color: #2ecc71; }
 
         /* Generate Form */
         .form-label { font-size: 13px; color: #b0bec5; margin-bottom: 8px; display: block; }
@@ -203,10 +285,7 @@
             display: flex; align-items: center; background-color: #0d2137;
             border: 1px solid #1a5276; border-radius: 8px; padding: 10px 15px; gap: 10px;
         }
-        .input-group input {
-            flex: 1; background: transparent; border: none; outline: none;
-            color: #fff; font-size: 14px;
-        }
+        .input-group input { flex: 1; background: transparent; border: none; outline: none; color: #fff; font-size: 14px; }
         .input-group input::placeholder { color: #78909c; }
         .btn-max {
             background-color: #1a3a5c; color: #00e5ff; border: none;
@@ -214,8 +293,6 @@
             cursor: pointer; transition: background 0.3s;
         }
         .btn-max:hover { background-color: #245a8a; }
-
-        /* Info Box */
         .info-box {
             background-color: rgba(0, 229, 255, 0.05); border: 1px solid #1a5276;
             border-radius: 8px; padding: 15px; margin-top: 15px;
@@ -228,8 +305,6 @@
         .info-box ul { list-style: none; padding: 0; }
         .info-box li { font-size: 13px; color: #b0bec5; margin-bottom: 6px; line-height: 1.5; }
         .info-box li strong { color: #fff; }
-
-        /* Summary */
         .summary { margin-top: 20px; }
         .summary-row {
             display: flex; justify-content: space-between; align-items: center;
@@ -242,8 +317,6 @@
         .summary-value.fee { color: #e74c3c; }
         .summary-value.total { color: #00e5ff; }
         .summary-value.balance { color: #00e5ff; font-family: monospace; }
-
-        /* Generate Button */
         .btn-generate {
             width: 100%; padding: 14px; background-color: #00e5ff; color: #0a1628;
             border: none; border-radius: 8px; font-size: 16px; font-weight: bold;
@@ -255,6 +328,8 @@
 
         .tab-content { display: none; }
         .tab-content.active { display: block; }
+        .page-section { display: none; }
+        .page-section.active { display: block; }
 
         /* Toast */
         .toast {
@@ -277,7 +352,8 @@
             </div>
         </div>
         <ul class="menu">
-            <li><a href="#" onclick="showAccessKeyPage(event)"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg></span><span class="menu-text">Access Key</span></a></li>
+            <li><a href="#" class="active" id="menu-dashboard" onclick="navigateTo('dashboard', event)"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></span><span class="menu-text">Dashboard</span></a></li>
+            <li><a href="#" id="menu-accesskey" onclick="navigateTo('accesskey', event)"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg></span><span class="menu-text">Access Key</span></a></li>
         </ul>
     </div>
 
@@ -315,140 +391,258 @@
             </div>
         </div>
 
-        <div class="content" id="main-content">
-            <div class="page-header">
-                <div>
-                    <div class="page-header-title">
-                        <svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
-                        Access Key
+        <div class="content">
+            <!-- DASHBOARD PAGE -->
+            <div class="page-section active" id="page-dashboard">
+                <div class="welcome-banner">
+                    <div class="welcome-text">
+                        <h2>Selamat datang kembali, <span class="highlight">Fery Muliawan</span> 👋</h2>
+                        <p>Berikut ringkasan aktivitas masternode Anda hari ini.</p>
                     </div>
-                    <div class="page-header-subtitle">Generate dan kelola Access Key untuk aktivasi node validator</div>
                 </div>
-                <div class="page-header-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">Total Balance</span>
+                            <div class="stat-card-icon balance">
+                                <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                            </div>
+                        </div>
+                        <div class="stat-card-value">1,000.00 <span style="font-size:14px;color:#b0bec5;">BossX</span></div>
+                        <div class="stat-card-desc positive">↑ +2.5% dari kemarin</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">Total Staked</span>
+                            <div class="stat-card-icon staked">
+                                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            </div>
+                        </div>
+                        <div class="stat-card-value">999.00 <span style="font-size:14px;color:#b0bec5;">BossX</span></div>
+                        <div class="stat-card-desc">1 node aktif</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">Active Nodes</span>
+                            <div class="stat-card-icon nodes">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            </div>
+                        </div>
+                        <div class="stat-card-value">1</div>
+                        <div class="stat-card-desc positive">● Online</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <span class="stat-card-title">Total Rewards</span>
+                            <div class="stat-card-icon rewards">
+                                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                        </div>
+                        <div class="stat-card-value">12.45 <span style="font-size:14px;color:#b0bec5;">BossX</span></div>
+                        <div class="stat-card-desc positive">↑ +0.8 hari ini</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="tabs">
-                <button class="tab-btn active" id="btn-generate" onclick="switchTab('generate')">
-                    <svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>
-                    Generate
-                </button>
-                <button class="tab-btn" id="btn-mykeys" onclick="switchTab('mykeys')">
-                    <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
-                    My Keys
-                    <span class="tab-badge" id="key-badge">0</span>
-                </button>
-            </div>
-
-            <!-- Tab Generate -->
-            <div class="tab-content active" id="tab-generate">
-                <div class="panel">
-                    <div class="panel-title" style="margin-bottom: 20px;">
-                        <svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>
-                        Generate Access Key
-                    </div>
-
-                    <label class="form-label">Jumlah BossX untuk Stake:</label>
-                    <div class="input-group">
-                        <input type="number" id="stake-input" placeholder="Minimal 10 BossX" min="10" oninput="updateSummary()">
-                        <button class="btn-max" onclick="setMax()">MAX</button>
-                    </div>
-
-                    <div class="info-box">
-                        <div class="info-box-title">
-                            <svg viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-                            Informasi
+                <div class="dashboard-grid">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+                                Transaksi Terbaru
+                            </div>
+                            <button class="btn-view-all">Lihat Semua</button>
                         </div>
-                        <ul>
-                            <li><strong>Minimal stake:</strong> 10 BossX</li>
-                            <li><strong>Fee transaksi:</strong> 1 BossX (dipotong otomatis)</li>
-                            <li><strong>Format:</strong> 25 karakter (huruf + angka)</li>
-                            <li><strong>Status:</strong> One-time use (hangus setelah redeem)</li>
-                            <li><strong>Cara pakai:</strong> Copy kode → paste di Dashboard → Redeem</li>
-                        </ul>
-                    </div>
-
-                    <div class="summary">
-                        <div class="summary-row">
-                            <span class="summary-label">Jumlah Stake:</span>
-                            <span class="summary-value stake" id="summary-stake">0.00 BossX</span>
-                        </div>
-                        <div class="summary-row">
-                            <span class="summary-label">Fee:</span>
-                            <span class="summary-value fee">1.00 BossX</span>
-                        </div>
-                        <div class="summary-row">
-                            <span class="summary-label">Total Terpotong:</span>
-                            <span class="summary-value total" id="summary-total">1.00 BossX</span>
-                        </div>
-                        <div class="summary-row">
-                            <span class="summary-label">Saldo saat ini:</span>
-                            <span class="summary-value balance">1000.00000000 BossX</span>
-                        </div>
-                    </div>
-
-                    <button class="btn-generate" onclick="generateKey()">
-                        <svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>
-                        Generate Access Key
-                    </button>
-                </div>
-            </div>
-
-            <!-- Tab My Keys -->
-            <div class="tab-content" id="tab-mykeys">
-                <div class="panel">
-                    <div class="panel-header">
-                        <div class="panel-title">
-                            <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
-                            History Access Key
-                        </div>
-                        <button class="btn-refresh" onclick="refreshKeys()">
-                            <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
-                            Refresh
-                        </button>
-                    </div>
-
-                    <div id="keys-table-container">
-                        <table class="key-table">
+                        <table class="tx-table">
                             <thead>
                                 <tr>
-                                    <th>Access Key</th>
-                                    <th>Stake</th>
+                                    <th>Tipe</th>
+                                    <th>Deskripsi</th>
                                     <th>Tanggal</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
+                                    <th style="text-align:right;">Jumlah</th>
                                 </tr>
                             </thead>
-                            <tbody id="keys-table-body">
+                            <tbody id="tx-table-body">
+                                <tr>
+                                    <td><span class="tx-type generate">GENERATE</span></td>
+                                    <td>Generate Access Key</td>
+                                    <td style="color:#b0bec5;">9 Nov 2026, 17:25</td>
+                                    <td class="tx-amount negative" style="text-align:right;">-1.00 BossX</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tx-type reward">REWARD</span></td>
+                                    <td>Reward Masternode</td>
+                                    <td style="color:#b0bec5;">9 Nov 2026, 12:00</td>
+                                    <td class="tx-amount positive" style="text-align:right;">+0.80 BossX</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tx-type stake">STAKE</span></td>
+                                    <td>Stake untuk Access Key</td>
+                                    <td style="color:#b0bec5;">9 Nov 2026, 17:25</td>
+                                    <td class="tx-amount negative" style="text-align:right;">-999.00 BossX</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-card-header">
-                                <span class="stat-card-title">Total Keys</span>
-                                <span class="stat-card-icon"><svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg></span>
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                Aksi Cepat
                             </div>
-                            <div class="stat-card-value" id="stat-total">0</div>
-                            <div class="stat-card-desc">Access Key dibuat</div>
                         </div>
-                        <div class="stat-card available">
-                            <div class="stat-card-header">
-                                <span class="stat-card-title">Available</span>
-                                <span class="stat-card-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
-                            </div>
-                            <div class="stat-card-value" id="stat-available">0</div>
-                            <div class="stat-card-desc">Belum diredeem</div>
+                        <div class="quick-actions">
+                            <button class="action-btn" onclick="navigateTo('accesskey', event)">
+                                <div class="action-icon cyan">
+                                    <svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>
+                                </div>
+                                <div class="action-btn-text">
+                                    <div class="action-btn-title">Generate Key</div>
+                                    <div class="action-btn-desc">Buat Access Key baru</div>
+                                </div>
+                            </button>
+                            <button class="action-btn">
+                                <div class="action-icon green">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                </div>
+                                <div class="action-btn-text">
+                                    <div class="action-btn-title">Redeem Key</div>
+                                    <div class="action-btn-desc">Aktivasi node validator</div>
+                                </div>
+                            </button>
+                            <button class="action-btn">
+                                <div class="action-icon purple">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                                </div>
+                                <div class="action-btn-text">
+                                    <div class="action-btn-title">Stake BossX</div>
+                                    <div class="action-btn-desc">Tingkatkan stake Anda</div>
+                                </div>
+                            </button>
+                            <button class="action-btn">
+                                <div class="action-icon orange">
+                                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                                </div>
+                                <div class="action-btn-text">
+                                    <div class="action-btn-title">Riwayat</div>
+                                    <div class="action-btn-desc">Lihat semua transaksi</div>
+                                </div>
+                            </button>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-card-header">
-                                <span class="stat-card-title">Redeemed</span>
-                                <span class="stat-card-icon"><svg viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/></svg></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCESS KEY PAGE -->
+            <div class="page-section" id="page-accesskey">
+                <div class="page-header">
+                    <div>
+                        <div class="page-header-title">
+                            <svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                            Access Key
+                        </div>
+                        <div class="page-header-subtitle">Generate dan kelola Access Key untuk aktivasi node validator</div>
+                    </div>
+                    <div class="page-header-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab-btn active" id="btn-generate" onclick="switchTab('generate')">
+                        <svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>
+                        Generate
+                    </button>
+                    <button class="tab-btn" id="btn-mykeys" onclick="switchTab('mykeys')">
+                        <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+                        My Keys
+                        <span class="tab-badge" id="key-badge">0</span>
+                    </button>
+                </div>
+
+                <div class="tab-content active" id="tab-generate">
+                    <div class="panel">
+                        <div class="panel-title" style="margin-bottom: 20px;">
+                            <svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>
+                            Generate Access Key
+                        </div>
+                        <label class="form-label">Jumlah BossX untuk Stake:</label>
+                        <div class="input-group">
+                            <input type="number" id="stake-input" placeholder="Minimal 10 BossX" min="10" oninput="updateSummary()">
+                            <button class="btn-max" onclick="setMax()">MAX</button>
+                        </div>
+                        <div class="info-box">
+                            <div class="info-box-title">
+                                <svg viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                                Informasi
                             </div>
-                            <div class="stat-card-value" id="stat-redeemed">0</div>
-                            <div class="stat-card-desc">Sudah digunakan</div>
+                            <ul>
+                                <li><strong>Minimal stake:</strong> 10 BossX</li>
+                                <li><strong>Fee transaksi:</strong> 1 BossX (dipotong otomatis)</li>
+                                <li><strong>Format:</strong> 25 karakter (huruf + angka)</li>
+                                <li><strong>Status:</strong> One-time use (hangus setelah redeem)</li>
+                                <li><strong>Cara pakai:</strong> Copy kode → paste di Dashboard → Redeem</li>
+                            </ul>
+                        </div>
+                        <div class="summary">
+                            <div class="summary-row"><span class="summary-label">Jumlah Stake:</span><span class="summary-value stake" id="summary-stake">0.00 BossX</span></div>
+                            <div class="summary-row"><span class="summary-label">Fee:</span><span class="summary-value fee">1.00 BossX</span></div>
+                            <div class="summary-row"><span class="summary-label">Total Terpotong:</span><span class="summary-value total" id="summary-total">1.00 BossX</span></div>
+                            <div class="summary-row"><span class="summary-label">Saldo saat ini:</span><span class="summary-value balance">1000.00000000 BossX</span></div>
+                        </div>
+                        <button class="btn-generate" onclick="generateKey()">
+                            <svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>
+                            Generate Access Key
+                        </button>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="tab-mykeys">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+                                History Access Key
+                            </div>
+                            <button class="btn-refresh" onclick="refreshKeys()" style="display:flex;align-items:center;gap:6px;background-color:#0d2137;border:1px solid #1a5276;color:#fff;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;">
+                                <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#fff;"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                                Refresh
+                            </button>
+                        </div>
+                        <div id="keys-table-container">
+                            <table class="key-table">
+                                <thead>
+                                    <tr><th>Access Key</th><th>Stake</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr>
+                                </thead>
+                                <tbody id="keys-table-body"></tbody>
+                            </table>
+                        </div>
+                        <div class="stats-grid-small">
+                            <div class="stat-card-small">
+                                <div class="stat-card-small-header">
+                                    <span class="stat-card-small-title">Total Keys</span>
+                                    <span class="stat-card-small-icon"><svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg></span>
+                                </div>
+                                <div class="stat-card-small-value" id="stat-total">0</div>
+                                <div class="stat-card-small-desc">Access Key dibuat</div>
+                            </div>
+                            <div class="stat-card-small available">
+                                <div class="stat-card-small-header">
+                                    <span class="stat-card-small-title">Available</span>
+                                    <span class="stat-card-small-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+                                </div>
+                                <div class="stat-card-small-value" id="stat-available">0</div>
+                                <div class="stat-card-small-desc">Belum diredeem</div>
+                            </div>
+                            <div class="stat-card-small">
+                                <div class="stat-card-small-header">
+                                    <span class="stat-card-small-title">Redeemed</span>
+                                    <span class="stat-card-small-icon"><svg viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/></svg></span>
+                                </div>
+                                <div class="stat-card-small-value" id="stat-redeemed">0</div>
+                                <div class="stat-card-small-desc">Sudah digunakan</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -456,7 +650,7 @@
         </div>
     </div>
 
-    <div class="toast" id="toast">Key berhasil disalin!</div>
+    <div class="toast" id="toast">Berhasil!</div>
 
     <script>
         let accessKeys = [];
@@ -472,8 +666,16 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        function showAccessKeyPage(e) { e.preventDefault(); }
+        // Navigasi antar halaman (Dashboard / Access Key)
+        function navigateTo(page, event) {
+            if (event) event.preventDefault();
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.sidebar .menu a').forEach(a => a.classList.remove('active'));
+            document.getElementById('page-' + page).classList.add('active');
+            document.getElementById('menu-' + page).classList.add('active');
+        }
 
+        // Tab di dalam Access Key
         function switchTab(tab) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
@@ -485,7 +687,6 @@
             document.getElementById('stake-input').value = 1000;
             updateSummary();
         }
-
         function updateSummary() {
             const stake = parseFloat(document.getElementById('stake-input').value) || 0;
             const fee = 1;
@@ -496,70 +697,38 @@
 
         function generateKey() {
             const stake = parseFloat(document.getElementById('stake-input').value) || 0;
-            if (stake < 10) {
-                alert('Minimal stake adalah 10 BossX');
-                return;
-            }
+            if (stake < 10) { alert('Minimal stake adalah 10 BossX'); return; }
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
             let key = '';
-            for (let i = 0; i < 25; i++) {
-                key += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
+            for (let i = 0; i < 25; i++) key += chars.charAt(Math.floor(Math.random() * chars.length));
             const now = new Date();
             const dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false });
 
-            accessKeys.push({
-                key: key,
-                stake: stake,
-                fee: 1,
-                date: dateStr,
-                status: 'AVAILABLE'
-            });
-
+            accessKeys.push({ key: key, stake: stake, fee: 1, date: dateStr, status: 'AVAILABLE' });
             updateKeysTable();
             document.getElementById('stake-input').value = '';
             updateSummary();
             switchTab('mykeys');
+            showToast('Access Key berhasil digenerate!');
         }
 
         function updateKeysTable() {
             const tbody = document.getElementById('keys-table-body');
             tbody.innerHTML = '';
-
             accessKeys.forEach((item, index) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td><span class="key-value">${item.key}</span></td>
-                    <td>
-                        <div class="stake-value">${item.stake.toFixed(2)} BossX</div>
-                        <div class="fee-value">Fee: ${item.fee} BossX</div>
-                    </td>
-                    <td>
-                        <div class="date-value">
-                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-                            ${item.date}
-                        </div>
-                    </td>
-                    <td>
-                        <span class="status-badge">
-                            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                            ${item.status}
-                        </span>
-                    </td>
-                    <td>
-                        <button class="btn-copy" onclick="copyKey(${index})">
-                            <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                            Copy
-                        </button>
-                    </td>
+                    <td><div class="stake-value">${item.stake.toFixed(2)} BossX</div><div class="fee-value">Fee: ${item.fee} BossX</div></td>
+                    <td><div class="date-value"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>${item.date}</div></td>
+                    <td><span class="status-badge"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>${item.status}</span></td>
+                    <td><button class="btn-copy" onclick="copyKey(${index})"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>Copy</button></td>
                 `;
                 tbody.appendChild(tr);
             });
-
             const total = accessKeys.length;
             const available = accessKeys.filter(k => k.status === 'AVAILABLE').length;
             const redeemed = accessKeys.filter(k => k.status === 'REDEEMED').length;
-
             document.getElementById('stat-total').textContent = total;
             document.getElementById('stat-available').textContent = available;
             document.getElementById('stat-redeemed').textContent = redeemed;
@@ -568,29 +737,14 @@
 
         function copyKey(index) {
             const key = accessKeys[index].key;
-            navigator.clipboard.writeText(key).then(() => {
-                showToast('Key berhasil disalin!');
-            }).catch(() => {
-                const ta = document.createElement('textarea');
-                ta.value = key;
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                showToast('Key berhasil disalin!');
+            navigator.clipboard.writeText(key).then(() => showToast('Key berhasil disalin!')).catch(() => {
+                const ta = document.createElement('textarea'); ta.value = key; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showToast('Key berhasil disalin!');
             });
         }
-
+        function refreshKeys() { updateKeysTable(); showToast('Data berhasil diperbarui!'); }
         function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.textContent = msg;
-            toast.classList.add('show');
+            const toast = document.getElementById('toast'); toast.textContent = msg; toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2500);
-        }
-
-        function refreshKeys() {
-            updateKeysTable();
-            showToast('Data berhasil diperbarui!');
         }
     </script>
 
