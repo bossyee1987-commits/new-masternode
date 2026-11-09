@@ -240,9 +240,75 @@
         .toast { position: fixed; bottom: 30px; right: 30px; background-color: #2ecc71; color: #fff; padding: 12px 20px; border-radius: 8px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); opacity: 0; transform: translateY(20px); transition: all 0.3s; z-index: 1000; }
         .toast.show { opacity: 1; transform: translateY(0); }
 
+        /* ===== Log Engine Mastercloud Section ===== */
+        .log-section { margin-top: 20px; }
+        .log-panel {
+            background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%);
+            border: 1px solid #1a5276; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+        }
+        .log-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 20px; background-color: rgba(0, 229, 255, 0.05);
+            border-bottom: 1px solid #1a5276;
+        }
+        .log-title { font-size: 16px; font-weight: bold; color: #00e5ff; }
+        .btn-clear-log {
+            background-color: #e74c3c; color: #fff; border: none;
+            padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: bold;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .btn-clear-log:hover { background-color: #c0392b; }
+        .log-content {
+            background-color: #050a14; padding: 15px; max-height: 250px;
+            overflow-y: auto; font-family: 'Courier New', monospace; font-size: 12px;
+        }
+        .log-content::-webkit-scrollbar { width: 8px; }
+        .log-content::-webkit-scrollbar-track { background: #0a1628; border-radius: 4px; }
+        .log-content::-webkit-scrollbar-thumb { background: #1a5276; border-radius: 4px; }
+        .log-content::-webkit-scrollbar-thumb:hover { background: #2471a3; }
+        .log-entry {
+            padding: 4px 0; color: #2ecc71; border-bottom: 1px solid rgba(26, 82, 118, 0.3);
+        }
+        .log-entry:last-child { border-bottom: none; }
+        .log-timestamp { color: #00e5ff; margin-right: 8px; }
+        .log-level-success { color: #2ecc71; }
+        .log-level-info { color: #3498db; }
+        .log-level-warning { color: #f39c12; }
+        .log-level-error { color: #e74c3c; }
+
+        /* System Info Panel */
+        .system-info-panel {
+            margin-top: 15px;
+            background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%);
+            border: 1px solid #1a5276; border-radius: 12px; padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+        }
+        .system-info-title {
+            font-size: 15px; font-weight: bold; color: #00e5ff;
+            display: flex; align-items: center; gap: 8px; margin-bottom: 15px;
+        }
+        .system-info-title svg { width: 18px; height: 18px; fill: #00e5ff; }
+        .system-info-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+        }
+        .system-info-column { display: flex; flex-direction: column; gap: 8px; }
+        .system-info-item {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            padding: 6px 0; border-bottom: 1px solid rgba(26, 82, 118, 0.3);
+        }
+        .system-info-label { color: #b0bec5; font-size: 13px; flex: 1; }
+        .system-info-value {
+            color: #fff; font-size: 13px; font-weight: bold; text-align: right;
+        }
+        .system-info-value.status-active { color: #2ecc71; }
+        .system-info-value.status-pending { color: #f39c12; }
+        .system-info-value.status-time { color: #e74c3c; }
+
         /* Responsive - fallback ke 2 kolom untuk layar sempit */
         @media (max-width: 1400px) {
             .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+            .system-info-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 700px) {
             .dashboard-grid { grid-template-columns: 1fr; }
@@ -394,6 +460,65 @@
                                 <div class="wallet-token-network">Internal Token</div>
                             </div>
                             <div class="wallet-balance" id="bossxBalance">899.000000000 <span class="currency">BossX</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Log Engine Mastercloud Section -->
+                <div class="log-section">
+                    <div class="log-panel">
+                        <div class="log-header">
+                            <div class="log-title">Log Engine Mastercloud</div>
+                            <button class="btn-clear-log" onclick="clearLog()">Clear Log</button>
+                        </div>
+                        <div class="log-content" id="logContent">
+                            <!-- Log entries akan diisi secara dinamis -->
+                        </div>
+                    </div>
+
+                    <!-- Informasi Sistem BossX Validator -->
+                    <div class="system-info-panel">
+                        <div class="system-info-title">
+                            <svg viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                            Informasi Sistem BossX Validator
+                        </div>
+                        <div class="system-info-grid">
+                            <div class="system-info-column">
+                                <div class="system-info-item">
+                                    <span class="system-info-label">Node Status:</span>
+                                    <span class="system-info-value status-active">Aktif</span>
+                                </div>
+                                <div class="system-info-item">
+                                    <span class="system-info-label">Auto Stop:</span>
+                                    <span class="system-info-value">Setiap hari jam 06:00</span>
+                                </div>
+                                <div class="system-info-item">
+                                    <span class="system-info-label">Auto Claim:</span>
+                                    <span class="system-info-value">Setiap 60 detik (masuk Pending Reward)</span>
+                                </div>
+                                <div class="system-info-item">
+                                    <span class="system-info-label">Masa Berlaku Validasi:</span>
+                                    <span class="system-info-value status-time">39.999.537 detik</span>
+                                </div>
+                            </div>
+                            <div class="system-info-column">
+                                <div class="system-info-item">
+                                    <span class="system-info-label">Minimal Stake:</span>
+                                    <span class="system-info-value">10 BossX (via Access Key)</span>
+                                </div>
+                                <div class="system-info-item">
+                                    <span class="system-info-label">Fee Generate Key:</span>
+                                    <span class="system-info-value">1 BossX</span>
+                                </div>
+                                <div class="system-info-item">
+                                    <span class="system-info-label">Claim Reward:</span>
+                                    <span class="system-info-value">Tanpa minimal (kapan saja)</span>
+                                </div>
+                                <div class="system-info-item">
+                                    <span class="system-info-label">Access Key:</span>
+                                    <span class="system-info-value">25 karakter, one-time use</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -599,6 +724,12 @@
         function showToast(msg) {
             const toast = document.getElementById('toast'); toast.textContent = msg; toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // ==================== LOG FUNCTIONS ====================
+        function clearLog() {
+            document.getElementById('logContent').innerHTML = '';
+            showToast('Log berhasil dihapus');
         }
 
         // ==================== REWARD & COUNTDOWN SYSTEM ====================
