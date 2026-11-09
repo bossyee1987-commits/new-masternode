@@ -172,8 +172,9 @@
         .reward-card-title { font-size: 15px; font-weight: bold; color: #fff; }
         .reward-card-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
         .reward-card-icon svg { width: 20px; height: 20px; fill: #00e5ff; }
+        /* PERUBAHAN 3: Angka reward diperkecil dari 26px ke 18px agar sama dengan angka di wallet */
         .reward-amount { 
-            font-size: 26px; font-weight: bold; color: #00ff88; 
+            font-size: 18px; font-weight: bold; color: #00ff88; 
             font-family: 'Courier New', monospace; 
             margin-bottom: 15px; letter-spacing: 0.5px; 
             transition: transform 0.3s ease;
@@ -212,7 +213,7 @@
         .wallet-balance { font-size: 18px; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; }
         .wallet-balance .currency { font-size: 12px; color: #b0bec5; margin-left: 4px; }
 
-        /* Access Key Running Card (sebelumnya Validator Running) */
+        /* Access Key Running Card */
         .validator-card { 
             background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); 
             border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; 
@@ -223,7 +224,7 @@
         .validator-title { font-size: 14px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 8px; }
         .validator-title svg { width: 18px; height: 18px; fill: #f0a500; }
 
-        /* Info Row di atas dial (Reward kiri + Countdown kanan) */
+        /* Info Row - PERUBAHAN 1: Label "Reward" & "Next Reset" dihapus */
         .validator-info-row {
             width: 100%;
             display: flex;
@@ -237,13 +238,6 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-        }
-        .validator-info-label {
-            font-size: 10px;
-            color: #b0bec5;
-            margin-bottom: 3px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
         .validator-info-value {
             font-size: 14px;
@@ -266,26 +260,27 @@
             text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
         }
 
-        /* Vault Container - diturunkan posisinya */
+        /* PERUBAHAN 2: Vault Container diperbesar dari 240px ke 270px */
         .vault-container { 
             position: relative; 
-            width: 240px; 
-            height: 240px; 
+            width: 270px; 
+            height: 270px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             transform-origin: center center;
-            margin-top: 15px;
+            margin-top: 10px;
         }
-        .guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 120px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
+        .guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 135px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
         .guide-line.active { background: linear-gradient(to bottom, rgba(0,255,136,0.6), transparent); }
         .guide-line.click-flash { width: 4px; background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(0,255,136,0.8), transparent); transition: all 0.08s ease-out; }
         .ring { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 1.5s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease; }
-        .ring-outer { width: 220px; height: 220px; background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.2); }
-        .ring-2 { width: 176px; height: 176px; background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.15); }
-        .ring-3 { width: 144px; height: 144px; background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
-        .ring-4 { width: 112px; height: 112px; background: radial-gradient(circle, transparent 42%, #0d0d22 42%, #0d0d22 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
-        .ring-inner { width: 88px; height: 88px; background: radial-gradient(circle, transparent 42%, #0a0a20 42%, #0a0a20 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+        /* Semua ring diperbesar proporsional (skala ~1.125x dari 240px) */
+        .ring-outer { width: 250px; height: 250px; background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.2); }
+        .ring-2 { width: 200px; height: 200px; background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.15); }
+        .ring-3 { width: 162px; height: 162px; background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+        .ring-4 { width: 126px; height: 126px; background: radial-gradient(circle, transparent 42%, #0d0d22 42%, #0d0d22 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+        .ring-inner { width: 100px; height: 100px; background: radial-gradient(circle, transparent 42%, #0a0a20 42%, #0a0a20 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
         .ring.running { border-color: rgba(0, 255, 136, 0.4); }
         .ring-outer.running { box-shadow: 0 0 25px rgba(0, 255, 136, 0.1), inset 0 0 20px rgba(0, 255, 136, 0.05); }
         .ring-2.running { box-shadow: 0 0 20px rgba(0, 255, 136, 0.08); }
@@ -297,9 +292,9 @@
         .ring.running .tick { background: rgba(0, 255, 136, 0.2); }
         .tick.major { width: 2px; height: 8px; background: rgba(100, 100, 150, 0.5); }
         .ring.running .tick.major { background: rgba(0, 255, 136, 0.4); }
-        .ring-char { position: absolute; font-size: 9px; font-weight: bold; color: #444466; user-select: none; transition: color 0.5s; letter-spacing: 1px; font-family: 'Courier New', monospace; }
+        .ring-char { position: absolute; font-size: 10px; font-weight: bold; color: #444466; user-select: none; transition: color 0.5s; letter-spacing: 1px; font-family: 'Courier New', monospace; }
         .ring.running .ring-char { color: rgba(0, 255, 136, 0.7); text-shadow: 0 0 4px rgba(0, 255, 136, 0.3); }
-        .ring-char.highlight { color: #ffffff !important; text-shadow: 0 0 8px #00ff88, 0 0 15px rgba(0, 255, 136, 0.6) !important; font-size: 11px; }
+        .ring-char.highlight { color: #ffffff !important; text-shadow: 0 0 8px #00ff88, 0 0 15px rgba(0, 255, 136, 0.6) !important; font-size: 12px; }
         @keyframes spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes spin-ccw { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
         .ring.running.spin-1 { animation: spin-cw 20s linear infinite; }
@@ -307,14 +302,14 @@
         .ring.running.spin-3 { animation: spin-cw 16s linear infinite; }
         .ring.running.spin-4 { animation: spin-ccw 24s linear infinite; }
         .ring.running.spin-5 { animation: spin-cw 12s linear infinite; }
-        .center { position: absolute; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle, #1a1a2e, #050510); border: 2px solid rgba(100, 100, 150, 0.3); display: flex; align-items: center; justify-content: center; z-index: 50; box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.5); transition: border-color 0.5s, box-shadow 0.5s; }
+        .center { position: absolute; width: 75px; height: 75px; border-radius: 50%; background: radial-gradient(circle, #1a1a2e, #050510); border: 2px solid rgba(100, 100, 150, 0.3); display: flex; align-items: center; justify-content: center; z-index: 50; box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.5); transition: border-color 0.5s, box-shadow 0.5s; }
         .center.running { border-color: rgba(0, 255, 136, 0.5); box-shadow: 0 0 40px rgba(0, 255, 136, 0.2), inset 0 0 20px rgba(0, 255, 136, 0.1); }
-        .power-btn { width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(100, 100, 150, 0.4); background: radial-gradient(circle at 30% 30%, #2a2a40, #0a0a1a); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.4s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.05); position: relative; }
+        .power-btn { width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100, 100, 150, 0.4); background: radial-gradient(circle at 30% 30%, #2a2a40, #0a0a1a); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.4s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.05); position: relative; }
         .power-btn:hover { transform: scale(1.05); border-color: rgba(100, 100, 150, 0.7); }
         .power-btn:active { transform: scale(0.95); }
         .power-btn.running { border-color: rgba(0, 255, 136, 0.6); background: radial-gradient(circle at 30% 30%, #0a3a2a, #051510); box-shadow: 0 0 25px rgba(0, 255, 136, 0.4), inset 0 1px 2px rgba(0, 255, 136, 0.2); }
         .power-btn.running:hover { border-color: rgba(255, 80, 80, 0.6); }
-        .power-icon { width: 22px; height: 22px; stroke: #555577; stroke-width: 2.5; fill: none; transition: stroke 0.4s, filter 0.4s; }
+        .power-icon { width: 24px; height: 24px; stroke: #555577; stroke-width: 2.5; fill: none; transition: stroke 0.4s, filter 0.4s; }
         .power-btn.running .power-icon { stroke: #00ff88; filter: drop-shadow(0 0 6px #00ff88); }
 
         /* Toast */
@@ -470,7 +465,7 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: Access Key Running (sebelumnya Validator Running) -->
+                    <!-- Card 2: Access Key Running -->
                     <div class="validator-card">
                         <div class="validator-card-header">
                             <div class="validator-title">
@@ -479,14 +474,12 @@
                             </div>
                         </div>
 
-                        <!-- Info Row: Reward (kiri) + Countdown ke 06:00 (kanan) -->
+                        <!-- Info Row: Label "Reward" & "Next Reset" DIHAPUS, hanya angka -->
                         <div class="validator-info-row">
                             <div class="validator-info-left">
-                                <div class="validator-info-label">Reward</div>
                                 <div class="validator-info-value" id="runningReward">0.000000000 BossX</div>
                             </div>
                             <div class="validator-info-right">
-                                <div class="validator-info-label">Next Reset</div>
                                 <div class="validator-countdown-value" id="countdownTo6AM">00:00:00</div>
                             </div>
                         </div>
@@ -772,21 +765,16 @@
             const now = new Date();
             const target = new Date(now);
             target.setHours(6, 0, 0, 0);
-
-            // Jika sudah lewat jam 06:00 hari ini, targetkan ke besok
             if (now >= target) {
                 target.setDate(target.getDate() + 1);
             }
-
             const diff = target - now;
             const hours = Math.floor(diff / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
             const h = String(hours).padStart(2, '0');
             const m = String(minutes).padStart(2, '0');
             const s = String(seconds).padStart(2, '0');
-
             const el = document.getElementById('countdownTo6AM');
             if (el) el.textContent = `${h}:${m}:${s}`;
         }
@@ -849,16 +837,13 @@
             setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        // ==================== LOG FUNCTIONS ====================
         function clearLog() {
             document.getElementById('logContent').innerHTML = '';
             showToast('Log berhasil dihapus');
         }
 
-        // ==================== REWARD & COUNTDOWN SYSTEM ====================
         function updateRewardDisplay() { 
             document.getElementById('rewardAmount').textContent = currentReward.toFixed(9) + ' BossX';
-            // Sinkronkan juga dengan reward di card Access Key Running
             const runningRewardEl = document.getElementById('runningReward');
             if (runningRewardEl) runningRewardEl.textContent = currentReward.toFixed(9) + ' BossX';
         }
@@ -898,7 +883,6 @@
             if (rewardInterval) { clearInterval(rewardInterval); rewardInterval = null; }
         }
 
-        // ==================== AUDIO ENGINE ====================
         function initAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -935,10 +919,10 @@
         }
         function stopClickLoop() { if (clickInterval) { clearInterval(clickInterval); clickInterval = null; } }
 
-        // ==================== RING INITIALIZATION ====================
+        // PERUBAHAN 2: Radii disesuaikan untuk vault 270px
         function initRings() {
-            const radii = [100, 79, 64, 49, 38];
-            const tickRadii = [108, 86, 70, 54, 42];
+            const radii = [113, 89, 72, 56, 43];
+            const tickRadii = [122, 97, 79, 61, 48];
             for (let r = 0; r < 5; r++) {
                 const ring = document.getElementById(`ring-${r}`); const radius = radii[r]; const tickRadius = tickRadii[r]; const offset = RING_OFFSETS[r];
                 for (let i = 0; i < TICKS_PER_RING; i++) {
