@@ -5,161 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BossX</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; }
 
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar Styles */
         .sidebar {
-            width: 250px;
-            background-color: #2c3e50;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            transition: width 0.3s ease;
-            overflow: hidden;
-            border-right: 1px solid #34495e;
+            width: 250px; background-color: #2c3e50; color: #fff;
+            display: flex; flex-direction: column; transition: width 0.3s ease;
+            overflow: hidden; border-right: 1px solid #34495e;
         }
-
-        .sidebar.collapsed {
-            width: 70px;
-        }
+        .sidebar.collapsed { width: 70px; }
 
         .sidebar .logo {
-            padding: 20px 15px;
-            border-bottom: 1px solid #34495e;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            white-space: nowrap;
+            padding: 20px 15px; border-bottom: 1px solid #34495e;
+            display: flex; align-items: center; gap: 12px; white-space: nowrap;
         }
+        .sidebar .logo-img { width: 55px; height: 55px; object-fit: contain; }
+        .logo-text { display: flex; flex-direction: column; }
+        .brand-name { font-size: 26px; font-weight: bold; }
+        .brand-subtitle { font-size: 14px; color: #bdc3c7; margin-top: 2px; }
 
-        .sidebar .logo-img {
-            min-width: 55px; /* Ukuran logo diperbesar */
-            width: 55px;
-            height: 55px;
-            object-fit: contain;
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            transition: opacity 0.2s ease;
-        }
-
-        .brand-name {
-            font-size: 26px; /* Ukuran BossX diperbesar */
-            font-weight: bold;
-        }
-
-        .brand-subtitle {
-            font-size: 14px; /* Ukuran sub-teks diperbesar agar simetris */
-            color: #bdc3c7;
-            margin-top: 2px;
-        }
-
-        .sidebar.collapsed .logo-text {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .sidebar .menu {
-            list-style: none;
-            padding: 10px 0;
-        }
-
+        .sidebar .menu { list-style: none; padding: 10px 0; }
         .sidebar .menu li a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 15px;
-            color: #ecf0f1;
-            text-decoration: none;
-            transition: background 0.3s;
-            white-space: nowrap;
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px;
+            color: #ecf0f1; text-decoration: none; transition: background 0.3s; white-space: nowrap;
         }
+        .sidebar .menu li a:hover { background-color: #34495e; }
 
-        .sidebar .menu li a:hover {
-            background-color: #34495e;
-        }
-
-        .sidebar.collapsed .menu-text {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Main Area Styles */
-        .main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
+        .main { flex: 1; display: flex; flex-direction: column; }
         .header {
-            background-color: #3498db;
-            color: #fff;
-            padding: 0 25px;
-            display: flex;
-            align-items: center;
-            border-bottom: 2px solid #2980b9; /* Garis header diperjelas */
-            height: 85px; /* Tinggi header diperbesar agar garis lebih ke bawah */
+            background-color: #3498db; color: #fff; padding: 0 25px;
+            display: flex; align-items: center; border-bottom: 2px solid #2980b9; height: 85px;
         }
-
         .toggle-btn {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 26px;
-            cursor: pointer;
-            margin-right: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            transition: background 0.3s;
+            background: none; border: none; color: #fff; font-size: 26px; cursor: pointer;
+            margin-right: 20px; width: 40px; height: 40px; border-radius: 4px; transition: background 0.3s;
         }
-
-        .toggle-btn:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .clock-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .clock-time {
-            font-size: 26px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .clock-date {
-            font-size: 14px;
-            margin-top: 2px;
-            opacity: 0.9;
-        }
-
-        .content {
-            flex: 1;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
+        .toggle-btn:hover { background-color: rgba(255, 255, 255, 0.2); }
+        .clock-container { display: flex; flex-direction: column; }
+        .clock-time { font-size: 26px; font-weight: bold; letter-spacing: 1px; }
+        .clock-date { font-size: 14px; margin-top: 2px; opacity: 0.9; }
+        .content { flex: 1; padding: 20px; background-color: #f5f5f5; }
     </style>
 </head>
 <body>
 
-    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="logo">
             <img src="https://i.ibb.co/qYBkPDH3/Picsart-25-04-01-16-25-47-054.png" alt="BossX Logo" class="logo-img">
@@ -169,18 +58,11 @@
             </div>
         </div>
         <ul class="menu">
-            <li>
-                <a href="#">
-                    <span>🔑</span>
-                    <span class="menu-text">Access Key</span>
-                </a>
-            </li>
+            <li><a href="#"><span>🔑</span><span class="menu-text">Access Key</span></a></li>
         </ul>
     </div>
 
-    <!-- Main Area -->
     <div class="main">
-        <!-- Header -->
         <div class="header">
             <button class="toggle-btn" onclick="toggleSidebar()" title="Buka/Tutup Sidebar">☰</button>
             <div class="clock-container">
@@ -188,37 +70,22 @@
                 <div class="clock-date" id="clock-date">Memuat tanggal...</div>
             </div>
         </div>
-
-        <!-- Content -->
         <div class="content"></div>
     </div>
 
     <script>
-        // Fungsi untuk toggle sidebar
         function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed');
+            document.getElementById('sidebar').classList.toggle('collapsed');
         }
 
-        // Fungsi untuk update jam dan tanggal real-time
         function updateClock() {
             const now = new Date();
-
-            // Format Jam, Menit, Detik
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock-time').textContent = `${hours}:${minutes}:${seconds}`;
-
-            // Format Hari, Tanggal Bulan Tahun (Bahasa Indonesia)
-            const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-            const dateStr = now.toLocaleDateString('id-ID', dateOptions);
-            document.getElementById('clock-date').textContent = dateStr;
+            document.getElementById('clock-time').textContent = now.toLocaleTimeString('id-ID', { hour12: false });
+            document.getElementById('clock-date').textContent = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
         }
 
-        // Jalankan fungsi setiap 1 detik
         setInterval(updateClock, 1000);
-        updateClock(); // Panggil langsung saat halaman dimuat
+        updateClock();
     </script>
 
 </body>
