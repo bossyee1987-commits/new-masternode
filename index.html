@@ -172,7 +172,6 @@
         .reward-card-title { font-size: 15px; font-weight: bold; color: #fff; }
         .reward-card-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
         .reward-card-icon svg { width: 20px; height: 20px; fill: #00e5ff; }
-        /* PERUBAHAN 3: Angka reward diperkecil dari 26px ke 18px agar sama dengan angka di wallet */
         .reward-amount { 
             font-size: 18px; font-weight: bold; color: #00ff88; 
             font-family: 'Courier New', monospace; 
@@ -187,21 +186,31 @@
         .btn-claim svg { width: 16px; height: 16px; fill: #0a1628; }
         .reward-action-wrapper { margin-top: auto; }
 
-        /* My Wallet Balance Card */
+        /* My Wallet Balance Card - PERUBAHAN: Sub-card simetris */
         .wallet-card { 
             background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); 
             border: 1px solid #1a5276; border-radius: 12px; padding: 18px; 
             box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
             min-height: 340px;
+            display: flex;
+            flex-direction: column;
         }
         .wallet-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .wallet-card-title { font-size: 15px; font-weight: bold; color: #fff; }
         .wallet-card-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
         .wallet-card-icon svg { width: 20px; height: 20px; fill: #00e5ff; }
-        .wallet-subcard { background: linear-gradient(135deg, #0a1e3d 0%, #0d2a4a 100%); border: 1px solid #1a5276; border-radius: 8px; padding: 12px; margin-bottom: 10px; transition: border-color 0.3s; }
+        .wallet-subcard { 
+            background: linear-gradient(135deg, #0a1e3d 0%, #0d2a4a 100%); 
+            border: 1px solid #1a5276; border-radius: 8px; 
+            padding: 12px; margin-bottom: 10px; 
+            transition: border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
         .wallet-subcard:last-child { margin-bottom: 0; }
         .wallet-subcard:hover { border-color: #00e5ff; }
-        .wallet-subcard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .wallet-subcard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .wallet-token-info { display: flex; align-items: center; gap: 8px; }
         .wallet-token-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .wallet-token-icon.usdt { background-color: rgba(38, 161, 123, 0.15); }
@@ -210,7 +219,11 @@
         .wallet-token-icon.bossx img { width: 24px; height: 24px; object-fit: contain; }
         .wallet-token-name { font-size: 13px; font-weight: bold; color: #fff; }
         .wallet-token-network { font-size: 10px; color: #2ecc71; }
-        .wallet-balance { font-size: 18px; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; }
+        .wallet-balance { 
+            font-size: 18px; font-weight: bold; color: #fff; 
+            font-family: 'Courier New', monospace;
+            margin-top: auto;
+        }
         .wallet-balance .currency { font-size: 12px; color: #b0bec5; margin-left: 4px; }
 
         /* Access Key Running Card */
@@ -224,7 +237,6 @@
         .validator-title { font-size: 14px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 8px; }
         .validator-title svg { width: 18px; height: 18px; fill: #f0a500; }
 
-        /* Info Row - PERUBAHAN 1: Label "Reward" & "Next Reset" dihapus */
         .validator-info-row {
             width: 100%;
             display: flex;
@@ -234,53 +246,41 @@
             margin-bottom: 5px;
             border-bottom: 1px solid rgba(26, 82, 118, 0.4);
         }
-        .validator-info-left {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
+        .validator-info-left { display: flex; flex-direction: column; align-items: flex-start; }
         .validator-info-value {
-            font-size: 14px;
-            font-weight: bold;
-            color: #00ff88;
+            font-size: 14px; font-weight: bold; color: #00ff88;
             font-family: 'Courier New', monospace;
             text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
         }
-        .validator-info-right {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
+        .validator-info-right { display: flex; flex-direction: column; align-items: flex-end; }
         .validator-countdown-value {
-            font-size: 16px;
-            font-weight: bold;
-            color: #00e5ff;
+            font-size: 16px; font-weight: bold; color: #00e5ff;
             font-family: 'Courier New', monospace;
             letter-spacing: 1px;
             text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
         }
 
-        /* PERUBAHAN 2: Vault Container diperbesar dari 240px ke 270px */
+        /* PERUBAHAN 1: Vault Container diperbesar dari 270px ke 290px */
         .vault-container { 
             position: relative; 
-            width: 270px; 
-            height: 270px; 
+            width: 290px; 
+            height: 290px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             transform-origin: center center;
             margin-top: 10px;
         }
-        .guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 135px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
+        .guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 145px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
         .guide-line.active { background: linear-gradient(to bottom, rgba(0,255,136,0.6), transparent); }
         .guide-line.click-flash { width: 4px; background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(0,255,136,0.8), transparent); transition: all 0.08s ease-out; }
         .ring { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 1.5s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease; }
-        /* Semua ring diperbesar proporsional (skala ~1.125x dari 240px) */
-        .ring-outer { width: 250px; height: 250px; background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.2); }
-        .ring-2 { width: 200px; height: 200px; background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.15); }
-        .ring-3 { width: 162px; height: 162px; background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
-        .ring-4 { width: 126px; height: 126px; background: radial-gradient(circle, transparent 42%, #0d0d22 42%, #0d0d22 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
-        .ring-inner { width: 100px; height: 100px; background: radial-gradient(circle, transparent 42%, #0a0a20 42%, #0a0a20 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+        /* Semua ring diperbesar proporsional */
+        .ring-outer { width: 270px; height: 270px; background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.2); }
+        .ring-2 { width: 216px; height: 216px; background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.15); }
+        .ring-3 { width: 175px; height: 175px; background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+        .ring-4 { width: 136px; height: 136px; background: radial-gradient(circle, transparent 42%, #0d0d22 42%, #0d0d22 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+        .ring-inner { width: 108px; height: 108px; background: radial-gradient(circle, transparent 42%, #0a0a20 42%, #0a0a20 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
         .ring.running { border-color: rgba(0, 255, 136, 0.4); }
         .ring-outer.running { box-shadow: 0 0 25px rgba(0, 255, 136, 0.1), inset 0 0 20px rgba(0, 255, 136, 0.05); }
         .ring-2.running { box-shadow: 0 0 20px rgba(0, 255, 136, 0.08); }
@@ -302,14 +302,14 @@
         .ring.running.spin-3 { animation: spin-cw 16s linear infinite; }
         .ring.running.spin-4 { animation: spin-ccw 24s linear infinite; }
         .ring.running.spin-5 { animation: spin-cw 12s linear infinite; }
-        .center { position: absolute; width: 75px; height: 75px; border-radius: 50%; background: radial-gradient(circle, #1a1a2e, #050510); border: 2px solid rgba(100, 100, 150, 0.3); display: flex; align-items: center; justify-content: center; z-index: 50; box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.5); transition: border-color 0.5s, box-shadow 0.5s; }
+        .center { position: absolute; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, #1a1a2e, #050510); border: 2px solid rgba(100, 100, 150, 0.3); display: flex; align-items: center; justify-content: center; z-index: 50; box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.5); transition: border-color 0.5s, box-shadow 0.5s; }
         .center.running { border-color: rgba(0, 255, 136, 0.5); box-shadow: 0 0 40px rgba(0, 255, 136, 0.2), inset 0 0 20px rgba(0, 255, 136, 0.1); }
-        .power-btn { width: 52px; height: 52px; border-radius: 50%; border: 2px solid rgba(100, 100, 150, 0.4); background: radial-gradient(circle at 30% 30%, #2a2a40, #0a0a1a); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.4s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.05); position: relative; }
+        .power-btn { width: 56px; height: 56px; border-radius: 50%; border: 2px solid rgba(100, 100, 150, 0.4); background: radial-gradient(circle at 30% 30%, #2a2a40, #0a0a1a); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.4s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.05); position: relative; }
         .power-btn:hover { transform: scale(1.05); border-color: rgba(100, 100, 150, 0.7); }
         .power-btn:active { transform: scale(0.95); }
         .power-btn.running { border-color: rgba(0, 255, 136, 0.6); background: radial-gradient(circle at 30% 30%, #0a3a2a, #051510); box-shadow: 0 0 25px rgba(0, 255, 136, 0.4), inset 0 1px 2px rgba(0, 255, 136, 0.2); }
         .power-btn.running:hover { border-color: rgba(255, 80, 80, 0.6); }
-        .power-icon { width: 24px; height: 24px; stroke: #555577; stroke-width: 2.5; fill: none; transition: stroke 0.4s, filter 0.4s; }
+        .power-icon { width: 26px; height: 26px; stroke: #555577; stroke-width: 2.5; fill: none; transition: stroke 0.4s, filter 0.4s; }
         .power-btn.running .power-icon { stroke: #00ff88; filter: drop-shadow(0 0 6px #00ff88); }
 
         /* Toast */
@@ -474,7 +474,6 @@
                             </div>
                         </div>
 
-                        <!-- Info Row: Label "Reward" & "Next Reset" DIHAPUS, hanya angka -->
                         <div class="validator-info-row">
                             <div class="validator-info-left">
                                 <div class="validator-info-value" id="runningReward">0.000000000 BossX</div>
@@ -520,7 +519,7 @@
                         </div>
                     </div>
 
-                    <!-- Card 4: My Wallet Balance -->
+                    <!-- Card 4: My Wallet Balance - PERUBAHAN: Saldo USDT 0.00, BOSSX 1000 -->
                     <div class="wallet-card">
                         <div class="wallet-card-header">
                             <div class="wallet-card-title">My Wallet Balance</div>
@@ -538,7 +537,7 @@
                                 </div>
                                 <div class="wallet-token-network">TRC20/BEP20</div>
                             </div>
-                            <div class="wallet-balance">1000.00 <span class="currency">USDT</span></div>
+                            <div class="wallet-balance">0.00 <span class="currency">USDT</span></div>
                         </div>
                         <div class="wallet-subcard">
                             <div class="wallet-subcard-header">
@@ -550,7 +549,7 @@
                                 </div>
                                 <div class="wallet-token-network">Internal Token</div>
                             </div>
-                            <div class="wallet-balance" id="bossxBalance">899.000000000 <span class="currency">BossX</span></div>
+                            <div class="wallet-balance" id="bossxBalance">1000.000000000 <span class="currency">BossX</span></div>
                         </div>
                     </div>
                 </div>
@@ -733,8 +732,9 @@
     <div class="toast" id="toast">Berhasil!</div>
 
     <script>
+        // PERUBAHAN 3: Saldo BOSSX diubah dari 899 ke 1000
         let accessKeys = [];
-        let bossxBalance = 899.000000000;
+        let bossxBalance = 1000.000000000;
         let currentReward = 0.000000000;
         let countdownSeconds = 60;
         let rewardInterval = null;
@@ -919,10 +919,10 @@
         }
         function stopClickLoop() { if (clickInterval) { clearInterval(clickInterval); clickInterval = null; } }
 
-        // PERUBAHAN 2: Radii disesuaikan untuk vault 270px
+        // PERUBAHAN 1: Radii disesuaikan untuk vault 290px (lebih besar)
         function initRings() {
-            const radii = [113, 89, 72, 56, 43];
-            const tickRadii = [122, 97, 79, 61, 48];
+            const radii = [121, 96, 77, 60, 46];
+            const tickRadii = [131, 104, 84, 65, 51];
             for (let r = 0; r < 5; r++) {
                 const ring = document.getElementById(`ring-${r}`); const radius = radii[r]; const tickRadius = tickRadii[r]; const offset = RING_OFFSETS[r];
                 for (let i = 0; i < TICKS_PER_RING; i++) {
