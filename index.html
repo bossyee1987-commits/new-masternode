@@ -137,74 +137,74 @@
         .page-section { display: none; }
         .page-section.active { display: block; }
 
-        /* Dashboard Grid */
-        .dashboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        /* ===== Dashboard Grid - 4 Card Sejajar ===== */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
 
         /* Redeem Card */
-        .redeem-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 25px; }
-        .redeem-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .redeem-card-title { font-size: 18px; font-weight: bold; color: #fff; }
-        .redeem-card-icon { width: 36px; height: 36px; border: 1px solid #1a5276; border-radius: 8px; display: flex; align-items: center; justify-content: center; background-color: #0d2137; }
-        .redeem-card-icon svg { width: 18px; height: 18px; fill: #00e5ff; }
-        .redeem-input { width: 100%; background-color: #0d2137; border: 1px solid #1a5276; border-radius: 8px; padding: 12px 15px; color: #fff; font-size: 14px; font-family: monospace; letter-spacing: 1px; outline: none; margin-bottom: 15px; transition: border 0.3s; }
+        .redeem-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 18px; }
+        .redeem-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .redeem-card-title { font-size: 15px; font-weight: bold; color: #fff; }
+        .redeem-card-icon { width: 30px; height: 30px; border: 1px solid #1a5276; border-radius: 8px; display: flex; align-items: center; justify-content: center; background-color: #0d2137; }
+        .redeem-card-icon svg { width: 16px; height: 16px; fill: #00e5ff; }
+        .redeem-input { width: 100%; background-color: #0d2137; border: 1px solid #1a5276; border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 13px; font-family: monospace; letter-spacing: 1px; outline: none; margin-bottom: 12px; transition: border 0.3s; }
         .redeem-input::placeholder { color: #78909c; }
         .redeem-input:focus { border-color: #00e5ff; }
-        .btn-redeem { width: 100%; padding: 14px; background-color: #00e5ff; color: #0a1628; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s; }
+        .btn-redeem { width: 100%; padding: 11px; background-color: #00e5ff; color: #0a1628; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; }
         .btn-redeem:hover { background-color: #00c4d9; }
-        .btn-redeem svg { width: 18px; height: 18px; fill: #0a1628; }
-        .redeem-footer { text-align: center; margin-top: 15px; font-size: 13px; color: #b0bec5; }
+        .btn-redeem svg { width: 16px; height: 16px; fill: #0a1628; }
+        .redeem-footer { text-align: center; margin-top: 12px; font-size: 11px; color: #b0bec5; }
         .redeem-footer a { color: #00e5ff; text-decoration: none; cursor: pointer; }
         .redeem-footer a:hover { text-decoration: underline; }
 
         /* Reward Validasi Card */
-        .reward-card { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 25px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
-        .reward-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .reward-card-title { font-size: 18px; font-weight: bold; color: #fff; }
-        .reward-card-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
-        .reward-card-icon svg { width: 24px; height: 24px; fill: #00e5ff; }
-        .reward-amount { font-size: 32px; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; margin-bottom: 30px; letter-spacing: 0.5px; transition: transform 0.3s ease; }
-        .reward-countdown { font-size: 13px; color: #00e5ff; margin-bottom: 15px; }
+        .reward-card { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 18px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
+        .reward-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .reward-card-title { font-size: 15px; font-weight: bold; color: #fff; }
+        .reward-card-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
+        .reward-card-icon svg { width: 20px; height: 20px; fill: #00e5ff; }
+        .reward-amount { font-size: 22px; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; margin-bottom: 15px; letter-spacing: 0.5px; transition: transform 0.3s ease; }
+        .reward-countdown { font-size: 12px; color: #00e5ff; margin-bottom: 12px; }
         .reward-countdown span { font-weight: bold; }
-        .btn-claim { width: 100%; padding: 14px; background-color: #00e5ff; color: #0a1628; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s; }
+        .btn-claim { width: 100%; padding: 11px; background-color: #00e5ff; color: #0a1628; border: none; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; }
         .btn-claim:hover { background-color: #00c4d9; transform: translateY(-1px); }
-        .btn-claim svg { width: 18px; height: 18px; fill: #0a1628; }
+        .btn-claim svg { width: 16px; height: 16px; fill: #0a1628; }
 
         /* My Wallet Balance Card */
-        .wallet-card { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 25px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
-        .wallet-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .wallet-card-title { font-size: 18px; font-weight: bold; color: #fff; }
-        .wallet-card-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
-        .wallet-card-icon svg { width: 24px; height: 24px; fill: #00e5ff; }
-        .wallet-subcard { background: linear-gradient(135deg, #0a1e3d 0%, #0d2a4a 100%); border: 1px solid #1a5276; border-radius: 10px; padding: 18px; margin-bottom: 12px; transition: border-color 0.3s; }
+        .wallet-card { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 18px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
+        .wallet-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .wallet-card-title { font-size: 15px; font-weight: bold; color: #fff; }
+        .wallet-card-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
+        .wallet-card-icon svg { width: 20px; height: 20px; fill: #00e5ff; }
+        .wallet-subcard { background: linear-gradient(135deg, #0a1e3d 0%, #0d2a4a 100%); border: 1px solid #1a5276; border-radius: 8px; padding: 12px; margin-bottom: 10px; transition: border-color 0.3s; }
         .wallet-subcard:last-child { margin-bottom: 0; }
         .wallet-subcard:hover { border-color: #00e5ff; }
-        .wallet-subcard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .wallet-token-info { display: flex; align-items: center; gap: 10px; }
-        .wallet-token-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .wallet-subcard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .wallet-token-info { display: flex; align-items: center; gap: 8px; }
+        .wallet-token-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .wallet-token-icon.usdt { background-color: rgba(38, 161, 123, 0.15); }
-        .wallet-token-icon.usdt svg { width: 18px; height: 18px; fill: #26a17b; }
+        .wallet-token-icon.usdt svg { width: 16px; height: 16px; fill: #26a17b; }
         .wallet-token-icon.bossx { background-color: rgba(0, 229, 255, 0.15); }
-        .wallet-token-icon.bossx svg { width: 18px; height: 18px; fill: #00e5ff; }
-        .wallet-token-name { font-size: 14px; font-weight: bold; color: #fff; }
-        .wallet-token-network { font-size: 11px; color: #2ecc71; }
-        .wallet-balance { font-size: 22px; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; }
-        .wallet-balance .currency { font-size: 14px; color: #b0bec5; margin-left: 5px; }
+        .wallet-token-icon.bossx svg { width: 16px; height: 16px; fill: #00e5ff; }
+        .wallet-token-name { font-size: 13px; font-weight: bold; color: #fff; }
+        .wallet-token-network { font-size: 10px; color: #2ecc71; }
+        .wallet-balance { font-size: 18px; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; }
+        .wallet-balance .currency { font-size: 12px; color: #b0bec5; margin-left: 4px; }
 
-        /* Validator Dial Card */
-        .validator-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .validator-card-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #1a3a5c; }
-        .validator-title { font-size: 18px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 10px; }
-        .validator-title svg { width: 22px; height: 22px; fill: #f0a500; }
-        .vault-container { position: relative; width: 340px; height: 340px; display: flex; align-items: center; justify-content: center; transform-origin: center center; }
-        .guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 170px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
+        /* Validator Dial Card - Ukuran Diperkecil */
+        .validator-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        .validator-card-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding-bottom: 8px; border-bottom: 1px solid #1a3a5c; }
+        .validator-title { font-size: 14px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 8px; }
+        .validator-title svg { width: 18px; height: 18px; fill: #f0a500; }
+        .vault-container { position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; transform-origin: center center; }
+        .guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 120px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
         .guide-line.active { background: linear-gradient(to bottom, rgba(0,255,136,0.6), transparent); }
         .guide-line.click-flash { width: 4px; background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(0,255,136,0.8), transparent); transition: all 0.08s ease-out; }
         .ring { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 1.5s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease; }
-        .ring-outer { width: 320px; height: 320px; background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.2); }
-        .ring-2 { width: 256px; height: 256px; background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.15); }
-        .ring-3 { width: 208px; height: 208px; background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
-        .ring-4 { width: 160px; height: 160px; background: radial-gradient(circle, transparent 42%, #0d0d22 42%, #0d0d22 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
-        .ring-inner { width: 128px; height: 128px; background: radial-gradient(circle, transparent 42%, #0a0a20 42%, #0a0a20 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+        .ring-outer { width: 220px; height: 220px; background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.2); }
+        .ring-2 { width: 176px; height: 176px; background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.15); }
+        .ring-3 { width: 144px; height: 144px; background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+        .ring-4 { width: 112px; height: 112px; background: radial-gradient(circle, transparent 42%, #0d0d22 42%, #0d0d22 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+        .ring-inner { width: 88px; height: 88px; background: radial-gradient(circle, transparent 42%, #0a0a20 42%, #0a0a20 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
         .ring.running { border-color: rgba(0, 255, 136, 0.4); }
         .ring-outer.running { box-shadow: 0 0 25px rgba(0, 255, 136, 0.1), inset 0 0 20px rgba(0, 255, 136, 0.05); }
         .ring-2.running { box-shadow: 0 0 20px rgba(0, 255, 136, 0.08); }
@@ -212,13 +212,13 @@
         .ring-4.running { box-shadow: 0 0 12px rgba(0, 255, 136, 0.05); }
         .ring-inner.running { box-shadow: 0 0 10px rgba(0, 255, 136, 0.05); }
         .ring.click-flash { border-color: rgba(255, 255, 255, 0.9) !important; box-shadow: 0 0 40px rgba(255, 255, 255, 0.5), inset 0 0 30px rgba(0, 255, 136, 0.3) !important; transition: all 0.08s ease-out; }
-        .tick { position: absolute; width: 1px; height: 6px; background: rgba(100, 100, 150, 0.3); transform-origin: center; transition: background 0.5s; }
+        .tick { position: absolute; width: 1px; height: 5px; background: rgba(100, 100, 150, 0.3); transform-origin: center; transition: background 0.5s; }
         .ring.running .tick { background: rgba(0, 255, 136, 0.2); }
-        .tick.major { width: 2px; height: 10px; background: rgba(100, 100, 150, 0.5); }
+        .tick.major { width: 2px; height: 8px; background: rgba(100, 100, 150, 0.5); }
         .ring.running .tick.major { background: rgba(0, 255, 136, 0.4); }
-        .ring-char { position: absolute; font-size: 11px; font-weight: bold; color: #444466; user-select: none; transition: color 0.5s; letter-spacing: 1px; font-family: 'Courier New', monospace; }
+        .ring-char { position: absolute; font-size: 9px; font-weight: bold; color: #444466; user-select: none; transition: color 0.5s; letter-spacing: 1px; font-family: 'Courier New', monospace; }
         .ring.running .ring-char { color: rgba(0, 255, 136, 0.7); text-shadow: 0 0 4px rgba(0, 255, 136, 0.3); }
-        .ring-char.highlight { color: #ffffff !important; text-shadow: 0 0 8px #00ff88, 0 0 15px rgba(0, 255, 136, 0.6) !important; font-size: 13px; }
+        .ring-char.highlight { color: #ffffff !important; text-shadow: 0 0 8px #00ff88, 0 0 15px rgba(0, 255, 136, 0.6) !important; font-size: 11px; }
         @keyframes spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes spin-ccw { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
         .ring.running.spin-1 { animation: spin-cw 20s linear infinite; }
@@ -226,19 +226,27 @@
         .ring.running.spin-3 { animation: spin-cw 16s linear infinite; }
         .ring.running.spin-4 { animation: spin-ccw 24s linear infinite; }
         .ring.running.spin-5 { animation: spin-cw 12s linear infinite; }
-        .center { position: absolute; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, #1a1a2e, #050510); border: 2px solid rgba(100, 100, 150, 0.3); display: flex; align-items: center; justify-content: center; z-index: 50; box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.5); transition: border-color 0.5s, box-shadow 0.5s; }
+        .center { position: absolute; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle, #1a1a2e, #050510); border: 2px solid rgba(100, 100, 150, 0.3); display: flex; align-items: center; justify-content: center; z-index: 50; box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.5); transition: border-color 0.5s, box-shadow 0.5s; }
         .center.running { border-color: rgba(0, 255, 136, 0.5); box-shadow: 0 0 40px rgba(0, 255, 136, 0.2), inset 0 0 20px rgba(0, 255, 136, 0.1); }
-        .power-btn { width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(100, 100, 150, 0.4); background: radial-gradient(circle at 30% 30%, #2a2a40, #0a0a1a); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.4s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.05); position: relative; }
+        .power-btn { width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(100, 100, 150, 0.4); background: radial-gradient(circle at 30% 30%, #2a2a40, #0a0a1a); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.4s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.05); position: relative; }
         .power-btn:hover { transform: scale(1.05); border-color: rgba(100, 100, 150, 0.7); }
         .power-btn:active { transform: scale(0.95); }
         .power-btn.running { border-color: rgba(0, 255, 136, 0.6); background: radial-gradient(circle at 30% 30%, #0a3a2a, #051510); box-shadow: 0 0 25px rgba(0, 255, 136, 0.4), inset 0 1px 2px rgba(0, 255, 136, 0.2); }
         .power-btn.running:hover { border-color: rgba(255, 80, 80, 0.6); }
-        .power-icon { width: 26px; height: 26px; stroke: #555577; stroke-width: 2.5; fill: none; transition: stroke 0.4s, filter 0.4s; }
+        .power-icon { width: 22px; height: 22px; stroke: #555577; stroke-width: 2.5; fill: none; transition: stroke 0.4s, filter 0.4s; }
         .power-btn.running .power-icon { stroke: #00ff88; filter: drop-shadow(0 0 6px #00ff88); }
 
         /* Toast */
         .toast { position: fixed; bottom: 30px; right: 30px; background-color: #2ecc71; color: #fff; padding: 12px 20px; border-radius: 8px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); opacity: 0; transform: translateY(20px); transition: all 0.3s; z-index: 1000; }
         .toast.show { opacity: 1; transform: translateY(0); }
+
+        /* Responsive - fallback ke 2 kolom untuk layar sempit */
+        @media (max-width: 1400px) {
+            .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 700px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -309,7 +317,7 @@
                             Redeem Now
                         </button>
                         <div class="redeem-footer">
-                            Beli Access Key di menu "<a onclick="navigateTo('accesskey', event)">Access Key</a>"
+                            Beli di menu "<a onclick="navigateTo('accesskey', event)">Access Key</a>"
                         </div>
                     </div>
 
@@ -517,7 +525,6 @@
         let rewardInterval = null;
         const REWARD_PER_SECOND = 0.000000001;
 
-        // Validator Dial Variables
         let isRunning = false;
         let clickInterval = null;
         let audioCtx = null;
@@ -671,7 +678,8 @@
 
         // ==================== RING INITIALIZATION ====================
         function initRings() {
-            const radii = [144, 114, 90, 68, 54]; const tickRadii = [156, 124, 100, 76, 60];
+            const radii = [100, 79, 64, 49, 38];
+            const tickRadii = [108, 86, 70, 54, 42];
             for (let r = 0; r < 5; r++) {
                 const ring = document.getElementById(`ring-${r}`); const radius = radii[r]; const tickRadius = tickRadii[r]; const offset = RING_OFFSETS[r];
                 for (let i = 0; i < TICKS_PER_RING; i++) {
@@ -685,7 +693,7 @@
                     const charIndex = (i + offset) % CHARS.length; const angle = (i * 360 / CHARS_PER_RING) - 90; const rad = (angle * Math.PI) / 180;
                     const x = Math.cos(rad) * radius; const y = Math.sin(rad) * radius;
                     const charEl = document.createElement('div'); charEl.className = 'ring-char'; charEl.textContent = CHARS[charIndex]; charEl.dataset.index = i;
-                    charEl.style.left = `calc(50% + ${x}px - 6px)`; charEl.style.top = `calc(50% + ${y}px - 8px)`;
+                    charEl.style.left = `calc(50% + ${x}px - 5px)`; charEl.style.top = `calc(50% + ${y}px - 6px)`;
                     ring.appendChild(charEl);
                 }
             }
