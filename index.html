@@ -43,9 +43,9 @@
         }
 
         .sidebar .logo-img {
-            min-width: 40px;
-            width: 40px;
-            height: 40px;
+            min-width: 55px; /* Ukuran logo diperbesar */
+            width: 55px;
+            height: 55px;
             object-fit: contain;
         }
 
@@ -56,12 +56,12 @@
         }
 
         .brand-name {
-            font-size: 20px;
+            font-size: 26px; /* Ukuran BossX diperbesar */
             font-weight: bold;
         }
 
         .brand-subtitle {
-            font-size: 11px;
+            font-size: 14px; /* Ukuran sub-teks diperbesar agar simetris */
             color: #bdc3c7;
             margin-top: 2px;
         }
@@ -106,32 +106,48 @@
         .header {
             background-color: #3498db;
             color: #fff;
-            padding: 15px 20px;
-            font-size: 18px;
-            font-weight: bold;
+            padding: 0 25px;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #2980b9;
+            border-bottom: 2px solid #2980b9; /* Garis header diperjelas */
+            height: 85px; /* Tinggi header diperbesar agar garis lebih ke bawah */
         }
 
         .toggle-btn {
             background: none;
             border: none;
             color: #fff;
-            font-size: 24px;
+            font-size: 26px;
             cursor: pointer;
-            margin-right: 15px;
+            margin-right: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 4px;
             transition: background 0.3s;
         }
 
         .toggle-btn:hover {
             background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .clock-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .clock-time {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .clock-date {
+            font-size: 14px;
+            margin-top: 2px;
+            opacity: 0.9;
         }
 
         .content {
@@ -167,7 +183,10 @@
         <!-- Header -->
         <div class="header">
             <button class="toggle-btn" onclick="toggleSidebar()" title="Buka/Tutup Sidebar">☰</button>
-            <span>Header</span>
+            <div class="clock-container">
+                <div class="clock-time" id="clock-time">00:00:00</div>
+                <div class="clock-date" id="clock-date">Memuat tanggal...</div>
+            </div>
         </div>
 
         <!-- Content -->
@@ -175,10 +194,31 @@
     </div>
 
     <script>
+        // Fungsi untuk toggle sidebar
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('collapsed');
         }
+
+        // Fungsi untuk update jam dan tanggal real-time
+        function updateClock() {
+            const now = new Date();
+
+            // Format Jam, Menit, Detik
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock-time').textContent = `${hours}:${minutes}:${seconds}`;
+
+            // Format Hari, Tanggal Bulan Tahun (Bahasa Indonesia)
+            const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            const dateStr = now.toLocaleDateString('id-ID', dateOptions);
+            document.getElementById('clock-date').textContent = dateStr;
+        }
+
+        // Jalankan fungsi setiap 1 detik
+        setInterval(updateClock, 1000);
+        updateClock(); // Panggil langsung saat halaman dimuat
     </script>
 
 </body>
