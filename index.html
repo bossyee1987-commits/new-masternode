@@ -32,18 +32,188 @@
         .sidebar .menu li a:hover { background-color: #34495e; }
 
         .main { flex: 1; display: flex; flex-direction: column; }
+
+        /* Header Styles */
         .header {
-            background-color: #3498db; color: #fff; padding: 0 25px;
-            display: flex; align-items: center; border-bottom: 2px solid #2980b9; height: 85px;
+            background-color: #0a1628;
+            color: #fff;
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #1a3a5c;
+            height: 85px;
+            gap: 20px;
         }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 180px;
+        }
+
         .toggle-btn {
-            background: none; border: none; color: #fff; font-size: 26px; cursor: pointer;
-            margin-right: 20px; width: 40px; height: 40px; border-radius: 4px; transition: background 0.3s;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 26px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .toggle-btn:hover { background-color: rgba(255, 255, 255, 0.2); }
+        .toggle-btn:hover { background-color: rgba(255, 255, 255, 0.1); }
+
         .clock-container { display: flex; flex-direction: column; }
-        .clock-time { font-size: 26px; font-weight: bold; letter-spacing: 1px; }
-        .clock-date { font-size: 14px; margin-top: 2px; opacity: 0.9; }
+        .clock-time { font-size: 22px; font-weight: bold; color: #00e5ff; letter-spacing: 1px; }
+        .clock-date { font-size: 13px; color: #b0bec5; margin-top: 2px; }
+
+        /* Search Bar */
+        .header-center {
+            flex: 1;
+            max-width: 500px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #0d2137;
+            border: 1px solid #1a5276;
+            border-radius: 8px;
+            padding: 10px 15px;
+            width: 100%;
+            gap: 10px;
+        }
+
+        .search-bar svg {
+            width: 18px;
+            height: 18px;
+            fill: #00e5ff;
+            flex-shrink: 0;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .search-bar input::placeholder {
+            color: #78909c;
+        }
+
+        /* Header Right */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-width: 320px;
+            justify-content: flex-end;
+        }
+
+        .market-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: transparent;
+            border: 1px solid #2ecc71;
+            color: #2ecc71;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .market-btn:hover {
+            background-color: rgba(46, 204, 113, 0.1);
+        }
+
+        .market-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #2ecc71;
+        }
+
+        .notif-btn {
+            position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notif-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+
+        .notif-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background-color: #e74c3c;
+            color: #fff;
+            font-size: 10px;
+            font-weight: bold;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #0d2137;
+            border: 1px solid #1a5276;
+            border-radius: 8px;
+            padding: 6px 12px 6px 6px;
+            cursor: pointer;
+        }
+
+        .profile-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #1a5276;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .profile-role {
+            font-size: 11px;
+            color: #00e5ff;
+        }
+
         .content { flex: 1; padding: 20px; background-color: #f5f5f5; }
     </style>
 </head>
@@ -64,12 +234,45 @@
 
     <div class="main">
         <div class="header">
-            <button class="toggle-btn" onclick="toggleSidebar()" title="Buka/Tutup Sidebar">☰</button>
-            <div class="clock-container">
-                <div class="clock-time" id="clock-time">00:00:00</div>
-                <div class="clock-date" id="clock-date">Memuat tanggal...</div>
+            <!-- Kiri: Toggle + Jam -->
+            <div class="header-left">
+                <button class="toggle-btn" onclick="toggleSidebar()" title="Buka/Tutup Sidebar">☰</button>
+                <div class="clock-container">
+                    <div class="clock-time" id="clock-time">00:00:00</div>
+                    <div class="clock-date" id="clock-date">Memuat tanggal...</div>
+                </div>
+            </div>
+
+            <!-- Tengah: Search Bar -->
+            <div class="header-center">
+                <div class="search-bar">
+                    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <input type="text" placeholder="Cari cryptocurrency, transaksi...">
+                </div>
+            </div>
+
+            <!-- Kanan: Market + Notif + Profile -->
+            <div class="header-right">
+                <button class="market-btn">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    Market Open
+                </button>
+
+                <button class="notif-btn" title="Notifikasi">
+                    <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
+                    <span class="notif-badge">3</span>
+                </button>
+
+                <div class="profile">
+                    <img src="https://i.ibb.co/qYBkPDH3/Picsart-25-04-01-16-25-47-054.png" alt="Avatar" class="profile-avatar">
+                    <div class="profile-info">
+                        <span class="profile-name">Fery Muliawan</span>
+                        <span class="profile-role">Validator: 8055x</span>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="content"></div>
     </div>
 
