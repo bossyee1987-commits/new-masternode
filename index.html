@@ -234,10 +234,12 @@
         .page-section { display: none; }
         .page-section.active { display: block; }
 
-        /* Redeem Card */
+        /* Dashboard Grid */
         .dashboard-grid {
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
         }
+
+        /* Redeem Card */
         .redeem-card {
             background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
             border: 1px solid #1a3a5c; border-radius: 10px; padding: 25px;
@@ -273,235 +275,80 @@
         .redeem-footer a { color: #00e5ff; text-decoration: none; cursor: pointer; }
         .redeem-footer a:hover { text-decoration: underline; }
 
-        /* Validator Dial Card */
-        .validator-card {
-            background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
-            border: 1px solid #1a3a5c; border-radius: 10px; padding: 30px;
-            display: flex; flex-direction: column; align-items: center;
+        /* Reward Validasi Card */
+        .reward-card {
+            background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%);
+            border: 1px solid #1a5276; border-radius: 12px; padding: 25px;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
         }
-        .validator-card-header {
-            width: 100%; display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #1a3a5c;
+        .reward-card-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
         }
-        .validator-title {
-            font-size: 18px; font-weight: bold; color: #f0a500;
+        .reward-card-title { font-size: 18px; font-weight: bold; color: #fff; }
+        .reward-card-icon {
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+        }
+        .reward-card-icon svg { width: 24px; height: 24px; fill: #00e5ff; }
+        .reward-amount {
+            font-size: 32px; font-weight: bold; color: #fff;
+            font-family: 'Courier New', monospace; margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+        .reward-countdown {
+            font-size: 13px; color: #00e5ff; margin-bottom: 15px;
+        }
+        .reward-countdown span { font-weight: bold; }
+        .btn-claim {
+            width: 100%; padding: 14px; background-color: #00e5ff; color: #0a1628;
+            border: none; border-radius: 8px; font-size: 16px; font-weight: bold;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: all 0.3s;
+        }
+        .btn-claim:hover { background-color: #00c4d9; transform: translateY(-1px); }
+        .btn-claim svg { width: 18px; height: 18px; fill: #0a1628; }
+
+        /* My Wallet Balance Card */
+        .wallet-card {
+            background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%);
+            border: 1px solid #1a5276; border-radius: 12px; padding: 25px;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+        }
+        .wallet-card-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+        }
+        .wallet-card-title { font-size: 18px; font-weight: bold; color: #fff; }
+        .wallet-card-icon {
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+        }
+        .wallet-card-icon svg { width: 24px; height: 24px; fill: #00e5ff; }
+        .wallet-subcard {
+            background: linear-gradient(135deg, #0a1e3d 0%, #0d2a4a 100%);
+            border: 1px solid #1a5276; border-radius: 10px; padding: 18px;
+            margin-bottom: 12px; transition: border-color 0.3s;
+        }
+        .wallet-subcard:last-child { margin-bottom: 0; }
+        .wallet-subcard:hover { border-color: #00e5ff; }
+        .wallet-subcard-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
+        }
+        .wallet-token-info {
             display: flex; align-items: center; gap: 10px;
         }
-        .validator-title svg { width: 22px; height: 22px; fill: #f0a500; }
-        .validator-reward {
-            font-size: 20px; font-weight: bold; color: #00ff88;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+        .wallet-token-icon {
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
         }
-        .validator-reclaim {
-            font-size: 11px; color: #b0bec5; margin-top: 5px;
-        }
-
-        /* Vault Container */
-        .vault-container {
-            position: relative;
-            width: 380px;
-            height: 380px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform-origin: center center;
-        }
-
-        .guide-line {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 190px;
-            background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent);
-            z-index: 90;
-            pointer-events: none;
-            transition: background 0.5s ease;
-        }
-
-        .guide-line.active {
-            background: linear-gradient(to bottom, rgba(0,255,136,0.6), transparent);
-        }
-
-        .guide-line.click-flash {
-            width: 4px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(0,255,136,0.8), transparent);
-            transition: all 0.08s ease-out;
-        }
-
-        .ring {
-            position: absolute;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 1.5s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease;
-        }
-
-        .ring-outer {
-            width: 360px; height: 360px;
-            background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%);
-            border: 2px solid rgba(100, 100, 150, 0.2);
-        }
-        .ring-2 {
-            width: 288px; height: 288px;
-            background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%);
-            border: 2px solid rgba(100, 100, 150, 0.15);
-        }
-        .ring-3 {
-            width: 234px; height: 234px;
-            background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%);
-            border: 2px solid rgba(100, 100, 150, 0.1);
-        }
-        .ring-4 {
-            width: 180px; height: 180px;
-            background: radial-gradient(circle, transparent 42%, #0d0d22 42%, #0d0d22 48%, transparent 48%);
-            border: 2px solid rgba(100, 100, 150, 0.1);
-        }
-        .ring-inner {
-            width: 144px; height: 144px;
-            background: radial-gradient(circle, transparent 42%, #0a0a20 42%, #0a0a20 48%, transparent 48%);
-            border: 2px solid rgba(100, 100, 150, 0.1);
-        }
-
-        .ring.running {
-            border-color: rgba(0, 255, 136, 0.4);
-        }
-        .ring-outer.running { box-shadow: 0 0 25px rgba(0, 255, 136, 0.1), inset 0 0 20px rgba(0, 255, 136, 0.05); }
-        .ring-2.running { box-shadow: 0 0 20px rgba(0, 255, 136, 0.08); }
-        .ring-3.running { box-shadow: 0 0 15px rgba(0, 255, 136, 0.06); }
-        .ring-4.running { box-shadow: 0 0 12px rgba(0, 255, 136, 0.05); }
-        .ring-inner.running { box-shadow: 0 0 10px rgba(0, 255, 136, 0.05); }
-
-        .ring.click-flash {
-            border-color: rgba(255, 255, 255, 0.9) !important;
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.5), inset 0 0 30px rgba(0, 255, 136, 0.3) !important;
-            transition: all 0.08s ease-out;
-        }
-
-        .tick {
-            position: absolute;
-            width: 1px;
-            height: 6px;
-            background: rgba(100, 100, 150, 0.3);
-            transform-origin: center;
-            transition: background 0.5s;
-        }
-
-        .ring.running .tick {
-            background: rgba(0, 255, 136, 0.2);
-        }
-
-        .tick.major {
-            width: 2px;
-            height: 10px;
-            background: rgba(100, 100, 150, 0.5);
-        }
-
-        .ring.running .tick.major {
-            background: rgba(0, 255, 136, 0.4);
-        }
-
-        .ring-char {
-            position: absolute;
-            font-size: 12px;
-            font-weight: bold;
-            color: #444466;
-            user-select: none;
-            transition: color 0.5s;
-            letter-spacing: 1px;
+        .wallet-token-icon.usdt { background-color: rgba(38, 161, 123, 0.15); }
+        .wallet-token-icon.usdt svg { width: 18px; height: 18px; fill: #26a17b; }
+        .wallet-token-icon.bossx { background-color: rgba(0, 229, 255, 0.15); }
+        .wallet-token-icon.bossx svg { width: 18px; height: 18px; fill: #00e5ff; }
+        .wallet-token-name { font-size: 14px; font-weight: bold; color: #fff; }
+        .wallet-token-network { font-size: 11px; color: #2ecc71; }
+        .wallet-balance {
+            font-size: 22px; font-weight: bold; color: #fff;
             font-family: 'Courier New', monospace;
         }
-
-        .ring.running .ring-char {
-            color: rgba(0, 255, 136, 0.7);
-            text-shadow: 0 0 4px rgba(0, 255, 136, 0.3);
-        }
-
-        .ring-char.highlight {
-            color: #ffffff !important;
-            text-shadow: 0 0 8px #00ff88, 0 0 15px rgba(0, 255, 136, 0.6) !important;
-            font-size: 14px;
-        }
-
-        @keyframes spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes spin-ccw { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
-
-        .ring.running.spin-1 { animation: spin-cw 20s linear infinite; }
-        .ring.running.spin-2 { animation: spin-ccw 28s linear infinite; }
-        .ring.running.spin-3 { animation: spin-cw 16s linear infinite; }
-        .ring.running.spin-4 { animation: spin-ccw 24s linear infinite; }
-        .ring.running.spin-5 { animation: spin-cw 12s linear infinite; }
-
-        .center {
-            position: absolute;
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #1a1a2e, #050510);
-            border: 2px solid rgba(100, 100, 150, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 50;
-            box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.5);
-            transition: border-color 0.5s, box-shadow 0.5s;
-        }
-
-        .center.running {
-            border-color: rgba(0, 255, 136, 0.5);
-            box-shadow: 0 0 40px rgba(0, 255, 136, 0.2), inset 0 0 20px rgba(0, 255, 136, 0.1);
-        }
-
-        .power-btn {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            border: 2px solid rgba(100, 100, 150, 0.4);
-            background: radial-gradient(circle at 30% 30%, #2a2a40, #0a0a1a);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.05);
-            position: relative;
-        }
-
-        .power-btn:hover {
-            transform: scale(1.05);
-            border-color: rgba(100, 100, 150, 0.7);
-        }
-
-        .power-btn:active {
-            transform: scale(0.95);
-        }
-
-        .power-btn.running {
-            border-color: rgba(0, 255, 136, 0.6);
-            background: radial-gradient(circle at 30% 30%, #0a3a2a, #051510);
-            box-shadow: 0 0 25px rgba(0, 255, 136, 0.4), inset 0 1px 2px rgba(0, 255, 136, 0.2);
-        }
-
-        .power-btn.running:hover {
-            border-color: rgba(255, 80, 80, 0.6);
-        }
-
-        .power-icon {
-            width: 28px;
-            height: 28px;
-            stroke: #555577;
-            stroke-width: 2.5;
-            fill: none;
-            transition: stroke 0.4s, filter 0.4s;
-        }
-
-        .power-btn.running .power-icon {
-            stroke: #00ff88;
-            filter: drop-shadow(0 0 6px #00ff88);
-        }
+        .wallet-balance .currency { font-size: 14px; color: #b0bec5; margin-left: 5px; }
 
         /* Toast */
         .toast {
@@ -532,7 +379,7 @@
     <div class="main">
         <div class="header">
             <div class="header-left">
-                <button class="toggle-btn" onclick="toggleSidebar()" title="Buka/Tutup Sidebar"></button>
+                <button class="toggle-btn" onclick="toggleSidebar()" title="Buka/Tutup Sidebar">☰</button>
                 <div class="clock-container">
                     <div class="clock-time" id="clock-time">00:00:00</div>
                     <div class="clock-date" id="clock-date">Memuat tanggal...</div>
@@ -585,34 +432,53 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: Validator Running -->
-                    <div class="validator-card">
-                        <div class="validator-card-header">
-                            <div class="validator-title">
-                                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                                Validator Running
-                            </div>
-                            <div>
-                                <div class="validator-reward" id="validatorReward">0.000000000 BossX</div>
-                                <div class="validator-reclaim">Auto-claim setiap 60 detik</div>
+                    <!-- Card 2: Reward Validasi -->
+                    <div class="reward-card">
+                        <div class="reward-card-header">
+                            <div class="reward-card-title">Reward Validasi</div>
+                            <div class="reward-card-icon">
+                                <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
                             </div>
                         </div>
-                        
-                        <div class="vault-container" id="vault">
-                            <div class="guide-line" id="guideLine"></div>
-                            <div class="ring ring-outer spin-1" id="ring-0"></div>
-                            <div class="ring ring-2 spin-2" id="ring-1"></div>
-                            <div class="ring ring-3 spin-3" id="ring-2"></div>
-                            <div class="ring ring-4 spin-4" id="ring-3"></div>
-                            <div class="ring ring-inner spin-5" id="ring-4"></div>
-                            <div class="center" id="centerDisplay">
-                                <button class="power-btn" id="powerBtn" onclick="toggleValidator()" aria-label="Toggle Validator">
-                                    <svg class="power-icon" viewBox="0 0 24 24">
-                                        <path d="M12 2 L12 12" stroke-linecap="round"/>
-                                        <path d="M18.36 6.64 A9 9 0 1 1 5.64 6.64" stroke-linecap="round"/>
-                                    </svg>
-                                </button>
+                        <div class="reward-amount" id="rewardAmount">0.000000000 BossX</div>
+                        <div class="reward-countdown">Auto claim in: <span id="countdownTimer">60</span>s</div>
+                        <button class="btn-claim" onclick="manualClaim()">
+                            <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                            Claim to Wallet
+                        </button>
+                    </div>
+
+                    <!-- Card 3: My Wallet Balance -->
+                    <div class="wallet-card">
+                        <div class="wallet-card-header">
+                            <div class="wallet-card-title">My Wallet Balance</div>
+                            <div class="wallet-card-icon">
+                                <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
                             </div>
+                        </div>
+                        <div class="wallet-subcard">
+                            <div class="wallet-subcard-header">
+                                <div class="wallet-token-info">
+                                    <div class="wallet-token-icon usdt">
+                                        <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                                    </div>
+                                    <div class="wallet-token-name">USDT</div>
+                                </div>
+                                <div class="wallet-token-network">TRC20/BEP20</div>
+                            </div>
+                            <div class="wallet-balance">1000.00 <span class="currency">USDT</span></div>
+                        </div>
+                        <div class="wallet-subcard">
+                            <div class="wallet-subcard-header">
+                                <div class="wallet-token-info">
+                                    <div class="wallet-token-icon bossx">
+                                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                    </div>
+                                    <div class="wallet-token-name">BOSSX</div>
+                                </div>
+                                <div class="wallet-token-network">Internal Token</div>
+                            </div>
+                            <div class="wallet-balance" id="bossxBalance">899.000000000 <span class="currency">BossX</span></div>
                         </div>
                     </div>
                 </div>
@@ -738,29 +604,11 @@
 
     <script>
         let accessKeys = [];
-        let isRunning = false;
-        let clickInterval = null;
-        let audioCtx = null;
-        let animationFrameId = null;
-        let startTime = 0;
-        let rewardInterval = null;
-        let autoclaimInterval = null;
+        let bossxBalance = 899.000000000;
         let currentReward = 0.000000000;
+        let countdownSeconds = 60;
+        let rewardInterval = null;
         const REWARD_PER_SECOND = 0.000000001;
-
-        const CHARS = '0123456789ABCDEFGHIJKLMN'.split('');
-        const CHARS_PER_RING = 24;
-        const RING_OFFSETS = [0, 6, 12, 18, 3];
-        const CLICK_INTERVAL_MS = 60000;
-        const TICKS_PER_RING = 60;
-
-        const RING_SPEEDS = [
-            360 / 20000,
-            -360 / 28000,
-            360 / 16000,
-            -360 / 24000,
-            360 / 12000
-        ];
 
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('collapsed');
@@ -852,203 +700,62 @@
             setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        // ==================== AUDIO ENGINE ====================
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        // ==================== REWARD & COUNTDOWN SYSTEM ====================
+        function updateRewardDisplay() {
+            document.getElementById('rewardAmount').textContent = currentReward.toFixed(9) + ' BossX';
+        }
+
+        function updateBossxBalanceDisplay() {
+            document.getElementById('bossxBalance').innerHTML = bossxBalance.toFixed(9) + ' <span class="currency">BossX</span>';
+        }
+
+        function updateCountdownDisplay() {
+            document.getElementById('countdownTimer').textContent = countdownSeconds;
+        }
+
+        function performClaim(isAuto) {
+            if (currentReward <= 0) return;
+            const claimedAmount = currentReward;
+            bossxBalance += claimedAmount;
+            currentReward = 0;
+            countdownSeconds = 60;
+            updateRewardDisplay();
+            updateBossxBalanceDisplay();
+            updateCountdownDisplay();
+
+            const msg = isAuto 
+                ? `Auto-claim berhasil: ${claimedAmount.toFixed(9)} BossX` 
+                : `Claim berhasil: ${claimedAmount.toFixed(9)} BossX`;
+            showToast(msg);
+
+            // Visual feedback
+            const rewardEl = document.getElementById('rewardAmount');
+            rewardEl.style.transform = 'scale(1.05)';
+            rewardEl.style.transition = 'transform 0.3s ease';
+            setTimeout(() => { rewardEl.style.transform = 'scale(1)'; }, 300);
+        }
+
+        function manualClaim() {
+            if (currentReward <= 0) {
+                showToast('Tidak ada reward untuk di-claim');
+                return;
             }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+            performClaim(false);
         }
 
-        function playMechanicalClick() {
-            if (!audioCtx) return;
-            const now = audioCtx.currentTime;
-            
-            const clickOsc = audioCtx.createOscillator();
-            const clickGain = audioCtx.createGain();
-            const clickFilter = audioCtx.createBiquadFilter();
-            
-            clickOsc.type = 'triangle';
-            clickOsc.frequency.setValueAtTime(1800, now);
-            clickOsc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
-            
-            clickFilter.type = 'bandpass';
-            clickFilter.frequency.value = 1200;
-            clickFilter.Q.value = 2;
-            
-            clickGain.gain.setValueAtTime(0, now);
-            clickGain.gain.linearRampToValueAtTime(0.4, now + 0.002);
-            clickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
-            
-            clickOsc.connect(clickFilter);
-            clickFilter.connect(clickGain);
-            clickGain.connect(audioCtx.destination);
-            
-            clickOsc.start(now);
-            clickOsc.stop(now + 0.1);
-            
-            const thudOsc = audioCtx.createOscillator();
-            const thudGain = audioCtx.createGain();
-            
-            thudOsc.type = 'sine';
-            thudOsc.frequency.setValueAtTime(180, now);
-            thudOsc.frequency.exponentialRampToValueAtTime(60, now + 0.1);
-            
-            thudGain.gain.setValueAtTime(0, now);
-            thudGain.gain.linearRampToValueAtTime(0.3, now + 0.003);
-            thudGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
-            
-            thudOsc.connect(thudGain);
-            thudGain.connect(audioCtx.destination);
-            
-            thudOsc.start(now);
-            thudOsc.stop(now + 0.2);
-            
-            const bufferSize = audioCtx.sampleRate * 0.05;
-            const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-            const noiseData = noiseBuffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                noiseData[i] = (Math.random() * 2 - 1) * 0.5;
-            }
-            
-            const noiseSource = audioCtx.createBufferSource();
-            const noiseGain = audioCtx.createGain();
-            const noiseFilter = audioCtx.createBiquadFilter();
-            
-            noiseSource.buffer = noiseBuffer;
-            noiseFilter.type = 'highpass';
-            noiseFilter.frequency.value = 2000;
-            
-            noiseGain.gain.setValueAtTime(0.15, now);
-            noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
-            
-            noiseSource.connect(noiseFilter);
-            noiseFilter.connect(noiseGain);
-            noiseGain.connect(audioCtx.destination);
-            
-            noiseSource.start(now);
-        }
-
-        function triggerClickFlash() {
-            const guideLine = document.getElementById('guideLine');
-            const rings = document.querySelectorAll('.ring');
-            
-            guideLine.classList.add('click-flash');
-            rings.forEach(ring => ring.classList.add('click-flash'));
-            
-            setTimeout(() => {
-                guideLine.classList.remove('click-flash');
-                rings.forEach(ring => ring.classList.remove('click-flash'));
-            }, 150);
-            
-            if (navigator.vibrate) navigator.vibrate([30, 20, 30]);
-        }
-
-        function startClickLoop() {
-            if (clickInterval) clearInterval(clickInterval);
-            clickInterval = setInterval(() => {
-                if (!isRunning) return;
-                playMechanicalClick();
-                triggerClickFlash();
-            }, CLICK_INTERVAL_MS);
-        }
-
-        function stopClickLoop() {
-            if (clickInterval) {
-                clearInterval(clickInterval);
-                clickInterval = null;
-            }
-        }
-
-        // ==================== RING INITIALIZATION ====================
-        function initRings() {
-            const radii = [162, 128, 101, 77, 60];
-            const tickRadii = [176, 140, 113, 86, 68];
-            
-            for (let r = 0; r < 5; r++) {
-                const ring = document.getElementById(`ring-${r}`);
-                const radius = radii[r];
-                const tickRadius = tickRadii[r];
-                const offset = RING_OFFSETS[r];
-
-                for (let i = 0; i < TICKS_PER_RING; i++) {
-                    const angle = (i * 360 / TICKS_PER_RING) - 90;
-                    const rad = (angle * Math.PI) / 180;
-                    const x = Math.cos(rad) * tickRadius;
-                    const y = Math.sin(rad) * tickRadius;
-
-                    const tick = document.createElement('div');
-                    tick.className = `tick ${i % 5 === 0 ? 'major' : ''}`;
-                    tick.style.left = `calc(50% + ${x}px - 0.5px)`;
-                    tick.style.top = `calc(50% + ${y}px - 3px)`;
-                    tick.style.transform = `rotate(${angle + 90}deg)`;
-                    ring.appendChild(tick);
-                }
-
-                for (let i = 0; i < CHARS_PER_RING; i++) {
-                    const charIndex = (i + offset) % CHARS.length;
-                    const angle = (i * 360 / CHARS_PER_RING) - 90;
-                    const rad = (angle * Math.PI) / 180;
-                    const x = Math.cos(rad) * radius;
-                    const y = Math.sin(rad) * radius;
-
-                    const charEl = document.createElement('div');
-                    charEl.className = 'ring-char';
-                    charEl.textContent = CHARS[charIndex];
-                    charEl.dataset.index = i;
-                    charEl.style.left = `calc(50% + ${x}px - 6px)`;
-                    charEl.style.top = `calc(50% + ${y}px - 8px)`;
-                    ring.appendChild(charEl);
-                }
-            }
-        }
-
-        function updateHighlights(timestamp) {
-            if (!isRunning) return;
-            if (!startTime) startTime = timestamp;
-            const elapsed = timestamp - startTime;
-
-            const rings = document.querySelectorAll('.ring');
-            
-            rings.forEach((ring, r) => {
-                const oldHighlight = ring.querySelector('.ring-char.highlight');
-                if (oldHighlight) oldHighlight.classList.remove('highlight');
-                
-                let currentAngle = (elapsed * RING_SPEEDS[r]) % 360;
-                if (currentAngle < 0) currentAngle += 360;
-                
-                const anglePerChar = 360 / CHARS_PER_RING;
-                let rawIndex = -currentAngle / anglePerChar;
-                let highlightIndex = Math.round(rawIndex) % CHARS_PER_RING;
-                if (highlightIndex < 0) highlightIndex += CHARS_PER_RING;
-                
-                const chars = ring.querySelectorAll('.ring-char');
-                if (chars[highlightIndex]) {
-                    chars[highlightIndex].classList.add('highlight');
-                }
-            });
-
-            animationFrameId = requestAnimationFrame(updateHighlights);
-        }
-
-        // ==================== REWARD SYSTEM ====================
         function startRewardSystem() {
-            // Update reward setiap detik
+            if (rewardInterval) clearInterval(rewardInterval);
             rewardInterval = setInterval(() => {
-                if (isRunning) {
-                    currentReward += REWARD_PER_SECOND;
-                    updateRewardDisplay();
+                currentReward += REWARD_PER_SECOND;
+                countdownSeconds--;
+                
+                if (countdownSeconds <= 0) {
+                    performClaim(true);
                 }
+                
+                updateRewardDisplay();
+                updateCountdownDisplay();
             }, 1000);
-
-            // Auto-claim setiap 60 detik
-            autoclaimInterval = setInterval(() => {
-                if (isRunning && currentReward > 0) {
-                    performAutoclaim();
-                }
-            }, 60000);
         }
 
         function stopRewardSystem() {
@@ -1056,80 +763,10 @@
                 clearInterval(rewardInterval);
                 rewardInterval = null;
             }
-            if (autoclaimInterval) {
-                clearInterval(autoclaimInterval);
-                autoclaimInterval = null;
-            }
         }
 
-        function updateRewardDisplay() {
-            const rewardEl = document.getElementById('validatorReward');
-            rewardEl.textContent = currentReward.toFixed(9) + ' BossX';
-        }
-
-        function performAutoclaim() {
-            const claimedAmount = currentReward;
-            currentReward = 0;
-            updateRewardDisplay();
-            showToast(`Auto-claim berhasil: ${claimedAmount.toFixed(9)} BossX`);
-            
-            // Visual feedback
-            const rewardEl = document.getElementById('validatorReward');
-            rewardEl.style.transform = 'scale(1.2)';
-            rewardEl.style.transition = 'transform 0.3s ease';
-            setTimeout(() => {
-                rewardEl.style.transform = 'scale(1)';
-            }, 300);
-        }
-
-        function toggleValidator() {
-            initAudio();
-            
-            isRunning = !isRunning;
-            const btn = document.getElementById('powerBtn');
-            const center = document.getElementById('centerDisplay');
-            const guideLine = document.getElementById('guideLine');
-            const rings = document.querySelectorAll('.ring');
-
-            if (isRunning) {
-                btn.classList.add('running');
-                center.classList.add('running');
-                guideLine.classList.add('active');
-                rings.forEach(ring => ring.classList.add('running'));
-
-                startTime = 0;
-                animationFrameId = requestAnimationFrame(updateHighlights);
-                startClickLoop();
-                startRewardSystem();
-                
-                setTimeout(() => {
-                    playMechanicalClick();
-                    triggerClickFlash();
-                }, 300);
-
-                if (navigator.vibrate) navigator.vibrate(100);
-
-            } else {
-                btn.classList.remove('running');
-                center.classList.remove('running');
-                guideLine.classList.remove('active');
-                rings.forEach(ring => {
-                    ring.classList.remove('running');
-                    ring.style.transform = ''; 
-                    ring.querySelectorAll('.ring-char.highlight').forEach(el => el.classList.remove('highlight'));
-                });
-
-                if (animationFrameId) {
-                    cancelAnimationFrame(animationFrameId);
-                    animationFrameId = null;
-                }
-                
-                stopClickLoop();
-                stopRewardSystem();
-            }
-        }
-
-        initRings();
+        // Mulai sistem reward saat halaman dimuat
+        startRewardSystem();
     </script>
 
 </body>
