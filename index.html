@@ -140,7 +140,7 @@
         /* ===== Dashboard Grid - 4 Card Sejajar ===== */
         .dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
 
-        /* Redeem Card - Flex Column */
+        /* Redeem Card */
         .redeem-card { 
             background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); 
             border: 1px solid #1a3a5c; border-radius: 10px; padding: 18px; 
@@ -161,7 +161,7 @@
         .redeem-footer a:hover { text-decoration: underline; }
         .redeem-action-wrapper { margin-top: auto; }
 
-        /* Reward Validasi Card - Flex Column */
+        /* Reward Validasi Card */
         .reward-card { 
             background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); 
             border: 1px solid #1a5276; border-radius: 12px; padding: 18px; 
@@ -212,7 +212,7 @@
         .wallet-balance { font-size: 18px; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; }
         .wallet-balance .currency { font-size: 12px; color: #b0bec5; margin-left: 4px; }
 
-        /* Validator Dial Card */
+        /* Access Key Running Card (sebelumnya Validator Running) */
         .validator-card { 
             background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); 
             border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; 
@@ -222,7 +222,61 @@
         .validator-card-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding-bottom: 8px; border-bottom: 1px solid #1a3a5c; }
         .validator-title { font-size: 14px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 8px; }
         .validator-title svg { width: 18px; height: 18px; fill: #f0a500; }
-        .vault-container { position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; transform-origin: center center; }
+
+        /* Info Row di atas dial (Reward kiri + Countdown kanan) */
+        .validator-info-row {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid rgba(26, 82, 118, 0.4);
+        }
+        .validator-info-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .validator-info-label {
+            font-size: 10px;
+            color: #b0bec5;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .validator-info-value {
+            font-size: 14px;
+            font-weight: bold;
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+        }
+        .validator-info-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .validator-countdown-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #00e5ff;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+        }
+
+        /* Vault Container - diturunkan posisinya */
+        .vault-container { 
+            position: relative; 
+            width: 240px; 
+            height: 240px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transform-origin: center center;
+            margin-top: 15px;
+        }
         .guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 120px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
         .guide-line.active { background: linear-gradient(to bottom, rgba(0,255,136,0.6), transparent); }
         .guide-line.click-flash { width: 4px; background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(0,255,136,0.8), transparent); transition: all 0.08s ease-out; }
@@ -416,14 +470,27 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: Validator Running -->
+                    <!-- Card 2: Access Key Running (sebelumnya Validator Running) -->
                     <div class="validator-card">
                         <div class="validator-card-header">
                             <div class="validator-title">
                                 <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                                Validator Running
+                                Access Key Running
                             </div>
                         </div>
+
+                        <!-- Info Row: Reward (kiri) + Countdown ke 06:00 (kanan) -->
+                        <div class="validator-info-row">
+                            <div class="validator-info-left">
+                                <div class="validator-info-label">Reward</div>
+                                <div class="validator-info-value" id="runningReward">0.000000000 BossX</div>
+                            </div>
+                            <div class="validator-info-right">
+                                <div class="validator-info-label">Next Reset</div>
+                                <div class="validator-countdown-value" id="countdownTo6AM">00:00:00</div>
+                            </div>
+                        </div>
+
                         <div class="vault-container" id="vault">
                             <div class="guide-line" id="guideLine"></div>
                             <div class="ring ring-outer spin-1" id="ring-0"></div>
@@ -700,6 +767,32 @@
         }
         setInterval(updateClock, 1000); updateClock();
 
+        // ==================== COUNTDOWN KE 06:00 ====================
+        function updateCountdownTo6AM() {
+            const now = new Date();
+            const target = new Date(now);
+            target.setHours(6, 0, 0, 0);
+
+            // Jika sudah lewat jam 06:00 hari ini, targetkan ke besok
+            if (now >= target) {
+                target.setDate(target.getDate() + 1);
+            }
+
+            const diff = target - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const h = String(hours).padStart(2, '0');
+            const m = String(minutes).padStart(2, '0');
+            const s = String(seconds).padStart(2, '0');
+
+            const el = document.getElementById('countdownTo6AM');
+            if (el) el.textContent = `${h}:${m}:${s}`;
+        }
+        setInterval(updateCountdownTo6AM, 1000);
+        updateCountdownTo6AM();
+
         function navigateTo(page, event) {
             if (event) event.preventDefault();
             document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
@@ -763,7 +856,12 @@
         }
 
         // ==================== REWARD & COUNTDOWN SYSTEM ====================
-        function updateRewardDisplay() { document.getElementById('rewardAmount').textContent = currentReward.toFixed(9) + ' BossX'; }
+        function updateRewardDisplay() { 
+            document.getElementById('rewardAmount').textContent = currentReward.toFixed(9) + ' BossX';
+            // Sinkronkan juga dengan reward di card Access Key Running
+            const runningRewardEl = document.getElementById('runningReward');
+            if (runningRewardEl) runningRewardEl.textContent = currentReward.toFixed(9) + ' BossX';
+        }
         function updateBossxBalanceDisplay() { document.getElementById('bossxBalance').innerHTML = bossxBalance.toFixed(9) + ' <span class="currency">BossX</span>'; }
         function updateCountdownDisplay() { document.getElementById('countdownTimer').textContent = countdownSeconds; }
 
