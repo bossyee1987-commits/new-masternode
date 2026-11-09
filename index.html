@@ -92,8 +92,12 @@
         .fee-value { font-size: 11px; color: #e74c3c; margin-top: 3px; }
         .date-value { display: flex; align-items: center; gap: 6px; color: #b0bec5; font-size: 13px; }
         .date-value svg { width: 14px; height: 14px; fill: #b0bec5; }
-        .status-badge { display: inline-flex; align-items: center; gap: 6px; color: #2ecc71; font-size: 12px; font-weight: bold; }
-        .status-badge svg { width: 14px; height: 14px; fill: #2ecc71; }
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: bold; }
+        .status-badge.available { color: #2ecc71; }
+        .status-badge.available svg { fill: #2ecc71; }
+        .status-badge.redeemed { color: #e74c3c; }
+        .status-badge.redeemed svg { fill: #e74c3c; }
+        .status-badge svg { width: 14px; height: 14px; }
         .btn-copy { display: inline-flex; align-items: center; gap: 6px; background-color: #00e5ff; color: #0a1628; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .btn-copy:hover { background-color: #00c4d9; }
         .btn-copy svg { width: 12px; height: 12px; fill: #0a1628; }
@@ -156,6 +160,14 @@
         .btn-redeem { width: 100%; padding: 11px; background-color: #00e5ff; color: #0a1628; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; }
         .btn-redeem:hover { background-color: #00c4d9; }
         .btn-redeem svg { width: 16px; height: 16px; fill: #0a1628; }
+        /* State: Node Aktiv (hijau, disabled) */
+        .btn-redeem.node-active {
+            background-color: #2ecc71;
+            color: #fff;
+            cursor: default;
+        }
+        .btn-redeem.node-active:hover { background-color: #2ecc71; }
+        .btn-redeem.node-active svg { fill: #fff; }
         .redeem-footer { text-align: center; margin-top: 12px; font-size: 11px; color: #b0bec5; }
         .redeem-footer a { color: #00e5ff; text-decoration: none; cursor: pointer; }
         .redeem-footer a:hover { text-decoration: underline; }
@@ -184,9 +196,11 @@
         .btn-claim { width: 100%; padding: 11px; background-color: #00e5ff; color: #0a1628; border: none; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; }
         .btn-claim:hover { background-color: #00c4d9; transform: translateY(-1px); }
         .btn-claim svg { width: 16px; height: 16px; fill: #0a1628; }
+        .btn-claim:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .btn-claim:disabled:hover { background-color: #00e5ff; }
         .reward-action-wrapper { margin-top: auto; }
 
-        /* My Wallet Balance Card - PERUBAHAN: Sub-card simetris */
+        /* My Wallet Balance Card */
         .wallet-card { 
             background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); 
             border: 1px solid #1a5276; border-radius: 12px; padding: 18px; 
@@ -260,7 +274,6 @@
             text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
         }
 
-        /* PERUBAHAN 1: Vault Container diperbesar dari 270px ke 290px */
         .vault-container { 
             position: relative; 
             width: 290px; 
@@ -275,7 +288,6 @@
         .guide-line.active { background: linear-gradient(to bottom, rgba(0,255,136,0.6), transparent); }
         .guide-line.click-flash { width: 4px; background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(0,255,136,0.8), transparent); transition: all 0.08s ease-out; }
         .ring { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 1.5s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease; }
-        /* Semua ring diperbesar proporsional */
         .ring-outer { width: 270px; height: 270px; background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.2); }
         .ring-2 { width: 216px; height: 216px; background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.15); }
         .ring-3 { width: 175px; height: 175px; background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
@@ -309,12 +321,16 @@
         .power-btn:active { transform: scale(0.95); }
         .power-btn.running { border-color: rgba(0, 255, 136, 0.6); background: radial-gradient(circle at 30% 30%, #0a3a2a, #051510); box-shadow: 0 0 25px rgba(0, 255, 136, 0.4), inset 0 1px 2px rgba(0, 255, 136, 0.2); }
         .power-btn.running:hover { border-color: rgba(255, 80, 80, 0.6); }
+        .power-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+        .power-btn:disabled:hover { transform: none; border-color: rgba(100, 100, 150, 0.4); }
         .power-icon { width: 26px; height: 26px; stroke: #555577; stroke-width: 2.5; fill: none; transition: stroke 0.4s, filter 0.4s; }
         .power-btn.running .power-icon { stroke: #00ff88; filter: drop-shadow(0 0 6px #00ff88); }
 
         /* Toast */
         .toast { position: fixed; bottom: 30px; right: 30px; background-color: #2ecc71; color: #fff; padding: 12px 20px; border-radius: 8px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); opacity: 0; transform: translateY(20px); transition: all 0.3s; z-index: 1000; }
         .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.error { background-color: #e74c3c; }
+        .toast.warning { background-color: #f39c12; }
 
         /* ===== Log Engine Mastercloud Section ===== */
         .log-section { margin-top: 20px; }
@@ -338,13 +354,15 @@
         .log-content {
             background-color: #050a14; padding: 15px; max-height: 250px;
             overflow-y: auto; font-family: 'Courier New', monospace; font-size: 12px;
+            min-height: 100px;
         }
         .log-content::-webkit-scrollbar { width: 8px; }
         .log-content::-webkit-scrollbar-track { background: #0a1628; border-radius: 4px; }
         .log-content::-webkit-scrollbar-thumb { background: #1a5276; border-radius: 4px; }
         .log-content::-webkit-scrollbar-thumb:hover { background: #2471a3; }
         .log-entry {
-            padding: 4px 0; color: #2ecc71; border-bottom: 1px solid rgba(26, 82, 118, 0.3);
+            padding: 4px 0; border-bottom: 1px solid rgba(26, 82, 118, 0.3);
+            word-break: break-all;
         }
         .log-entry:last-child { border-bottom: none; }
         .log-timestamp { color: #00e5ff; margin-right: 8px; }
@@ -352,6 +370,7 @@
         .log-level-info { color: #3498db; }
         .log-level-warning { color: #f39c12; }
         .log-level-error { color: #e74c3c; }
+        .log-empty { color: #78909c; font-style: italic; text-align: center; padding: 20px 0; }
 
         /* System Info Panel */
         .system-info-panel {
@@ -378,8 +397,10 @@
             color: #fff; font-size: 13px; font-weight: bold; text-align: right;
         }
         .system-info-value.status-active { color: #2ecc71; }
+        .system-info-value.status-inactive { color: #e74c3c; }
         .system-info-value.status-pending { color: #f39c12; }
         .system-info-value.status-time { color: #e74c3c; }
+        .system-info-value.status-expired { color: #e74c3c; }
 
         /* Responsive */
         @media (max-width: 1400px) {
@@ -454,10 +475,10 @@
                             </div>
                         </div>
                         <div class="redeem-action-wrapper">
-                            <input type="text" class="redeem-input" placeholder="REDEEM KEY">
-                            <button class="btn-redeem">
-                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                                Redeem Now
+                            <input type="text" class="redeem-input" id="redeemInput" placeholder="REDEEM KEY">
+                            <button class="btn-redeem" id="btnRedeem" onclick="handleRedeem()">
+                                <svg viewBox="0 0 24 24" id="redeemIcon"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                <span id="redeemText">Redeem Now</span>
                             </button>
                             <div class="redeem-footer">
                                 Beli di menu "<a onclick="navigateTo('accesskey', event)">Access Key</a>"
@@ -491,7 +512,7 @@
                             <div class="ring ring-4 spin-4" id="ring-3"></div>
                             <div class="ring ring-inner spin-5" id="ring-4"></div>
                             <div class="center" id="centerDisplay">
-                                <button class="power-btn" id="powerBtn" onclick="toggleValidator()" aria-label="Toggle Validator">
+                                <button class="power-btn" id="powerBtn" onclick="togglePower()" aria-label="Toggle Power" disabled>
                                     <svg class="power-icon" viewBox="0 0 24 24">
                                         <path d="M12 2 L12 12" stroke-linecap="round"/>
                                         <path d="M18.36 6.64 A9 9 0 1 1 5.64 6.64" stroke-linecap="round"/>
@@ -512,14 +533,14 @@
                         <div class="reward-amount" id="rewardAmount">0.000000000 BossX</div>
                         <div class="reward-action-wrapper">
                             <div class="reward-countdown">Auto claim in: <span id="countdownTimer">60</span>s</div>
-                            <button class="btn-claim" onclick="manualClaim()">
+                            <button class="btn-claim" id="btnClaim" onclick="claimToWallet()">
                                 <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
                                 Claim to Wallet
                             </button>
                         </div>
                     </div>
 
-                    <!-- Card 4: My Wallet Balance - PERUBAHAN: Saldo USDT 0.00, BOSSX 1000 -->
+                    <!-- Card 4: My Wallet Balance -->
                     <div class="wallet-card">
                         <div class="wallet-card-header">
                             <div class="wallet-card-title">My Wallet Balance</div>
@@ -562,6 +583,7 @@
                             <button class="btn-clear-log" onclick="clearLog()">Clear Log</button>
                         </div>
                         <div class="log-content" id="logContent">
+                            <div class="log-empty">Belum ada log aktivitas.</div>
                         </div>
                     </div>
 
@@ -575,7 +597,7 @@
                             <div class="system-info-column">
                                 <div class="system-info-item">
                                     <span class="system-info-label">Node Status:</span>
-                                    <span class="system-info-value status-active">Aktif</span>
+                                    <span class="system-info-value status-inactive" id="sysNodeStatus">Non-Aktif</span>
                                 </div>
                                 <div class="system-info-item">
                                     <span class="system-info-label">Auto Stop:</span>
@@ -587,7 +609,7 @@
                                 </div>
                                 <div class="system-info-item">
                                     <span class="system-info-label">Masa Berlaku Validasi:</span>
-                                    <span class="system-info-value status-time">39.999.537 detik</span>
+                                    <span class="system-info-value status-time" id="sysContractTime">40.000.000 detik</span>
                                 </div>
                             </div>
                             <div class="system-info-column">
@@ -668,7 +690,7 @@
                             <div class="summary-row"><span class="summary-label">Jumlah Stake:</span><span class="summary-value stake" id="summary-stake">0.00 BossX</span></div>
                             <div class="summary-row"><span class="summary-label">Fee:</span><span class="summary-value fee">1.00 BossX</span></div>
                             <div class="summary-row"><span class="summary-label">Total Terpotong:</span><span class="summary-value total" id="summary-total">1.00 BossX</span></div>
-                            <div class="summary-row"><span class="summary-label">Saldo saat ini:</span><span class="summary-value balance">1000.00000000 BossX</span></div>
+                            <div class="summary-row"><span class="summary-label">Saldo saat ini:</span><span class="summary-value balance" id="summary-balance">1000.00000000 BossX</span></div>
                         </div>
                         <button class="btn-generate" onclick="generateKey()">
                             <svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>
@@ -732,14 +754,25 @@
     <div class="toast" id="toast">Berhasil!</div>
 
     <script>
-        // PERUBAHAN 3: Saldo BOSSX diubah dari 899 ke 1000
-        let accessKeys = [];
-        let bossxBalance = 1000.000000000;
-        let currentReward = 0.000000000;
-        let countdownSeconds = 60;
-        let rewardInterval = null;
+        // ==================== STATE MANAGEMENT ====================
+        const CONTRACT_DURATION_SECONDS = 40000000; // 40 juta detik
         const REWARD_PER_SECOND = 0.000000001;
+        const AUTO_CLAIM_INTERVAL = 60; // detik
 
+        let state = {
+            nodeActive: false,
+            powerOn: false,
+            redeemedKey: '',
+            stakeAmount: 0,
+            contractStart: null,       // Timestamp saat redeem berhasil
+            bossxBalance: 1000.000000000,
+            currentReward: 0.000000000,    // Reward dial (belum di-claim)
+            rewardValidasi: 0.000000000,   // Reward di card Reward Validasi
+            countdownSeconds: 60,
+            logs: []
+        };
+
+        let accessKeys = [];
         let isRunning = false;
         let clickInterval = null;
         let audioCtx = null;
@@ -752,13 +785,426 @@
         const TICKS_PER_RING = 60;
         const RING_SPEEDS = [360 / 20000, -360 / 28000, 360 / 16000, -360 / 24000, 360 / 12000];
 
+        // ==================== INITIALIZATION ====================
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('collapsed'); }
+        
         function updateClock() {
             const now = new Date();
             document.getElementById('clock-time').textContent = now.toLocaleTimeString('id-ID', { hour12: false });
             document.getElementById('clock-date').textContent = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
         }
         setInterval(updateClock, 1000); updateClock();
+
+        function navigateTo(page, event) {
+            if (event) event.preventDefault();
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.sidebar .menu a').forEach(a => a.classList.remove('active'));
+            document.getElementById('page-' + page).classList.add('active');
+            document.getElementById('menu-' + page).classList.add('active');
+        }
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('btn-' + tab).classList.add('active');
+            document.getElementById('tab-' + tab).classList.add('active');
+        }
+
+        // ==================== ACCESS KEY GENERATION ====================
+        function setMax() { 
+            const maxStake = Math.floor(state.bossxBalance) - 1;
+            document.getElementById('stake-input').value = Math.max(10, maxStake); 
+            updateSummary(); 
+        }
+        function updateSummary() {
+            const stake = parseFloat(document.getElementById('stake-input').value) || 0;
+            const fee = 1; const total = stake + fee;
+            document.getElementById('summary-stake').textContent = stake.toFixed(2) + ' BossX';
+            document.getElementById('summary-total').textContent = total.toFixed(2) + ' BossX';
+            document.getElementById('summary-balance').textContent = state.bossxBalance.toFixed(8) + ' BossX';
+        }
+        function generateKey() {
+            const stake = parseFloat(document.getElementById('stake-input').value) || 0;
+            if (stake < 10) { showToast('Minimal stake adalah 10 BossX', 'error'); return; }
+            if (stake + 1 > state.bossxBalance) { showToast('Saldo tidak mencukupi', 'error'); return; }
+            
+            // Potong saldo
+            state.bossxBalance -= (stake + 1);
+            updateWalletDisplay();
+            updateSummary();
+            
+            // Generate key 25 karakter
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; 
+            let key = '';
+            for (let i = 0; i < 25; i++) key += chars.charAt(Math.floor(Math.random() * chars.length));
+            
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false });
+            
+            accessKeys.push({ key: key, stake: stake, fee: 1, date: dateStr, status: 'AVAILABLE' });
+            updateKeysTable(); 
+            document.getElementById('stake-input').value = ''; 
+            updateSummary(); 
+            switchTab('mykeys');
+            showToast('Access Key berhasil digenerate! Saldo dipotong ' + (stake + 1) + ' BossX');
+        }
+        function updateKeysTable() {
+            const tbody = document.getElementById('keys-table-body'); tbody.innerHTML = '';
+            accessKeys.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                const statusClass = item.status === 'AVAILABLE' ? 'available' : 'redeemed';
+                const statusText = item.status === 'AVAILABLE' ? 'AVAILABLE' : 'REDEEMED';
+                tr.innerHTML = `<td><span class="key-value">${item.key}</span></td><td><div class="stake-value">${item.stake.toFixed(2)} BossX</div><div class="fee-value">Fee: ${item.fee} BossX</div></td><td><div class="date-value"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>${item.date}</div></td><td><span class="status-badge ${statusClass}"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>${statusText}</span></td><td><button class="btn-copy" onclick="copyKey(${index})"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>Copy</button></td>`;
+                tbody.appendChild(tr);
+            });
+            const total = accessKeys.length;
+            document.getElementById('stat-total').textContent = total;
+            document.getElementById('stat-available').textContent = accessKeys.filter(k => k.status === 'AVAILABLE').length;
+            document.getElementById('stat-redeemed').textContent = accessKeys.filter(k => k.status === 'REDEEMED').length;
+            document.getElementById('key-badge').textContent = total;
+        }
+        function copyKey(index) {
+            const key = accessKeys[index].key;
+            navigator.clipboard.writeText(key).then(() => showToast('Key berhasil disalin!')).catch(() => {
+                const ta = document.createElement('textarea'); ta.value = key; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showToast('Key berhasil disalin!');
+            });
+        }
+        function refreshKeys() { updateKeysTable(); showToast('Data berhasil diperbarui!'); }
+
+        // ==================== REDEEM LOGIC ====================
+        function handleRedeem() {
+            // Jika node sudah aktif, tidak bisa redeem lagi
+            if (state.nodeActive) {
+                showToast('Node sudah aktif. Kontrak masih berjalan.', 'warning');
+                return;
+            }
+            
+            const keyInput = document.getElementById('redeemInput');
+            const key = keyInput.value.trim();
+            
+            if (!key) {
+                showToast('Masukkan Access Key terlebih dahulu', 'error');
+                return;
+            }
+            
+            if (key.length !== 25) {
+                showToast('Access Key harus 25 karakter', 'error');
+                return;
+            }
+            
+            // Cari key yang valid
+            const found = accessKeys.find(k => k.key === key && k.status === 'AVAILABLE');
+            if (!found) {
+                showToast('Access Key tidak valid atau sudah digunakan', 'error');
+                return;
+            }
+            
+            // Validasi: kontrak harus sudah habis untuk redeem key baru
+            const remaining = getRemainingContractTime();
+            if (remaining > 0 && state.contractStart !== null) {
+                showToast('Kontrak sebelumnya masih berjalan. Tunggu hingga habis.', 'warning');
+                return;
+            }
+            
+            // Update status key
+            found.status = 'REDEEMED';
+            updateKeysTable();
+            
+            // Aktivasi node
+            state.nodeActive = true;
+            state.redeemedKey = key;
+            state.stakeAmount = found.stake;
+            state.contractStart = Date.now();
+            state.powerOn = false;
+            state.currentReward = 0;
+            state.rewardValidasi = 0;
+            state.countdownSeconds = AUTO_CLAIM_INTERVAL;
+            
+            // Update UI
+            updateRedeemButton();
+            updateSystemInfo();
+            updateWalletDisplay();
+            updateRewardDisplay();
+            updatePowerButton();
+            
+            // Log
+            addLog('SUCCESS', `Access Key redeemed: ${key} | Node activated with ${found.stake} BossX.`);
+            
+            showToast('Node berhasil diaktivasi! Silakan klik Power Dial untuk mulai reward.');
+            keyInput.value = '';
+        }
+
+        function updateRedeemButton() {
+            const btn = document.getElementById('btnRedeem');
+            const text = document.getElementById('redeemText');
+            const icon = document.getElementById('redeemIcon');
+            
+            if (state.nodeActive) {
+                btn.classList.add('node-active');
+                btn.disabled = true;
+                text.textContent = 'Node Aktiv';
+                icon.innerHTML = '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>';
+            } else {
+                btn.classList.remove('node-active');
+                btn.disabled = false;
+                text.textContent = 'Redeem Now';
+                icon.innerHTML = '<path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>';
+            }
+        }
+
+        // ==================== CONTRACT TIMER (MUTLAK) ====================
+        function getRemainingContractTime() {
+            if (!state.contractStart) return CONTRACT_DURATION_SECONDS;
+            const elapsed = (Date.now() - state.contractStart) / 1000;
+            const remaining = CONTRACT_DURATION_SECONDS - elapsed;
+            return Math.max(0, remaining);
+        }
+
+        function formatContractTime(seconds) {
+            return Math.ceil(seconds).toLocaleString('id-ID') + ' detik';
+        }
+
+        // ==================== AUTO STOP 06:00 ====================
+        function isAutoStopTime() {
+            const now = new Date();
+            return now.getHours() === 6 && now.getMinutes() === 0;
+        }
+
+        function isBlockedTime() {
+            const now = new Date();
+            // Blokir dari 06:00:00 sampai 06:00:59
+            return now.getHours() === 6 && now.getMinutes() === 0;
+        }
+
+        function checkAutoStop() {
+            const now = new Date();
+            // Auto stop tepat di 06:00:00
+            if (now.getHours() === 6 && now.getMinutes() === 0 && now.getSeconds() === 0) {
+                if (state.powerOn) {
+                    forcePowerOff('Auto Stop 06:00');
+                }
+            }
+        }
+
+        function forcePowerOff(reason) {
+            state.powerOn = false;
+            isRunning = false;
+            
+            // Stop visual
+            const btn = document.getElementById('powerBtn');
+            const center = document.getElementById('centerDisplay');
+            const guideLine = document.getElementById('guideLine');
+            const rings = document.querySelectorAll('.ring');
+            
+            btn.classList.remove('running');
+            center.classList.remove('running');
+            guideLine.classList.remove('active');
+            rings.forEach(ring => {
+                ring.classList.remove('running');
+                ring.style.transform = '';
+                ring.querySelectorAll('.ring-char.highlight').forEach(el => el.classList.remove('highlight'));
+            });
+            
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
+            stopClickLoop();
+            
+            addLog('WARNING', `Auto Stop triggered: ${reason}. Power dial turned OFF.`);
+            showToast(`Sistem auto-stop: ${reason}`, 'warning');
+            updatePowerButton();
+        }
+
+        // ==================== POWER DIAL ====================
+        function togglePower() {
+            // Cek apakah node aktif
+            if (!state.nodeActive) {
+                showToast('Node belum aktif. Redeem Access Key terlebih dahulu.', 'error');
+                return;
+            }
+            
+            // Cek kontrak
+            const remaining = getRemainingContractTime();
+            if (remaining <= 0) {
+                showToast('Kontrak sudah habis. Beli Access Key baru.', 'error');
+                state.nodeActive = false;
+                updateRedeemButton();
+                updateSystemInfo();
+                return;
+            }
+            
+            // Cek blocked time (06:00 - 06:01)
+            if (isBlockedTime()) {
+                showToast('Sistem auto-stop. Silakan coba lagi setelah 06:01', 'warning');
+                return;
+            }
+            
+            initAudio();
+            
+            if (!state.powerOn) {
+                // POWER ON
+                state.powerOn = true;
+                isRunning = true;
+                
+                const btn = document.getElementById('powerBtn');
+                const center = document.getElementById('centerDisplay');
+                const guideLine = document.getElementById('guideLine');
+                const rings = document.querySelectorAll('.ring');
+                
+                btn.classList.add('running');
+                center.classList.add('running');
+                guideLine.classList.add('active');
+                rings.forEach(ring => ring.classList.add('running'));
+                
+                startTime = 0;
+                animationFrameId = requestAnimationFrame(updateHighlights);
+                startClickLoop();
+                
+                setTimeout(() => { playMechanicalClick(); triggerClickFlash(); }, 300);
+                if (navigator.vibrate) navigator.vibrate(100);
+                
+                addLog('INFO', `Power dial ON. Reward system started. Contract remaining: ${formatContractTime(remaining)}`);
+                showToast('Power Dial aktif! Reward per detik berjalan.');
+            } else {
+                // POWER OFF
+                state.powerOn = false;
+                isRunning = false;
+                
+                const btn = document.getElementById('powerBtn');
+                const center = document.getElementById('centerDisplay');
+                const guideLine = document.getElementById('guideLine');
+                const rings = document.querySelectorAll('.ring');
+                
+                btn.classList.remove('running');
+                center.classList.remove('running');
+                guideLine.classList.remove('active');
+                rings.forEach(ring => {
+                    ring.classList.remove('running');
+                    ring.style.transform = '';
+                    ring.querySelectorAll('.ring-char.highlight').forEach(el => el.classList.remove('highlight'));
+                });
+                
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = null;
+                }
+                stopClickLoop();
+                
+                addLog('INFO', 'Power dial OFF. Reward system paused.');
+                showToast('Power Dial dimatikan.');
+            }
+            
+            updatePowerButton();
+        }
+
+        function updatePowerButton() {
+            const btn = document.getElementById('powerBtn');
+            if (!state.nodeActive) {
+                btn.disabled = true;
+            } else {
+                btn.disabled = false;
+            }
+        }
+
+        // ==================== REWARD SYSTEM ====================
+        function updateRewardDisplay() { 
+            document.getElementById('rewardAmount').textContent = state.rewardValidasi.toFixed(9) + ' BossX';
+            const runningRewardEl = document.getElementById('runningReward');
+            if (runningRewardEl) runningRewardEl.textContent = state.currentReward.toFixed(9) + ' BossX';
+        }
+        function updateWalletDisplay() { 
+            document.getElementById('bossxBalance').innerHTML = state.bossxBalance.toFixed(9) + ' <span class="currency">BossX</span>';
+            document.getElementById('summary-balance').textContent = state.bossxBalance.toFixed(8) + ' BossX';
+        }
+        function updateCountdownDisplay() { document.getElementById('countdownTimer').textContent = state.countdownSeconds; }
+
+        function claimToWallet() {
+            if (state.rewardValidasi <= 0) { 
+                showToast('Tidak ada reward untuk di-claim', 'warning'); 
+                return; 
+            }
+            
+            const claimedAmount = state.rewardValidasi;
+            state.bossxBalance += claimedAmount;
+            state.rewardValidasi = 0;
+            
+            updateRewardDisplay();
+            updateWalletDisplay();
+            
+            addLog('SUCCESS', `Claim to Wallet: ${claimedAmount.toFixed(9)} BossX added to balance.`);
+            showToast(`Claim berhasil: ${claimedAmount.toFixed(9)} BossX ditambahkan ke wallet!`);
+            
+            const rewardEl = document.getElementById('rewardAmount');
+            rewardEl.style.transform = 'scale(1.05)';
+            setTimeout(() => { rewardEl.style.transform = 'scale(1)'; }, 300);
+        }
+
+        // ==================== MAIN GAME LOOP (setiap detik) ====================
+        function gameLoop() {
+            const now = new Date();
+            const isAutoStop = isAutoStopTime();
+            
+            // Cek auto stop
+            checkAutoStop();
+            
+            // Update countdown ke 06:00
+            updateCountdownTo6AM();
+            
+            // Update contract timer
+            updateContractDisplay();
+            
+            // Jika power ON dan node aktif dan kontrak masih ada dan bukan jam auto stop
+            if (state.nodeActive && state.powerOn && !isAutoStop) {
+                const remaining = getRemainingContractTime();
+                
+                if (remaining > 0) {
+                    // Tambah reward per detik
+                    state.currentReward += REWARD_PER_SECOND;
+                    state.countdownSeconds--;
+                    
+                    // Auto claim ke Reward Validasi setiap 60 detik
+                    if (state.countdownSeconds <= 0) {
+                        state.rewardValidasi += state.currentReward;
+                        addLog('INFO', `Auto-claim: ${state.currentReward.toFixed(9)} BossX moved to Reward Validasi.`);
+                        state.currentReward = 0;
+                        state.countdownSeconds = AUTO_CLAIM_INTERVAL;
+                    }
+                    
+                    updateRewardDisplay();
+                    updateCountdownDisplay();
+                } else {
+                    // Kontrak habis
+                    state.powerOn = false;
+                    state.nodeActive = false;
+                    isRunning = false;
+                    
+                    // Stop visual
+                    const btn = document.getElementById('powerBtn');
+                    const center = document.getElementById('centerDisplay');
+                    const guideLine = document.getElementById('guideLine');
+                    const rings = document.querySelectorAll('.ring');
+                    btn.classList.remove('running');
+                    center.classList.remove('running');
+                    guideLine.classList.remove('active');
+                    rings.forEach(ring => {
+                        ring.classList.remove('running');
+                        ring.style.transform = '';
+                        ring.querySelectorAll('.ring-char.highlight').forEach(el => el.classList.remove('highlight'));
+                    });
+                    if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+                    stopClickLoop();
+                    
+                    addLog('ERROR', 'Contract expired (40.000.000 detik habis). Node deactivated permanently. Buy new Access Key to restart.');
+                    showToast('Kontrak habis! Node non-aktif. Beli Access Key baru.', 'error');
+                    
+                    updateRedeemButton();
+                    updatePowerButton();
+                    updateSystemInfo();
+                    updateRewardDisplay();
+                }
+            }
+        }
+        setInterval(gameLoop, 1000);
 
         // ==================== COUNTDOWN KE 06:00 ====================
         function updateCountdownTo6AM() {
@@ -781,108 +1227,79 @@
         setInterval(updateCountdownTo6AM, 1000);
         updateCountdownTo6AM();
 
-        function navigateTo(page, event) {
-            if (event) event.preventDefault();
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.sidebar .menu a').forEach(a => a.classList.remove('active'));
-            document.getElementById('page-' + page).classList.add('active');
-            document.getElementById('menu-' + page).classList.add('active');
+        function updateContractDisplay() {
+            const remaining = getRemainingContractTime();
+            const el = document.getElementById('sysContractTime');
+            if (el) {
+                if (remaining <= 0) {
+                    el.textContent = '0 detik (EXPIRED)';
+                    el.className = 'system-info-value status-expired';
+                } else {
+                    el.textContent = formatContractTime(remaining);
+                    el.className = 'system-info-value status-time';
+                }
+            }
         }
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.getElementById('btn-' + tab).classList.add('active');
-            document.getElementById('tab-' + tab).classList.add('active');
+
+        function updateSystemInfo() {
+            const el = document.getElementById('sysNodeStatus');
+            if (el) {
+                if (state.nodeActive) {
+                    el.textContent = 'Aktif';
+                    el.className = 'system-info-value status-active';
+                } else {
+                    el.textContent = 'Non-Aktif';
+                    el.className = 'system-info-value status-inactive';
+                }
+            }
         }
-        function setMax() { document.getElementById('stake-input').value = 1000; updateSummary(); }
-        function updateSummary() {
-            const stake = parseFloat(document.getElementById('stake-input').value) || 0;
-            const fee = 1; const total = stake + fee;
-            document.getElementById('summary-stake').textContent = stake.toFixed(2) + ' BossX';
-            document.getElementById('summary-total').textContent = total.toFixed(2) + ' BossX';
-        }
-        function generateKey() {
-            const stake = parseFloat(document.getElementById('stake-input').value) || 0;
-            if (stake < 10) { alert('Minimal stake adalah 10 BossX'); return; }
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; let key = '';
-            for (let i = 0; i < 25; i++) key += chars.charAt(Math.floor(Math.random() * chars.length));
+
+        // ==================== LOG ENGINE ====================
+        function addLog(level, message) {
             const now = new Date();
-            const dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false });
-            accessKeys.push({ key: key, stake: stake, fee: 1, date: dateStr, status: 'AVAILABLE' });
-            updateKeysTable(); document.getElementById('stake-input').value = ''; updateSummary(); switchTab('mykeys');
-            showToast('Access Key berhasil digenerate!');
+            const timestamp = now.getFullYear() + '-' + 
+                String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                String(now.getDate()).padStart(2, '0') + ' ' +
+                String(now.getHours()).padStart(2, '0') + ':' + 
+                String(now.getMinutes()).padStart(2, '0') + ':' + 
+                String(now.getSeconds()).padStart(2, '0');
+            
+            state.logs.unshift({ timestamp, level, message });
+            if (state.logs.length > 100) state.logs.pop(); // Max 100 log
+            
+            renderLogs();
         }
-        function updateKeysTable() {
-            const tbody = document.getElementById('keys-table-body'); tbody.innerHTML = '';
-            accessKeys.forEach((item, index) => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td><span class="key-value">${item.key}</span></td><td><div class="stake-value">${item.stake.toFixed(2)} BossX</div><div class="fee-value">Fee: ${item.fee} BossX</div></td><td><div class="date-value"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>${item.date}</div></td><td><span class="status-badge"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>${item.status}</span></td><td><button class="btn-copy" onclick="copyKey(${index})"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>Copy</button></td>`;
-                tbody.appendChild(tr);
-            });
-            const total = accessKeys.length;
-            document.getElementById('stat-total').textContent = total;
-            document.getElementById('stat-available').textContent = accessKeys.filter(k => k.status === 'AVAILABLE').length;
-            document.getElementById('stat-redeemed').textContent = accessKeys.filter(k => k.status === 'REDEEMED').length;
-            document.getElementById('key-badge').textContent = total;
-        }
-        function copyKey(index) {
-            const key = accessKeys[index].key;
-            navigator.clipboard.writeText(key).then(() => showToast('Key berhasil disalin!')).catch(() => {
-                const ta = document.createElement('textarea'); ta.value = key; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showToast('Key berhasil disalin!');
-            });
-        }
-        function refreshKeys() { updateKeysTable(); showToast('Data berhasil diperbarui!'); }
-        function showToast(msg) {
-            const toast = document.getElementById('toast'); toast.textContent = msg; toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2500);
+
+        function renderLogs() {
+            const container = document.getElementById('logContent');
+            if (state.logs.length === 0) {
+                container.innerHTML = '<div class="log-empty">Belum ada log aktivitas.</div>';
+                return;
+            }
+            
+            container.innerHTML = state.logs.map(log => {
+                const levelClass = 'log-level-' + log.level.toLowerCase();
+                return `<div class="log-entry"><span class="log-timestamp">[${log.timestamp}]</span> <span class="${levelClass}">[${log.level}]</span> ${log.message}</div>`;
+            }).join('');
         }
 
         function clearLog() {
-            document.getElementById('logContent').innerHTML = '';
+            state.logs = [];
+            renderLogs();
             showToast('Log berhasil dihapus');
         }
 
-        function updateRewardDisplay() { 
-            document.getElementById('rewardAmount').textContent = currentReward.toFixed(9) + ' BossX';
-            const runningRewardEl = document.getElementById('runningReward');
-            if (runningRewardEl) runningRewardEl.textContent = currentReward.toFixed(9) + ' BossX';
-        }
-        function updateBossxBalanceDisplay() { document.getElementById('bossxBalance').innerHTML = bossxBalance.toFixed(9) + ' <span class="currency">BossX</span>'; }
-        function updateCountdownDisplay() { document.getElementById('countdownTimer').textContent = countdownSeconds; }
-
-        function performClaim(isAuto) {
-            if (currentReward <= 0) return;
-            const claimedAmount = currentReward;
-            bossxBalance += claimedAmount;
-            currentReward = 0;
-            countdownSeconds = 60;
-            updateRewardDisplay(); updateBossxBalanceDisplay(); updateCountdownDisplay();
-            const msg = isAuto ? `Auto-claim berhasil: ${claimedAmount.toFixed(9)} BossX` : `Claim berhasil: ${claimedAmount.toFixed(9)} BossX`;
-            showToast(msg);
-            const rewardEl = document.getElementById('rewardAmount');
-            rewardEl.style.transform = 'scale(1.05)';
-            setTimeout(() => { rewardEl.style.transform = 'scale(1)'; }, 300);
+        // ==================== TOAST ====================
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast'); 
+            toast.textContent = msg; 
+            toast.className = 'toast show';
+            if (type === 'error') toast.classList.add('error');
+            if (type === 'warning') toast.classList.add('warning');
+            setTimeout(() => { toast.className = 'toast'; }, 3000);
         }
 
-        function manualClaim() {
-            if (currentReward <= 0) { showToast('Tidak ada reward untuk di-claim'); return; }
-            performClaim(false);
-        }
-
-        function startRewardSystem() {
-            if (rewardInterval) clearInterval(rewardInterval);
-            rewardInterval = setInterval(() => {
-                currentReward += REWARD_PER_SECOND;
-                countdownSeconds--;
-                if (countdownSeconds <= 0) performClaim(true);
-                updateRewardDisplay(); updateCountdownDisplay();
-            }, 1000);
-        }
-
-        function stopRewardSystem() {
-            if (rewardInterval) { clearInterval(rewardInterval); rewardInterval = null; }
-        }
-
+        // ==================== AUDIO ENGINE ====================
         function initAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -919,7 +1336,7 @@
         }
         function stopClickLoop() { if (clickInterval) { clearInterval(clickInterval); clickInterval = null; } }
 
-        // PERUBAHAN 1: Radii disesuaikan untuk vault 290px (lebih besar)
+        // ==================== RING INITIALIZATION ====================
         function initRings() {
             const radii = [121, 96, 77, 60, 46];
             const tickRadii = [131, 104, 84, 65, 51];
@@ -954,24 +1371,12 @@
             animationFrameId = requestAnimationFrame(updateHighlights);
         }
 
-        function toggleValidator() {
-            initAudio(); isRunning = !isRunning;
-            const btn = document.getElementById('powerBtn'); const center = document.getElementById('centerDisplay');
-            const guideLine = document.getElementById('guideLine'); const rings = document.querySelectorAll('.ring');
-            if (isRunning) {
-                btn.classList.add('running'); center.classList.add('running'); guideLine.classList.add('active'); rings.forEach(ring => ring.classList.add('running'));
-                startTime = 0; animationFrameId = requestAnimationFrame(updateHighlights); startClickLoop(); startRewardSystem();
-                setTimeout(() => { playMechanicalClick(); triggerClickFlash(); }, 300);
-                if (navigator.vibrate) navigator.vibrate(100);
-            } else {
-                btn.classList.remove('running'); center.classList.remove('running'); guideLine.classList.remove('active');
-                rings.forEach(ring => { ring.classList.remove('running'); ring.style.transform = ''; ring.querySelectorAll('.ring-char.highlight').forEach(el => el.classList.remove('highlight')); });
-                if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
-                stopClickLoop(); stopRewardSystem();
-            }
-        }
-
+        // ==================== INIT ====================
         initRings();
+        updateSystemInfo();
+        updateWalletDisplay();
+        updateRewardDisplay();
+        updatePowerButton();
     </script>
 
 </body>
