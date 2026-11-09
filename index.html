@@ -160,12 +160,7 @@
         .btn-redeem { width: 100%; padding: 11px; background-color: #00e5ff; color: #0a1628; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; }
         .btn-redeem:hover { background-color: #00c4d9; }
         .btn-redeem svg { width: 16px; height: 16px; fill: #0a1628; }
-        /* State: Node Aktiv (hijau, disabled) */
-        .btn-redeem.node-active {
-            background-color: #2ecc71;
-            color: #fff;
-            cursor: default;
-        }
+        .btn-redeem.node-active { background-color: #2ecc71; color: #fff; cursor: default; }
         .btn-redeem.node-active:hover { background-color: #2ecc71; }
         .btn-redeem.node-active svg { fill: #fff; }
         .redeem-footer { text-align: center; margin-top: 12px; font-size: 11px; color: #b0bec5; }
@@ -196,8 +191,6 @@
         .btn-claim { width: 100%; padding: 11px; background-color: #00e5ff; color: #0a1628; border: none; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; }
         .btn-claim:hover { background-color: #00c4d9; transform: translateY(-1px); }
         .btn-claim svg { width: 16px; height: 16px; fill: #0a1628; }
-        .btn-claim:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        .btn-claim:disabled:hover { background-color: #00e5ff; }
         .reward-action-wrapper { margin-top: auto; }
 
         /* My Wallet Balance Card */
@@ -205,9 +198,7 @@
             background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); 
             border: 1px solid #1a5276; border-radius: 12px; padding: 18px; 
             box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
-            min-height: 340px;
-            display: flex;
-            flex-direction: column;
+            min-height: 340px; display: flex; flex-direction: column;
         }
         .wallet-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .wallet-card-title { font-size: 15px; font-weight: bold; color: #fff; }
@@ -216,11 +207,8 @@
         .wallet-subcard { 
             background: linear-gradient(135deg, #0a1e3d 0%, #0d2a4a 100%); 
             border: 1px solid #1a5276; border-radius: 8px; 
-            padding: 12px; margin-bottom: 10px; 
-            transition: border-color 0.3s;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
+            padding: 12px; margin-bottom: 10px; transition: border-color 0.3s;
+            display: flex; flex-direction: column; flex: 1;
         }
         .wallet-subcard:last-child { margin-bottom: 0; }
         .wallet-subcard:hover { border-color: #00e5ff; }
@@ -235,8 +223,7 @@
         .wallet-token-network { font-size: 10px; color: #2ecc71; }
         .wallet-balance { 
             font-size: 18px; font-weight: bold; color: #fff; 
-            font-family: 'Courier New', monospace;
-            margin-top: auto;
+            font-family: 'Courier New', monospace; margin-top: auto;
         }
         .wallet-balance .currency { font-size: 12px; color: #b0bec5; margin-left: 4px; }
 
@@ -244,46 +231,19 @@
         .validator-card { 
             background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); 
             border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; 
-            display: flex; flex-direction: column; align-items: center;
-            min-height: 340px;
+            display: flex; flex-direction: column; align-items: center; min-height: 340px;
         }
         .validator-card-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding-bottom: 8px; border-bottom: 1px solid #1a3a5c; }
         .validator-title { font-size: 14px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 8px; }
         .validator-title svg { width: 18px; height: 18px; fill: #f0a500; }
 
-        .validator-info-row {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 5px;
-            margin-bottom: 5px;
-            border-bottom: 1px solid rgba(26, 82, 118, 0.4);
-        }
+        .validator-info-row { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 10px 5px; margin-bottom: 5px; border-bottom: 1px solid rgba(26, 82, 118, 0.4); }
         .validator-info-left { display: flex; flex-direction: column; align-items: flex-start; }
-        .validator-info-value {
-            font-size: 14px; font-weight: bold; color: #00ff88;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
-        }
+        .validator-info-value { font-size: 14px; font-weight: bold; color: #00ff88; font-family: 'Courier New', monospace; text-shadow: 0 0 8px rgba(0, 255, 136, 0.4); }
         .validator-info-right { display: flex; flex-direction: column; align-items: flex-end; }
-        .validator-countdown-value {
-            font-size: 16px; font-weight: bold; color: #00e5ff;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 1px;
-            text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
-        }
+        .validator-countdown-value { font-size: 16px; font-weight: bold; color: #00e5ff; font-family: 'Courier New', monospace; letter-spacing: 1px; text-shadow: 0 0 8px rgba(0, 229, 255, 0.4); }
 
-        .vault-container { 
-            position: relative; 
-            width: 290px; 
-            height: 290px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            transform-origin: center center;
-            margin-top: 10px;
-        }
+        .vault-container { position: relative; width: 290px; height: 290px; display: flex; align-items: center; justify-content: center; transform-origin: center center; margin-top: 10px; }
         .guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 145px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
         .guide-line.active { background: linear-gradient(to bottom, rgba(0,255,136,0.6), transparent); }
         .guide-line.click-flash { width: 4px; background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(0,255,136,0.8), transparent); transition: all 0.08s ease-out; }
@@ -334,36 +294,17 @@
 
         /* ===== Log Engine Mastercloud Section ===== */
         .log-section { margin-top: 20px; }
-        .log-panel {
-            background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%);
-            border: 1px solid #1a5276; border-radius: 12px; overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
-        }
-        .log-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 20px; background-color: rgba(0, 229, 255, 0.05);
-            border-bottom: 1px solid #1a5276;
-        }
+        .log-panel { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; overflow: hidden; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
+        .log-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background-color: rgba(0, 229, 255, 0.05); border-bottom: 1px solid #1a5276; }
         .log-title { font-size: 16px; font-weight: bold; color: #00e5ff; }
-        .btn-clear-log {
-            background-color: #e74c3c; color: #fff; border: none;
-            padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: bold;
-            cursor: pointer; transition: all 0.3s;
-        }
+        .btn-clear-log { background-color: #e74c3c; color: #fff; border: none; padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .btn-clear-log:hover { background-color: #c0392b; }
-        .log-content {
-            background-color: #050a14; padding: 15px; max-height: 250px;
-            overflow-y: auto; font-family: 'Courier New', monospace; font-size: 12px;
-            min-height: 100px;
-        }
+        .log-content { background-color: #050a14; padding: 15px; max-height: 250px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 12px; min-height: 100px; }
         .log-content::-webkit-scrollbar { width: 8px; }
         .log-content::-webkit-scrollbar-track { background: #0a1628; border-radius: 4px; }
         .log-content::-webkit-scrollbar-thumb { background: #1a5276; border-radius: 4px; }
         .log-content::-webkit-scrollbar-thumb:hover { background: #2471a3; }
-        .log-entry {
-            padding: 4px 0; border-bottom: 1px solid rgba(26, 82, 118, 0.3);
-            word-break: break-all;
-        }
+        .log-entry { padding: 4px 0; border-bottom: 1px solid rgba(26, 82, 118, 0.3); word-break: break-all; }
         .log-entry:last-child { border-bottom: none; }
         .log-timestamp { color: #00e5ff; margin-right: 8px; }
         .log-level-success { color: #2ecc71; }
@@ -373,29 +314,14 @@
         .log-empty { color: #78909c; font-style: italic; text-align: center; padding: 20px 0; }
 
         /* System Info Panel */
-        .system-info-panel {
-            margin-top: 15px;
-            background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%);
-            border: 1px solid #1a5276; border-radius: 12px; padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
-        }
-        .system-info-title {
-            font-size: 15px; font-weight: bold; color: #00e5ff;
-            display: flex; align-items: center; gap: 8px; margin-bottom: 15px;
-        }
+        .system-info-panel { margin-top: 15px; background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 20px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
+        .system-info-title { font-size: 15px; font-weight: bold; color: #00e5ff; display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
         .system-info-title svg { width: 18px; height: 18px; fill: #00e5ff; }
-        .system-info-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
-        }
+        .system-info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         .system-info-column { display: flex; flex-direction: column; gap: 8px; }
-        .system-info-item {
-            display: flex; justify-content: space-between; align-items: flex-start;
-            padding: 6px 0; border-bottom: 1px solid rgba(26, 82, 118, 0.3);
-        }
+        .system-info-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid rgba(26, 82, 118, 0.3); }
         .system-info-label { color: #b0bec5; font-size: 13px; flex: 1; }
-        .system-info-value {
-            color: #fff; font-size: 13px; font-weight: bold; text-align: right;
-        }
+        .system-info-value { color: #fff; font-size: 13px; font-weight: bold; text-align: right; }
         .system-info-value.status-active { color: #2ecc71; }
         .system-info-value.status-inactive { color: #e74c3c; }
         .system-info-value.status-pending { color: #f39c12; }
@@ -403,13 +329,8 @@
         .system-info-value.status-expired { color: #e74c3c; }
 
         /* Responsive */
-        @media (max-width: 1400px) {
-            .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
-            .system-info-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 700px) {
-            .dashboard-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 1400px) { .dashboard-grid { grid-template-columns: repeat(2, 1fr); } .system-info-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 700px) { .dashboard-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -497,7 +418,7 @@
 
                         <div class="validator-info-row">
                             <div class="validator-info-left">
-                                <div class="validator-info-value" id="runningReward">0.000000000 BossX</div>
+                                <div class="validator-info-value" id="runningReward">0.00000000 BossX</div>
                             </div>
                             <div class="validator-info-right">
                                 <div class="validator-countdown-value" id="countdownTo6AM">00:00:00</div>
@@ -530,7 +451,7 @@
                                 <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
                             </div>
                         </div>
-                        <div class="reward-amount" id="rewardAmount">0.000000000 BossX</div>
+                        <div class="reward-amount" id="rewardAmount">0.00000000 BossX</div>
                         <div class="reward-action-wrapper">
                             <div class="reward-countdown">Auto claim in: <span id="countdownTimer">60</span>s</div>
                             <button class="btn-claim" id="btnClaim" onclick="claimToWallet()">
@@ -570,7 +491,7 @@
                                 </div>
                                 <div class="wallet-token-network">Internal Token</div>
                             </div>
-                            <div class="wallet-balance" id="bossxBalance">1000.000000000 <span class="currency">BossX</span></div>
+                            <div class="wallet-balance" id="bossxBalance">1000.00000000 <span class="currency">BossX</span></div>
                         </div>
                     </div>
                 </div>
@@ -754,20 +675,21 @@
     <div class="toast" id="toast">Berhasil!</div>
 
     <script>
-        // ==================== STATE MANAGEMENT ====================
+        // ==================== KONSTANTA REWARD ====================
         const CONTRACT_DURATION_SECONDS = 40000000; // 40 juta detik
-        const REWARD_PER_SECOND = 0.000000001;
-        const AUTO_CLAIM_INTERVAL = 60; // detik
+        const SECONDS_IN_MONTH = 2592000;           // 30 hari × 24 × 60 × 60
+        const MONTHLY_REWARD_PERCENT = 0.15;        // 15% per bulan
+        const AUTO_CLAIM_INTERVAL = 60;             // detik
 
         let state = {
             nodeActive: false,
             powerOn: false,
             redeemedKey: '',
             stakeAmount: 0,
-            contractStart: null,       // Timestamp saat redeem berhasil
-            bossxBalance: 1000.000000000,
-            currentReward: 0.000000000,    // Reward dial (belum di-claim)
-            rewardValidasi: 0.000000000,   // Reward di card Reward Validasi
+            contractStart: null,
+            bossxBalance: 1000.00000000,
+            currentReward: 0.00000000,
+            rewardValidasi: 0.00000000,
             countdownSeconds: 60,
             logs: []
         };
@@ -784,6 +706,17 @@
         const CLICK_INTERVAL_MS = 60000;
         const TICKS_PER_RING = 60;
         const RING_SPEEDS = [360 / 20000, -360 / 28000, 360 / 16000, -360 / 24000, 360 / 12000];
+
+        // ==================== FUNGSI REWARD DINAMIS ====================
+        function getRewardPerSecond() {
+            if (state.stakeAmount <= 0) return 0;
+            const monthlyReward = state.stakeAmount * MONTHLY_REWARD_PERCENT;
+            return monthlyReward / SECONDS_IN_MONTH;
+        }
+
+        function getMonthlyReward() {
+            return state.stakeAmount * MONTHLY_REWARD_PERCENT;
+        }
 
         // ==================== INITIALIZATION ====================
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('collapsed'); }
@@ -827,12 +760,10 @@
             if (stake < 10) { showToast('Minimal stake adalah 10 BossX', 'error'); return; }
             if (stake + 1 > state.bossxBalance) { showToast('Saldo tidak mencukupi', 'error'); return; }
             
-            // Potong saldo
             state.bossxBalance -= (stake + 1);
             updateWalletDisplay();
             updateSummary();
             
-            // Generate key 25 karakter
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; 
             let key = '';
             for (let i = 0; i < 25; i++) key += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -872,7 +803,6 @@
 
         // ==================== REDEEM LOGIC ====================
         function handleRedeem() {
-            // Jika node sudah aktif, tidak bisa redeem lagi
             if (state.nodeActive) {
                 showToast('Node sudah aktif. Kontrak masih berjalan.', 'warning');
                 return;
@@ -891,25 +821,21 @@
                 return;
             }
             
-            // Cari key yang valid
             const found = accessKeys.find(k => k.key === key && k.status === 'AVAILABLE');
             if (!found) {
                 showToast('Access Key tidak valid atau sudah digunakan', 'error');
                 return;
             }
             
-            // Validasi: kontrak harus sudah habis untuk redeem key baru
             const remaining = getRemainingContractTime();
             if (remaining > 0 && state.contractStart !== null) {
                 showToast('Kontrak sebelumnya masih berjalan. Tunggu hingga habis.', 'warning');
                 return;
             }
             
-            // Update status key
             found.status = 'REDEEMED';
             updateKeysTable();
             
-            // Aktivasi node
             state.nodeActive = true;
             state.redeemedKey = key;
             state.stakeAmount = found.stake;
@@ -919,17 +845,17 @@
             state.rewardValidasi = 0;
             state.countdownSeconds = AUTO_CLAIM_INTERVAL;
             
-            // Update UI
             updateRedeemButton();
             updateSystemInfo();
             updateWalletDisplay();
             updateRewardDisplay();
             updatePowerButton();
             
-            // Log
-            addLog('SUCCESS', `Access Key redeemed: ${key} | Node activated with ${found.stake} BossX.`);
+            const monthlyReward = getMonthlyReward();
+            const perSecond = getRewardPerSecond();
+            addLog('SUCCESS', `Access Key redeemed: ${key} | Node activated with ${found.stake} BossX. Reward: ${monthlyReward.toFixed(2)} BossX/bulan (${perSecond.toFixed(8)} BossX/detik).`);
             
-            showToast('Node berhasil diaktivasi! Silakan klik Power Dial untuk mulai reward.');
+            showToast(`Node diaktivasi! Reward: ${monthlyReward.toFixed(2)} BossX/bulan. Silakan klik Power Dial.`);
             keyInput.value = '';
         }
 
@@ -951,7 +877,7 @@
             }
         }
 
-        // ==================== CONTRACT TIMER (MUTLAK) ====================
+        // ==================== CONTRACT TIMER ====================
         function getRemainingContractTime() {
             if (!state.contractStart) return CONTRACT_DURATION_SECONDS;
             const elapsed = (Date.now() - state.contractStart) / 1000;
@@ -971,13 +897,11 @@
 
         function isBlockedTime() {
             const now = new Date();
-            // Blokir dari 06:00:00 sampai 06:00:59
             return now.getHours() === 6 && now.getMinutes() === 0;
         }
 
         function checkAutoStop() {
             const now = new Date();
-            // Auto stop tepat di 06:00:00
             if (now.getHours() === 6 && now.getMinutes() === 0 && now.getSeconds() === 0) {
                 if (state.powerOn) {
                     forcePowerOff('Auto Stop 06:00');
@@ -989,7 +913,6 @@
             state.powerOn = false;
             isRunning = false;
             
-            // Stop visual
             const btn = document.getElementById('powerBtn');
             const center = document.getElementById('centerDisplay');
             const guideLine = document.getElementById('guideLine');
@@ -1017,13 +940,11 @@
 
         // ==================== POWER DIAL ====================
         function togglePower() {
-            // Cek apakah node aktif
             if (!state.nodeActive) {
                 showToast('Node belum aktif. Redeem Access Key terlebih dahulu.', 'error');
                 return;
             }
             
-            // Cek kontrak
             const remaining = getRemainingContractTime();
             if (remaining <= 0) {
                 showToast('Kontrak sudah habis. Beli Access Key baru.', 'error');
@@ -1033,7 +954,6 @@
                 return;
             }
             
-            // Cek blocked time (06:00 - 06:01)
             if (isBlockedTime()) {
                 showToast('Sistem auto-stop. Silakan coba lagi setelah 06:01', 'warning');
                 return;
@@ -1042,7 +962,6 @@
             initAudio();
             
             if (!state.powerOn) {
-                // POWER ON
                 state.powerOn = true;
                 isRunning = true;
                 
@@ -1063,10 +982,10 @@
                 setTimeout(() => { playMechanicalClick(); triggerClickFlash(); }, 300);
                 if (navigator.vibrate) navigator.vibrate(100);
                 
-                addLog('INFO', `Power dial ON. Reward system started. Contract remaining: ${formatContractTime(remaining)}`);
+                const perSecond = getRewardPerSecond();
+                addLog('INFO', `Power dial ON. Reward: ${perSecond.toFixed(8)} BossX/detik. Contract remaining: ${formatContractTime(remaining)}`);
                 showToast('Power Dial aktif! Reward per detik berjalan.');
             } else {
-                // POWER OFF
                 state.powerOn = false;
                 isRunning = false;
                 
@@ -1099,21 +1018,17 @@
 
         function updatePowerButton() {
             const btn = document.getElementById('powerBtn');
-            if (!state.nodeActive) {
-                btn.disabled = true;
-            } else {
-                btn.disabled = false;
-            }
+            btn.disabled = !state.nodeActive;
         }
 
         // ==================== REWARD SYSTEM ====================
         function updateRewardDisplay() { 
-            document.getElementById('rewardAmount').textContent = state.rewardValidasi.toFixed(9) + ' BossX';
+            document.getElementById('rewardAmount').textContent = state.rewardValidasi.toFixed(8) + ' BossX';
             const runningRewardEl = document.getElementById('runningReward');
-            if (runningRewardEl) runningRewardEl.textContent = state.currentReward.toFixed(9) + ' BossX';
+            if (runningRewardEl) runningRewardEl.textContent = state.currentReward.toFixed(8) + ' BossX';
         }
         function updateWalletDisplay() { 
-            document.getElementById('bossxBalance').innerHTML = state.bossxBalance.toFixed(9) + ' <span class="currency">BossX</span>';
+            document.getElementById('bossxBalance').innerHTML = state.bossxBalance.toFixed(8) + ' <span class="currency">BossX</span>';
             document.getElementById('summary-balance').textContent = state.bossxBalance.toFixed(8) + ' BossX';
         }
         function updateCountdownDisplay() { document.getElementById('countdownTimer').textContent = state.countdownSeconds; }
@@ -1131,8 +1046,8 @@
             updateRewardDisplay();
             updateWalletDisplay();
             
-            addLog('SUCCESS', `Claim to Wallet: ${claimedAmount.toFixed(9)} BossX added to balance.`);
-            showToast(`Claim berhasil: ${claimedAmount.toFixed(9)} BossX ditambahkan ke wallet!`);
+            addLog('SUCCESS', `Claim to Wallet: ${claimedAmount.toFixed(8)} BossX added to balance.`);
+            showToast(`Claim berhasil: ${claimedAmount.toFixed(8)} BossX ditambahkan ke wallet!`);
             
             const rewardEl = document.getElementById('rewardAmount');
             rewardEl.style.transform = 'scale(1.05)';
@@ -1144,28 +1059,21 @@
             const now = new Date();
             const isAutoStop = isAutoStopTime();
             
-            // Cek auto stop
             checkAutoStop();
-            
-            // Update countdown ke 06:00
             updateCountdownTo6AM();
-            
-            // Update contract timer
             updateContractDisplay();
             
-            // Jika power ON dan node aktif dan kontrak masih ada dan bukan jam auto stop
             if (state.nodeActive && state.powerOn && !isAutoStop) {
                 const remaining = getRemainingContractTime();
                 
                 if (remaining > 0) {
-                    // Tambah reward per detik
-                    state.currentReward += REWARD_PER_SECOND;
+                    const rewardPerSec = getRewardPerSecond();
+                    state.currentReward += rewardPerSec;
                     state.countdownSeconds--;
                     
-                    // Auto claim ke Reward Validasi setiap 60 detik
                     if (state.countdownSeconds <= 0) {
                         state.rewardValidasi += state.currentReward;
-                        addLog('INFO', `Auto-claim: ${state.currentReward.toFixed(9)} BossX moved to Reward Validasi.`);
+                        addLog('INFO', `Auto-claim: ${state.currentReward.toFixed(8)} BossX moved to Reward Validasi.`);
                         state.currentReward = 0;
                         state.countdownSeconds = AUTO_CLAIM_INTERVAL;
                     }
@@ -1173,12 +1081,10 @@
                     updateRewardDisplay();
                     updateCountdownDisplay();
                 } else {
-                    // Kontrak habis
                     state.powerOn = false;
                     state.nodeActive = false;
                     isRunning = false;
                     
-                    // Stop visual
                     const btn = document.getElementById('powerBtn');
                     const center = document.getElementById('centerDisplay');
                     const guideLine = document.getElementById('guideLine');
@@ -1265,7 +1171,7 @@
                 String(now.getSeconds()).padStart(2, '0');
             
             state.logs.unshift({ timestamp, level, message });
-            if (state.logs.length > 100) state.logs.pop(); // Max 100 log
+            if (state.logs.length > 100) state.logs.pop();
             
             renderLogs();
         }
