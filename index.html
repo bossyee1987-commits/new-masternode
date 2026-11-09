@@ -288,12 +288,13 @@
             display: flex; align-items: center; gap: 10px;
         }
         .validator-title svg { width: 22px; height: 22px; fill: #f0a500; }
-        .validator-status {
-            font-size: 12px; color: #b0bec5; padding: 5px 12px;
-            border-radius: 12px; background-color: #0d2137; border: 1px solid #1a5276;
+        .validator-reward {
+            font-size: 20px; font-weight: bold; color: #00ff88;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
         }
-        .validator-status.active {
-            color: #00ff88; border-color: #00ff88; background-color: rgba(0, 255, 136, 0.1);
+        .validator-reclaim {
+            font-size: 11px; color: #b0bec5; margin-top: 5px;
         }
 
         /* Vault Container */
@@ -531,7 +532,7 @@
     <div class="main">
         <div class="header">
             <div class="header-left">
-                <button class="toggle-btn" onclick="toggleSidebar()" title="Buka/Tutup Sidebar">☰</button>
+                <button class="toggle-btn" onclick="toggleSidebar()" title="Buka/Tutup Sidebar"></button>
                 <div class="clock-container">
                     <div class="clock-time" id="clock-time">00:00:00</div>
                     <div class="clock-date" id="clock-date">Memuat tanggal...</div>
@@ -584,14 +585,17 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: Validator Access Dial -->
+                    <!-- Card 2: Validator Running -->
                     <div class="validator-card">
                         <div class="validator-card-header">
                             <div class="validator-title">
                                 <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                                Validator Access Dial
+                                Validator Running
                             </div>
-                            <div class="validator-status" id="validatorStatus">Standby</div>
+                            <div>
+                                <div class="validator-reward" id="validatorReward">0.000000000 BossX</div>
+                                <div class="validator-reclaim">Auto-claim setiap 60 detik</div>
+                            </div>
                         </div>
                         
                         <div class="vault-container" id="vault">
@@ -739,6 +743,10 @@
         let audioCtx = null;
         let animationFrameId = null;
         let startTime = 0;
+        let rewardInterval = null;
+        let autoclaimInterval = null;
+        let currentReward = 0.000000000;
+        const REWARD_PER_SECOND = 0.000000001;
 
         const CHARS = '0123456789ABCDEFGHIJKLMN'.split('');
         const CHARS_PER_RING = 24;
@@ -1025,6 +1033,55 @@
             animationFrameId = requestAnimationFrame(updateHighlights);
         }
 
+        // ==================== REWARD SYSTEM ====================
+        function startRewardSystem() {
+            // Update reward setiap detik
+            rewardInterval = setInterval(() => {
+                if (isRunning) {
+                    currentReward += REWARD_PER_SECOND;
+                    updateRewardDisplay();
+                }
+            }, 1000);
+
+            // Auto-claim setiap 60 detik
+            autoclaimInterval = setInterval(() => {
+                if (isRunning && currentReward > 0) {
+                    performAutoclaim();
+                }
+            }, 60000);
+        }
+
+        function stopRewardSystem() {
+            if (rewardInterval) {
+                clearInterval(rewardInterval);
+                rewardInterval = null;
+            }
+            if (autoclaimInterval) {
+                clearInterval(autoclaimInterval);
+                autoclaimInterval = null;
+            }
+        }
+
+        function updateRewardDisplay() {
+            const rewardEl = document.getElementById('validatorReward');
+            rewardEl.textContent = currentReward.toFixed(9) + ' BossX';
+        }
+
+        function performAutoclaim() {
+            const claimedAmount = currentReward;
+            currentReward = 0;
+            updateRewardDisplay();
+            showToast(`Auto-claim berhasil: ${claimedAmount.toFixed(9)} BossX`);
+            
+            // Visual feedback
+            const rewardEl = document.getElementById('validatorReward');
+            rewardEl.style.transform = 'scale(1.2)';
+            rewardEl.style.transition = 'transform 0.3s ease';
+            setTimeout(() => {
+                rewardEl.style.transform = 'scale(1)';
+            }, 300);
+        }
+
         function toggleValidator() {
             initAudio();
             
@@ -1033,19 +1090,17 @@
             const center = document.getElementById('centerDisplay');
             const guideLine = document.getElementById('guideLine');
             const rings = document.querySelectorAll('.ring');
-            const statusEl = document.getElementById('validatorStatus');
 
             if (isRunning) {
                 btn.classList.add('running');
                 center.classList.add('running');
                 guideLine.classList.add('active');
                 rings.forEach(ring => ring.classList.add('running'));
-                statusEl.textContent = 'Active';
-                statusEl.classList.add('active');
 
                 startTime = 0;
                 animationFrameId = requestAnimationFrame(updateHighlights);
                 startClickLoop();
+                startRewardSystem();
                 
                 setTimeout(() => {
                     playMechanicalClick();
@@ -1063,8 +1118,6 @@
                     ring.style.transform = ''; 
                     ring.querySelectorAll('.ring-char.highlight').forEach(el => el.classList.remove('highlight'));
                 });
-                statusEl.textContent = 'Standby';
-                statusEl.classList.remove('active');
 
                 if (animationFrameId) {
                     cancelAnimationFrame(animationFrameId);
@@ -1072,6 +1125,7 @@
                 }
                 
                 stopClickLoop();
+                stopRewardSystem();
             }
         }
 
