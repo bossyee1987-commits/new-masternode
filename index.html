@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website</title>
+    <title>BOSSX</title>
     <style>
         * {
             margin: 0;
@@ -27,9 +27,18 @@
 
         .sidebar .logo {
             padding: 20px;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             border-bottom: 1px solid #34495e;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar .logo-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
         }
 
         .sidebar .menu {
@@ -74,7 +83,10 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="logo">Menu</div>
+        <div class="logo">
+            <img src="https://i.ibb.co/qYBkPDH3/Picsart-25-04-01-16-25-47-054.png" alt="BOSSX Logo" class="logo-img">
+            <span>BOSSX</span>
+        </div>
         <ul class="menu">
             <li><a href="#">Access Key</a></li>
         </ul>
