@@ -140,8 +140,12 @@
         /* ===== Dashboard Grid - 4 Card Sejajar ===== */
         .dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
 
-        /* Redeem Card */
-        .redeem-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 18px; }
+        /* Redeem Card - Flex Column agar bisa dorong ke bawah */
+        .redeem-card { 
+            background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); 
+            border: 1px solid #1a3a5c; border-radius: 10px; padding: 18px; 
+            display: flex; flex-direction: column; min-height: 280px;
+        }
         .redeem-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .redeem-card-title { font-size: 15px; font-weight: bold; color: #fff; }
         .redeem-card-icon { width: 30px; height: 30px; border: 1px solid #1a5276; border-radius: 8px; display: flex; align-items: center; justify-content: center; background-color: #0d2137; }
@@ -155,9 +159,16 @@
         .redeem-footer { text-align: center; margin-top: 12px; font-size: 11px; color: #b0bec5; }
         .redeem-footer a { color: #00e5ff; text-decoration: none; cursor: pointer; }
         .redeem-footer a:hover { text-decoration: underline; }
+        /* Wrapper untuk mendorong input+button ke bawah */
+        .redeem-action-wrapper { margin-top: auto; }
 
-        /* Reward Validasi Card */
-        .reward-card { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 18px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
+        /* Reward Validasi Card - Flex Column */
+        .reward-card { 
+            background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); 
+            border: 1px solid #1a5276; border-radius: 12px; padding: 18px; 
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+            display: flex; flex-direction: column; min-height: 280px;
+        }
         .reward-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .reward-card-title { font-size: 15px; font-weight: bold; color: #fff; }
         .reward-card-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
@@ -168,6 +179,8 @@
         .btn-claim { width: 100%; padding: 11px; background-color: #00e5ff; color: #0a1628; border: none; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.3s; }
         .btn-claim:hover { background-color: #00c4d9; transform: translateY(-1px); }
         .btn-claim svg { width: 16px; height: 16px; fill: #0a1628; }
+        /* Wrapper untuk mendorong countdown+button ke bawah */
+        .reward-action-wrapper { margin-top: auto; }
 
         /* My Wallet Balance Card */
         .wallet-card { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 18px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
@@ -190,7 +203,7 @@
         .wallet-balance { font-size: 18px; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; }
         .wallet-balance .currency { font-size: 12px; color: #b0bec5; margin-left: 4px; }
 
-        /* Validator Dial Card - Ukuran Diperkecil */
+        /* Validator Dial Card */
         .validator-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; align-items: center; }
         .validator-card-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding-bottom: 8px; border-bottom: 1px solid #1a3a5c; }
         .validator-title { font-size: 14px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 8px; }
@@ -305,7 +318,7 @@
         .system-info-value.status-pending { color: #f39c12; }
         .system-info-value.status-time { color: #e74c3c; }
 
-        /* Responsive - fallback ke 2 kolom untuk layar sempit */
+        /* Responsive */
         @media (max-width: 1400px) {
             .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
             .system-info-grid { grid-template-columns: 1fr; }
@@ -377,13 +390,16 @@
                                 <svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
                             </div>
                         </div>
-                        <input type="text" class="redeem-input" placeholder="REDEEM KEY">
-                        <button class="btn-redeem">
-                            <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                            Redeem Now
-                        </button>
-                        <div class="redeem-footer">
-                            Beli di menu "<a onclick="navigateTo('accesskey', event)">Access Key</a>"
+                        <!-- Wrapper ini yang mendorong input+button ke bawah -->
+                        <div class="redeem-action-wrapper">
+                            <input type="text" class="redeem-input" placeholder="REDEEM KEY">
+                            <button class="btn-redeem">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                Redeem Now
+                            </button>
+                            <div class="redeem-footer">
+                                Beli di menu "<a onclick="navigateTo('accesskey', event)">Access Key</a>"
+                            </div>
                         </div>
                     </div>
 
@@ -422,11 +438,14 @@
                             </div>
                         </div>
                         <div class="reward-amount" id="rewardAmount">0.000000000 BossX</div>
-                        <div class="reward-countdown">Auto claim in: <span id="countdownTimer">60</span>s</div>
-                        <button class="btn-claim" onclick="manualClaim()">
-                            <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-                            Claim to Wallet
-                        </button>
+                        <!-- Wrapper ini yang mendorong countdown+button ke bawah -->
+                        <div class="reward-action-wrapper">
+                            <div class="reward-countdown">Auto claim in: <span id="countdownTimer">60</span>s</div>
+                            <button class="btn-claim" onclick="manualClaim()">
+                                <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                                Claim to Wallet
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Card 4: My Wallet Balance -->
@@ -472,7 +491,6 @@
                             <button class="btn-clear-log" onclick="clearLog()">Clear Log</button>
                         </div>
                         <div class="log-content" id="logContent">
-                            <!-- Log entries akan diisi secara dinamis -->
                         </div>
                     </div>
 
