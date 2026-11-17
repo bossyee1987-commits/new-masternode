@@ -163,8 +163,12 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .wallet-subcard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .wallet-token-info { display: flex; align-items: center; gap: 8px; }
 .wallet-token-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.wallet-token-icon.usdt { background-color: rgba(38, 161, 123, 0.15); }
-.wallet-token-icon.usdt svg { width: 16px; height: 16px; fill: #26a17b; }
+
+/* ===== PERUBAHAN: Logo USDT resmi ===== */
+.wallet-token-icon.usdt { background-color: transparent; padding: 0; }
+.wallet-token-icon.usdt svg { width: 26px; height: 26px; display: block; }
+/* ========================================= */
+
 .wallet-token-icon.bossx { background-color: rgba(0, 229, 255, 0.15); }
 .wallet-token-icon.bossx img { width: 24px; height: 24px; object-fit: contain; }
 .wallet-token-name { font-size: 13px; font-weight: bold; }
@@ -413,7 +417,12 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                         <div class="wallet-subcard-header">
                             <div class="wallet-token-info">
                                 <div class="wallet-token-icon usdt">
-                                    <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                                    <!-- ===== PERUBAHAN: Logo USDT resmi Tether ===== -->
+                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="16" cy="16" r="16" fill="#26A17B"/>
+                                        <path fill="#fff" d="M22.91 17.64c0 2.4-3.09 4.22-6.91 4.22s-6.91-1.82-6.91-4.22c0-2.33 2.91-4.11 6.56-4.22v-2.87h-5.1v-2.4h10.9v2.4h-5.1v2.87c3.65.11 6.56 1.89 6.56 4.22zM16 19.5c2.49 0 4.38-.94 4.38-2.1s-1.89-2.1-4.38-2.1-4.38.94-4.38 2.1 1.89 2.1 4.38 2.1z"/>
+                                    </svg>
+                                    <!-- ============================================= -->
                                 </div>
                                 <div class="wallet-token-name">USDT</div>
                             </div>
@@ -769,7 +778,6 @@ function handleRedeem() {
     updatePowerButton();
     saveState();
     
-    // PERUBAHAN: Log redeem tanpa info reward bulanan/detik
     addLog('SUCCESS', `Access Key redeemed: ${key} | Node activated with ${found.stake} BossX. Contract will start on first Power ON.`);
     
     showToast(`Node diaktivasi! Klik Power Dial untuk memulai kontrak & reward.`);
@@ -909,7 +917,6 @@ function togglePower() {
     setTimeout(() => { playMechanicalClick(); triggerClickFlash(); }, 300);
     if (navigator.vibrate) navigator.vibrate(100);
     
-    // PERUBAHAN: Log power ON tanpa info reward per detik
     const contractLabel = isFirstPowerOn ? 'Contract STARTED' : 'Contract RESUMED';
     addLog('INFO', `Power dial ON. ${contractLabel}. Remaining: ${formatContractTime(remaining)}`);
     showToast('Power Dial aktif! Reward per detik berjalan.');
