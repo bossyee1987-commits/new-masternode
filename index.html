@@ -162,20 +162,20 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .wallet-subcard:hover { border-color: #00e5ff; }
 .wallet-subcard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
 .wallet-token-info { display: flex; align-items: center; gap: 8px; }
-.wallet-token-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-/* ===== PERUBAHAN: Logo USDT resmi ===== */
+/* ===== PERUBAHAN: Logo lebih besar ===== */
+.wallet-token-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .wallet-token-icon.usdt { background-color: transparent; padding: 0; }
-.wallet-token-icon.usdt svg { width: 26px; height: 26px; display: block; }
-/* ========================================= */
-
+.wallet-token-icon.usdt svg { width: 34px; height: 34px; display: block; }
 .wallet-token-icon.bossx { background-color: rgba(0, 229, 255, 0.15); }
-.wallet-token-icon.bossx img { width: 24px; height: 24px; object-fit: contain; }
+.wallet-token-icon.bossx img { width: 32px; height: 32px; object-fit: contain; }
+/* ======================================= */
+
 .wallet-token-name { font-size: 13px; font-weight: bold; }
 .wallet-token-network { font-size: 10px; color: #2ecc71; }
 .wallet-balance { font-size: 18px; font-weight: bold; font-family: 'Courier New', monospace; margin-top: auto; }
 .wallet-balance .currency { font-size: 12px; color: #b0bec5; margin-left: 4px; }
-.validator-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; align-items: center; min-height: 340px; }
+.validator-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; align-items: center; min-height: 360px; }
 .validator-card-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding-bottom: 8px; border-bottom: 1px solid #1a3a5c; }
 .validator-title { font-size: 14px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 8px; }
 .validator-title svg { width: 18px; height: 18px; fill: #f0a500; }
@@ -184,17 +184,21 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .validator-info-value { font-size: 14px; font-weight: bold; color: #00ff88; font-family: 'Courier New', monospace; text-shadow: 0 0 8px rgba(0, 255, 136, 0.4); }
 .validator-info-right { display: flex; flex-direction: column; align-items: flex-end; }
 .validator-countdown-value { font-size: 16px; font-weight: bold; color: #00e5ff; font-family: 'Courier New', monospace; letter-spacing: 1px; text-shadow: 0 0 8px rgba(0, 229, 255, 0.4); }
-.vault-container { position: relative; width: 290px; height: 290px; display: flex; align-items: center; justify-content: center; transform-origin: center center; margin-top: 10px; }
-.guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 145px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
+
+/* ===== PERUBAHAN: Vault lebih besar untuk 6 ring ===== */
+.vault-container { position: relative; width: 330px; height: 330px; display: flex; align-items: center; justify-content: center; transform-origin: center center; margin-top: 10px; }
+.guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 165px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
 .guide-line.active { background: linear-gradient(to bottom, rgba(0,255,136,0.6), transparent); }
 .guide-line.click-flash { width: 4px; background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(0,255,136,0.8), transparent); transition: all 0.08s ease-out; }
 .ring { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 1.5s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease; }
+.ring-6 { width: 310px; height: 310px; background: radial-gradient(circle, transparent 42%, #222240 42%, #222240 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.25); }
 .ring-outer { width: 270px; height: 270px; background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.2); }
 .ring-2 { width: 216px; height: 216px; background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.15); }
 .ring-3 { width: 175px; height: 175px; background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
 .ring-4 { width: 136px; height: 136px; background: radial-gradient(circle, transparent 42%, #0d0d22 42%, #0d0d22 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
 .ring-inner { width: 108px; height: 108px; background: radial-gradient(circle, transparent 42%, #0a0a20 42%, #0a0a20 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
 .ring.running { border-color: rgba(0, 255, 136, 0.4); }
+.ring-6.running { box-shadow: 0 0 30px rgba(0, 255, 136, 0.12), inset 0 0 25px rgba(0, 255, 136, 0.06); }
 .ring-outer.running { box-shadow: 0 0 25px rgba(0, 255, 136, 0.1), inset 0 0 20px rgba(0, 255, 136, 0.05); }
 .ring-2.running { box-shadow: 0 0 20px rgba(0, 255, 136, 0.08); }
 .ring-3.running { box-shadow: 0 0 15px rgba(0, 255, 136, 0.06); }
@@ -205,16 +209,17 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .ring.running .tick { background: rgba(0, 255, 136, 0.2); }
 .tick.major { width: 2px; height: 8px; background: rgba(100, 100, 150, 0.5); }
 .ring.running .tick.major { background: rgba(0, 255, 136, 0.4); }
-.ring-char { position: absolute; font-size: 10px; font-weight: bold; color: #444466; user-select: none; transition: color 0.5s; letter-spacing: 1px; font-family: 'Courier New', monospace; }
+.ring-char { position: absolute; font-size: 11px; font-weight: bold; color: #444466; user-select: none; transition: color 0.5s; letter-spacing: 1px; font-family: 'Courier New', monospace; }
 .ring.running .ring-char { color: rgba(0, 255, 136, 0.7); text-shadow: 0 0 4px rgba(0, 255, 136, 0.3); }
-.ring-char.highlight { color: #ffffff !important; text-shadow: 0 0 8px #00ff88, 0 0 15px rgba(0, 255, 136, 0.6) !important; font-size: 12px; }
+.ring-char.highlight { color: #ffffff !important; text-shadow: 0 0 8px #00ff88, 0 0 15px rgba(0, 255, 136, 0.6) !important; font-size: 13px; }
 @keyframes spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes spin-ccw { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
-.ring.running.spin-1 { animation: spin-cw 20s linear infinite; }
-.ring.running.spin-2 { animation: spin-ccw 28s linear infinite; }
-.ring.running.spin-3 { animation: spin-cw 16s linear infinite; }
-.ring.running.spin-4 { animation: spin-ccw 24s linear infinite; }
-.ring.running.spin-5 { animation: spin-cw 12s linear infinite; }
+.ring.running.spin-1 { animation: spin-cw 22s linear infinite; }
+.ring.running.spin-2 { animation: spin-ccw 20s linear infinite; }
+.ring.running.spin-3 { animation: spin-cw 28s linear infinite; }
+.ring.running.spin-4 { animation: spin-ccw 16s linear infinite; }
+.ring.running.spin-5 { animation: spin-cw 24s linear infinite; }
+.ring.running.spin-6 { animation: spin-ccw 12s linear infinite; }
 .center { position: absolute; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, #1a1a2e, #050510); border: 2px solid rgba(100, 100, 150, 0.3); display: flex; align-items: center; justify-content: center; z-index: 50; box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.5); transition: border-color 0.5s, box-shadow 0.5s; }
 .center.running { border-color: rgba(0, 255, 136, 0.5); box-shadow: 0 0 40px rgba(0, 255, 136, 0.2), inset 0 0 20px rgba(0, 255, 136, 0.1); }
 .power-btn { width: 56px; height: 56px; border-radius: 50%; border: 2px solid rgba(100, 100, 150, 0.4); background: radial-gradient(circle at 30% 30%, #2a2a40, #0a0a1a); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.4s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.05); position: relative; }
@@ -373,11 +378,13 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                     </div>
                     <div class="vault-container" id="vault">
                         <div class="guide-line" id="guideLine"></div>
-                        <div class="ring ring-outer spin-1" id="ring-0"></div>
-                        <div class="ring ring-2 spin-2" id="ring-1"></div>
-                        <div class="ring ring-3 spin-3" id="ring-2"></div>
-                        <div class="ring ring-4 spin-4" id="ring-3"></div>
-                        <div class="ring ring-inner spin-5" id="ring-4"></div>
+                        <!-- PERUBAHAN: 6 ring (tambah ring-6 di luar) -->
+                        <div class="ring ring-6 spin-1" id="ring-0"></div>
+                        <div class="ring ring-outer spin-2" id="ring-1"></div>
+                        <div class="ring ring-2 spin-3" id="ring-2"></div>
+                        <div class="ring ring-3 spin-4" id="ring-3"></div>
+                        <div class="ring ring-4 spin-5" id="ring-4"></div>
+                        <div class="ring ring-inner spin-6" id="ring-5"></div>
                         <div class="center" id="centerDisplay">
                             <button class="power-btn" id="powerBtn" onclick="togglePower()" aria-label="Toggle Power" disabled>
                                 <svg class="power-icon" viewBox="0 0 24 24">
@@ -417,12 +424,10 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                         <div class="wallet-subcard-header">
                             <div class="wallet-token-info">
                                 <div class="wallet-token-icon usdt">
-                                    <!-- ===== PERUBAHAN: Logo USDT resmi Tether ===== -->
                                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="16" cy="16" r="16" fill="#26A17B"/>
                                         <path fill="#fff" d="M22.91 17.64c0 2.4-3.09 4.22-6.91 4.22s-6.91-1.82-6.91-4.22c0-2.33 2.91-4.11 6.56-4.22v-2.87h-5.1v-2.4h10.9v2.4h-5.1v2.87c3.65.11 6.56 1.89 6.56 4.22zM16 19.5c2.49 0 4.38-.94 4.38-2.1s-1.89-2.1-4.38-2.1-4.38.94-4.38 2.1 1.89 2.1 4.38 2.1z"/>
                                     </svg>
-                                    <!-- ============================================= -->
                                 </div>
                                 <div class="wallet-token-name">USDT</div>
                             </div>
@@ -613,7 +618,7 @@ const SECONDS_IN_MONTH = 2592000;
 const MONTHLY_REWARD_PERCENT = 0.15;
 const AUTO_CLAIM_INTERVAL = 60;
 const FIXED_DIFFICULTY = 12000;
-const STORAGE_KEY = 'bossx_masternode_state_v3';
+const STORAGE_KEY = 'bossx_masternode_state_v4';
 
 let state = {
     nodeActive: false,
@@ -636,12 +641,16 @@ let audioCtx = null;
 let animationFrameId = null;
 let startTime = 0;
 let currentLogFilter = 'ALL';
-const CHARS = '0123456789ABCDEFGHIJKLMN'.split('');
+
+// ===== PERUBAHAN: Pool karakter campuran besar-kecil =====
+const CHAR_POOL = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 const CHARS_PER_RING = 24;
-const RING_OFFSETS = [0, 6, 12, 18, 3];
+// Offset tidak lagi dipakai karena karakter di-random per ring
 const CLICK_INTERVAL_MS = 60000;
 const TICKS_PER_RING = 60;
-const RING_SPEEDS = [360 / 20000, -360 / 28000, 360 / 16000, -360 / 24000, 360 / 12000];
+// PERUBAHAN: 6 ring speeds (tambah 1)
+const RING_SPEEDS = [360/22000, -360/20000, 360/28000, -360/16000, 360/24000, -360/12000];
+// =============================================
 
 function getRewardPerSecond() {
     if (state.stakeAmount <= 0) return 0;
@@ -694,9 +703,9 @@ function generateKey() {
     updateWalletDisplay();
     updateSummary();
     
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; 
+    // PERUBAHAN: Access Key juga pakai huruf besar-kecil random
     let key = '';
-    for (let i = 0; i < 25; i++) key += chars.charAt(Math.floor(Math.random() * chars.length));
+    for (let i = 0; i < 25; i++) key += CHAR_POOL.charAt(Math.floor(Math.random() * CHAR_POOL.length));
     
     const now = new Date();
     const dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) + ', ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false });
@@ -1240,37 +1249,68 @@ function startClickLoop() {
 
 function stopClickLoop() { if (clickInterval) { clearInterval(clickInterval); clickInterval = null; } }
 
+// ===== PERUBAHAN: Fungsi helper untuk karakter random =====
+function getRandomChars(count) {
+    const shuffled = CHAR_POOL.split('').sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+}
+// ===========================================
+
+// PERUBAHAN: 6 ring (tambah ring-6 di luar)
 function initRings() {
-    const radii = [121, 96, 77, 60, 46];
-    const tickRadii = [131, 104, 84, 65, 51];
-    for (let r = 0; r < 5; r++) {
-        const ring = document.getElementById(`ring-${r}`); const radius = radii[r]; const tickRadius = tickRadii[r]; const offset = RING_OFFSETS[r];
+    const radii = [138, 121, 96, 77, 60, 46];
+    const tickRadii = [148, 131, 104, 84, 65, 51];
+    for (let r = 0; r < 6; r++) {
+        const ring = document.getElementById(`ring-${r}`);
+        const radius = radii[r];
+        const tickRadius = tickRadii[r];
+        // PERUBAHAN: Karakter random per ring (campuran besar-kecil)
+        const ringChars = getRandomChars(CHARS_PER_RING);
+        
         for (let i = 0; i < TICKS_PER_RING; i++) {
-            const angle = (i * 360 / TICKS_PER_RING) - 90; const rad = (angle * Math.PI) / 180;
-            const x = Math.cos(rad) * tickRadius; const y = Math.sin(rad) * tickRadius;
-            const tick = document.createElement('div'); tick.className = `tick ${i % 5 === 0 ? 'major' : ''}`;
-            tick.style.left = `calc(50% + ${x}px - 0.5px)`; tick.style.top = `calc(50% + ${y}px - 3px)`; tick.style.transform = `rotate(${angle + 90}deg)`;
+            const angle = (i * 360 / TICKS_PER_RING) - 90;
+            const rad = (angle * Math.PI) / 180;
+            const x = Math.cos(rad) * tickRadius;
+            const y = Math.sin(rad) * tickRadius;
+            const tick = document.createElement('div');
+            tick.className = `tick ${i % 5 === 0 ? 'major' : ''}`;
+            tick.style.left = `calc(50% + ${x}px - 0.5px)`;
+            tick.style.top = `calc(50% + ${y}px - 3px)`;
+            tick.style.transform = `rotate(${angle + 90}deg)`;
             ring.appendChild(tick);
         }
         for (let i = 0; i < CHARS_PER_RING; i++) {
-            const charIndex = (i + offset) % CHARS.length; const angle = (i * 360 / CHARS_PER_RING) - 90; const rad = (angle * Math.PI) / 180;
-            const x = Math.cos(rad) * radius; const y = Math.sin(rad) * radius;
-            const charEl = document.createElement('div'); charEl.className = 'ring-char'; charEl.textContent = CHARS[charIndex]; charEl.dataset.index = i;
-            charEl.style.left = `calc(50% + ${x}px - 5px)`; charEl.style.top = `calc(50% + ${y}px - 6px)`;
+            const angle = (i * 360 / CHARS_PER_RING) - 90;
+            const rad = (angle * Math.PI) / 180;
+            const x = Math.cos(rad) * radius;
+            const y = Math.sin(rad) * radius;
+            const charEl = document.createElement('div');
+            charEl.className = 'ring-char';
+            charEl.textContent = ringChars[i];
+            charEl.dataset.index = i;
+            charEl.style.left = `calc(50% + ${x}px - 5px)`;
+            charEl.style.top = `calc(50% + ${y}px - 6px)`;
             ring.appendChild(charEl);
         }
     }
 }
 
 function updateHighlights(timestamp) {
-    if (!isRunning) return; if (!startTime) startTime = timestamp; const elapsed = timestamp - startTime;
+    if (!isRunning) return;
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
     const rings = document.querySelectorAll('.ring');
     rings.forEach((ring, r) => {
-        const oldHighlight = ring.querySelector('.ring-char.highlight'); if (oldHighlight) oldHighlight.classList.remove('highlight');
-        let currentAngle = (elapsed * RING_SPEEDS[r]) % 360; if (currentAngle < 0) currentAngle += 360;
-        const anglePerChar = 360 / CHARS_PER_RING; let rawIndex = -currentAngle / anglePerChar;
-        let highlightIndex = Math.round(rawIndex) % CHARS_PER_RING; if (highlightIndex < 0) highlightIndex += CHARS_PER_RING;
-        const chars = ring.querySelectorAll('.ring-char'); if (chars[highlightIndex]) chars[highlightIndex].classList.add('highlight');
+        const oldHighlight = ring.querySelector('.ring-char.highlight');
+        if (oldHighlight) oldHighlight.classList.remove('highlight');
+        let currentAngle = (elapsed * RING_SPEEDS[r]) % 360;
+        if (currentAngle < 0) currentAngle += 360;
+        const anglePerChar = 360 / CHARS_PER_RING;
+        let rawIndex = -currentAngle / anglePerChar;
+        let highlightIndex = Math.round(rawIndex) % CHARS_PER_RING;
+        if (highlightIndex < 0) highlightIndex += CHARS_PER_RING;
+        const chars = ring.querySelectorAll('.ring-char');
+        if (chars[highlightIndex]) chars[highlightIndex].classList.add('highlight');
     });
     animationFrameId = requestAnimationFrame(updateHighlights);
 }
