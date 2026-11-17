@@ -247,7 +247,7 @@
         .power-btn:hover { transform: scale(1.05); border-color: rgba(100, 100, 150, 0.7); }
         .power-btn:active { transform: scale(0.95); }
         .power-btn.running { border-color: rgba(0, 255, 136, 0.6); background: radial-gradient(circle at 30% 30%, #0a3a2a, #051510); box-shadow: 0 0 25px rgba(0, 255, 136, 0.4), inset 0 1px 2px rgba(0, 255, 136, 0.2); }
-        .power-btn.running:hover { border-color: rgba(255, 80, 80, 0.6); }
+        .power-btn.running:hover { border-color: rgba(0, 255, 136, 0.6); cursor: not-allowed; }
         .power-btn:disabled { cursor: not-allowed; opacity: 0.6; }
         .power-btn:disabled:hover { transform: none; border-color: rgba(100, 100, 150, 0.4); }
         .power-icon { width: 26px; height: 26px; stroke: #555577; stroke-width: 2.5; fill: none; transition: stroke 0.4s, filter 0.4s; }
@@ -652,7 +652,7 @@
             powerOn: false,
             redeemedKey: '',
             stakeAmount: 0,
-            contractStart: null,       // BARU: null sampai power ON pertama
+            contractStart: null,
             bossxBalance: 1000.00000000,
             currentReward: 0.00000000,
             rewardValidasi: 0.00000000,
@@ -793,7 +793,6 @@
                 return;
             }
             
-            // Validasi: kontrak lama harus sudah habis untuk redeem key baru
             const remaining = getRemainingContractTime();
             if (remaining > 0) {
                 showToast('Kontrak sebelumnya masih berjalan. Tunggu hingga habis.', 'warning');
@@ -806,7 +805,7 @@
             state.nodeActive = true;
             state.redeemedKey = key;
             state.stakeAmount = found.stake;
-            state.contractStart = null;      // PERUBAHAN: null, akan di-set saat power ON pertama
+            state.contractStart = null;
             state.powerOn = false;
             state.currentReward = 0;
             state.rewardValidasi = 0;
@@ -858,7 +857,6 @@
         }
 
         // ==================== AUTO STOP 06:00 ====================
-        // PERUBAHAN: Blokir hanya 1 detik (06:00:00), bukan 1 menit
         function isBlockedTime() {
             const now = new Date();
             return now.getHours() === 6 && now.getMinutes() === 0 && now.getSeconds() === 0;
@@ -899,11 +897,20 @@
             
             addLog('WARNING', `Auto Stop triggered: ${reason}. Power dial turned OFF. You can turn it ON again at 06:00:01.`);
             showToast(`Sistem auto-stop: ${reason}. Bisa dinyalakan lagi di 06:00:01`, 'warning');
+            
+            // PERUBAHAN: Enable tombol power setelah auto-stop agar user bisa nyalakan lagi
             updatePowerButton();
+            updateContractStatus();
         }
 
         // ==================== POWER DIAL ====================
         function togglePower() {
+            // PERUBAHAN: Jika power sudah ON, tolak klik manual (tidak bisa dimatikan manual)
+            if (state.powerOn) {
+                showToast('Power tidak dapat dimatikan manual. Hanya sistem (06:00:00) yang dapat mematikan.', 'warning');
+                return;
+            }
+            
             if (!state.nodeActive) {
                 showToast('Node belum aktif. Redeem Access Key terlebih dahulu.', 'error');
                 return;
@@ -920,7 +927,6 @@
                 return;
             }
             
-            // PERUBAHAN: Blokir hanya di detik ke-0 (06:00:00)
             if (isBlockedTime()) {
                 showToast('Sistem auto-stop. Silakan coba lagi di 06:00:01', 'warning');
                 return;
@@ -928,80 +934,58 @@
             
             initAudio();
             
-            if (!state.powerOn) {
-                state.powerOn = true;
-                isRunning = true;
-                
-                // PERUBAHAN: Contract start di-set saat power ON PERTAMA kali
-                const isFirstPowerOn = !state.contractStart;
-                if (isFirstPowerOn) {
-                    state.contractStart = Date.now();
-                    addLog('SUCCESS', `Contract timer STARTED: 40.000.000 detik countdown begins.`);
-                    showToast('Kontrak dimulai! Hitung mundur 40.000.000 detik berjalan.');
-                }
-                
-                const btn = document.getElementById('powerBtn');
-                const center = document.getElementById('centerDisplay');
-                const guideLine = document.getElementById('guideLine');
-                const rings = document.querySelectorAll('.ring');
-                
-                btn.classList.add('running');
-                center.classList.add('running');
-                guideLine.classList.add('active');
-                rings.forEach(ring => ring.classList.add('running'));
-                
-                startTime = 0;
-                animationFrameId = requestAnimationFrame(updateHighlights);
-                startClickLoop();
-                
-                setTimeout(() => { playMechanicalClick(); triggerClickFlash(); }, 300);
-                if (navigator.vibrate) navigator.vibrate(100);
-                
-                const perSecond = getRewardPerSecond();
-                const contractLabel = isFirstPowerOn ? 'Contract STARTED' : 'Contract RESUMED';
-                addLog('INFO', `Power dial ON. Reward: ${perSecond.toFixed(8)} BossX/detik. ${contractLabel}. Remaining: ${formatContractTime(remaining)}`);
-                showToast('Power Dial aktif! Reward per detik berjalan.');
-                
-                updateContractStatus();
-            } else {
-                state.powerOn = false;
-                isRunning = false;
-                
-                const btn = document.getElementById('powerBtn');
-                const center = document.getElementById('centerDisplay');
-                const guideLine = document.getElementById('guideLine');
-                const rings = document.querySelectorAll('.ring');
-                
-                btn.classList.remove('running');
-                center.classList.remove('running');
-                guideLine.classList.remove('active');
-                rings.forEach(ring => {
-                    ring.classList.remove('running');
-                    ring.style.transform = '';
-                    ring.querySelectorAll('.ring-char.highlight').forEach(el => el.classList.remove('highlight'));
-                });
-                
-                if (animationFrameId) {
-                    cancelAnimationFrame(animationFrameId);
-                    animationFrameId = null;
-                }
-                stopClickLoop();
-                
-                addLog('INFO', 'Power dial OFF. Reward system paused. Contract timer continues running.');
-                showToast('Power Dial dimatikan. Kontrak tetap berjalan.');
-                
-                updateContractStatus();
+            // POWER ON (hanya bisa ON, tidak bisa OFF manual)
+            state.powerOn = true;
+            isRunning = true;
+            
+            const isFirstPowerOn = !state.contractStart;
+            if (isFirstPowerOn) {
+                state.contractStart = Date.now();
+                addLog('SUCCESS', `Contract timer STARTED: 40.000.000 detik countdown begins.`);
+                showToast('Kontrak dimulai! Hitung mundur 40.000.000 detik berjalan.');
             }
             
+            const btn = document.getElementById('powerBtn');
+            const center = document.getElementById('centerDisplay');
+            const guideLine = document.getElementById('guideLine');
+            const rings = document.querySelectorAll('.ring');
+            
+            btn.classList.add('running');
+            center.classList.add('running');
+            guideLine.classList.add('active');
+            rings.forEach(ring => ring.classList.add('running'));
+            
+            startTime = 0;
+            animationFrameId = requestAnimationFrame(updateHighlights);
+            startClickLoop();
+            
+            setTimeout(() => { playMechanicalClick(); triggerClickFlash(); }, 300);
+            if (navigator.vibrate) navigator.vibrate(100);
+            
+            const perSecond = getRewardPerSecond();
+            const contractLabel = isFirstPowerOn ? 'Contract STARTED' : 'Contract RESUMED';
+            addLog('INFO', `Power dial ON. Reward: ${perSecond.toFixed(8)} BossX/detik. ${contractLabel}. Remaining: ${formatContractTime(remaining)}`);
+            showToast('Power Dial aktif! Reward per detik berjalan.');
+            
+            // PERUBAHAN: Disable tombol setelah power ON (tidak bisa dimatikan manual)
             updatePowerButton();
+            updateContractStatus();
         }
 
+        // PERUBAHAN: Logic tombol power - disabled saat power ON, enabled saat OFF
         function updatePowerButton() {
             const btn = document.getElementById('powerBtn');
-            btn.disabled = !state.nodeActive;
+            if (!state.nodeActive) {
+                btn.disabled = true;
+            } else if (state.powerOn) {
+                // PERUBAHAN: Disable saat power ON (tidak bisa dimatikan manual)
+                btn.disabled = true;
+            } else {
+                // Enabled saat node aktif tapi power OFF (bisa dinyalakan)
+                btn.disabled = false;
+            }
         }
 
-        // PERUBAHAN: Tambah fungsi update status kontrak
         function updateContractStatus() {
             const el = document.getElementById('sysContractStatus');
             if (!el) return;
@@ -1013,10 +997,10 @@
                 el.textContent = 'Menunggu Power ON';
                 el.className = 'system-info-value status-waiting';
             } else if (state.powerOn) {
-                el.textContent = 'Berjalan';
+                el.textContent = 'Berjalan (Locked)';
                 el.className = 'system-info-value status-active';
             } else {
-                el.textContent = 'Paused (Power OFF)';
+                el.textContent = 'Paused (Auto-Stop)';
                 el.className = 'system-info-value status-pending';
             }
         }
@@ -1083,7 +1067,6 @@
                     updateRewardDisplay();
                     updateCountdownDisplay();
                 } else {
-                    // Kontrak habis
                     state.powerOn = false;
                     state.nodeActive = false;
                     state.contractStart = null;
