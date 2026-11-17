@@ -7,8 +7,6 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; background-color: #0a1628; }
-
-        /* Sidebar */
         .sidebar { width: 250px; background-color: #2c3e50; color: #fff; display: flex; flex-direction: column; transition: width 0.3s ease; overflow: hidden; border-right: 1px solid #34495e; flex-shrink: 0; }
         .sidebar.collapsed { width: 70px; }
         .sidebar .logo { padding: 20px 15px; border-bottom: 1px solid #34495e; display: flex; align-items: center; gap: 12px; white-space: nowrap; }
@@ -26,11 +24,7 @@
         .sidebar .menu li a .menu-icon { flex-shrink: 0; }
         .sidebar .menu li a .menu-icon svg { width: 22px; height: 22px; fill: #f39c12; }
         .sidebar.collapsed .menu-text { display: none; }
-
-        /* Main */
         .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-
-        /* Header */
         .header { background-color: #0a1628; color: #fff; padding: 0 25px; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #1a3a5c; height: 85px; gap: 20px; flex-shrink: 0; }
         .header-left { display: flex; align-items: center; gap: 15px; min-width: 180px; }
         .toggle-btn { background: none; border: none; color: #fff; font-size: 26px; cursor: pointer; width: 40px; height: 40px; border-radius: 4px; transition: background 0.3s; display: flex; align-items: center; justify-content: center; }
@@ -55,19 +49,13 @@
         .profile-info { display: flex; flex-direction: column; }
         .profile-name { font-size: 14px; font-weight: bold; color: #fff; }
         .profile-role { font-size: 11px; color: #00e5ff; }
-
-        /* Content */
         .content { flex: 1; padding: 20px; overflow-y: auto; }
-
-        /* Page Header */
         .page-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 20px; background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; margin-bottom: 20px; }
         .page-header-title { font-size: 26px; font-weight: bold; color: #00e5ff; display: flex; align-items: center; gap: 10px; }
         .page-header-title svg { width: 28px; height: 28px; fill: #00e5ff; }
         .page-header-subtitle { font-size: 13px; color: #b0bec5; margin-top: 5px; }
         .page-header-icon { width: 50px; height: 50px; border: 1px solid #1a5276; border-radius: 10px; display: flex; align-items: center; justify-content: center; background-color: #0d2137; }
         .page-header-icon svg { width: 26px; height: 26px; fill: #00e5ff; }
-
-        /* Tabs */
         .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
         .tab-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background-color: #0d2137; border: 1px solid #1a5276; border-radius: 8px; color: #fff; font-size: 14px; cursor: pointer; transition: all 0.3s; }
         .tab-btn svg { width: 16px; height: 16px; fill: #fff; }
@@ -75,14 +63,10 @@
         .tab-btn.active svg { fill: #0a1628; }
         .tab-badge { background-color: #00e5ff; color: #0a1628; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 10px; }
         .tab-btn.active .tab-badge { background-color: #0a1628; color: #00e5ff; }
-
-        /* Panel */
         .panel { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
         .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .panel-title { font-size: 18px; font-weight: bold; color: #fff; display: flex; align-items: center; gap: 10px; }
         .panel-title svg { width: 20px; height: 20px; fill: #00e5ff; }
-
-        /* Table */
         .key-table { width: 100%; border-collapse: collapse; }
         .key-table th { text-align: left; padding: 12px 15px; font-size: 13px; color: #00e5ff; border-bottom: 1px solid #1a3a5c; }
         .key-table td { padding: 15px; font-size: 13px; color: #fff; border-bottom: 1px solid #1a3a5c; vertical-align: middle; }
@@ -109,8 +93,6 @@
         .stat-card-small-value { font-size: 28px; font-weight: bold; color: #fff; margin-bottom: 5px; }
         .stat-card-small-desc { font-size: 12px; color: #b0bec5; }
         .stat-card-small.available .stat-card-small-desc { color: #2ecc71; }
-
-        /* Generate Form */
         .form-label { font-size: 13px; color: #b0bec5; margin-bottom: 8px; display: block; }
         .input-group { display: flex; align-items: center; background-color: #0d2137; border: 1px solid #1a5276; border-radius: 8px; padding: 10px 15px; gap: 10px; }
         .input-group input { flex: 1; background: transparent; border: none; outline: none; color: #fff; font-size: 14px; }
@@ -135,16 +117,11 @@
         .btn-generate { width: 100%; padding: 14px; background-color: #00e5ff; color: #0a1628; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px; transition: all 0.3s; }
         .btn-generate:hover { background-color: #00c4d9; }
         .btn-generate svg { width: 18px; height: 18px; fill: #0a1628; }
-
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         .page-section { display: none; }
         .page-section.active { display: block; }
-
-        /* Dashboard Grid */
         .dashboard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-
-        /* Redeem Card */
         .redeem-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 18px; display: flex; flex-direction: column; min-height: 340px; }
         .redeem-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .redeem-card-title { font-size: 15px; font-weight: bold; color: #fff; }
@@ -163,8 +140,6 @@
         .redeem-footer a { color: #00e5ff; text-decoration: none; cursor: pointer; }
         .redeem-footer a:hover { text-decoration: underline; }
         .redeem-action-wrapper { margin-top: auto; }
-
-        /* Reward Validasi Card */
         .reward-card { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 18px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); display: flex; flex-direction: column; min-height: 340px; }
         .reward-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .reward-card-title { font-size: 15px; font-weight: bold; color: #fff; }
@@ -177,8 +152,6 @@
         .btn-claim:hover { background-color: #00c4d9; transform: translateY(-1px); }
         .btn-claim svg { width: 16px; height: 16px; fill: #0a1628; }
         .reward-action-wrapper { margin-top: auto; }
-
-        /* Wallet Card */
         .wallet-card { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 18px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); min-height: 340px; display: flex; flex-direction: column; }
         .wallet-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .wallet-card-title { font-size: 15px; font-weight: bold; color: #fff; }
@@ -198,8 +171,6 @@
         .wallet-token-network { font-size: 10px; color: #2ecc71; }
         .wallet-balance { font-size: 18px; font-weight: bold; color: #fff; font-family: 'Courier New', monospace; margin-top: auto; }
         .wallet-balance .currency { font-size: 12px; color: #b0bec5; margin-left: 4px; }
-
-        /* Validator Card */
         .validator-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; align-items: center; min-height: 340px; }
         .validator-card-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding-bottom: 8px; border-bottom: 1px solid #1a3a5c; }
         .validator-title { font-size: 14px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 8px; }
@@ -209,7 +180,6 @@
         .validator-info-value { font-size: 14px; font-weight: bold; color: #00ff88; font-family: 'Courier New', monospace; text-shadow: 0 0 8px rgba(0, 255, 136, 0.4); }
         .validator-info-right { display: flex; flex-direction: column; align-items: flex-end; }
         .validator-countdown-value { font-size: 16px; font-weight: bold; color: #00e5ff; font-family: 'Courier New', monospace; letter-spacing: 1px; text-shadow: 0 0 8px rgba(0, 229, 255, 0.4); }
-
         .vault-container { position: relative; width: 290px; height: 290px; display: flex; align-items: center; justify-content: center; transform-origin: center center; margin-top: 10px; }
         .guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 145px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
         .guide-line.active { background: linear-gradient(to bottom, rgba(0,255,136,0.6), transparent); }
@@ -252,20 +222,19 @@
         .power-btn:disabled:hover { transform: none; border-color: rgba(100, 100, 150, 0.4); }
         .power-icon { width: 26px; height: 26px; stroke: #555577; stroke-width: 2.5; fill: none; transition: stroke 0.4s, filter 0.4s; }
         .power-btn.running .power-icon { stroke: #00ff88; filter: drop-shadow(0 0 6px #00ff88); }
-
-        /* Toast */
         .toast { position: fixed; bottom: 30px; right: 30px; background-color: #2ecc71; color: #fff; padding: 12px 20px; border-radius: 8px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); opacity: 0; transform: translateY(20px); transition: all 0.3s; z-index: 1000; }
         .toast.show { opacity: 1; transform: translateY(0); }
         .toast.error { background-color: #e74c3c; }
         .toast.warning { background-color: #f39c12; }
-
-        /* Log Section */
         .log-section { margin-top: 20px; }
         .log-panel { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; overflow: hidden; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
         .log-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background-color: rgba(0, 229, 255, 0.05); border-bottom: 1px solid #1a5276; }
         .log-title { font-size: 16px; font-weight: bold; color: #00e5ff; }
+        .log-header-actions { display: flex; gap: 10px; }
         .btn-clear-log { background-color: #e74c3c; color: #fff; border: none; padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .btn-clear-log:hover { background-color: #c0392b; }
+        .btn-reset-state { background-color: #f39c12; color: #fff; border: none; padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        .btn-reset-state:hover { background-color: #d68910; }
         .log-content { background-color: #050a14; padding: 15px; max-height: 250px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 12px; min-height: 100px; }
         .log-content::-webkit-scrollbar { width: 8px; }
         .log-content::-webkit-scrollbar-track { background: #0a1628; border-radius: 4px; }
@@ -279,8 +248,6 @@
         .log-level-warning { color: #f39c12; }
         .log-level-error { color: #e74c3c; }
         .log-empty { color: #78909c; font-style: italic; text-align: center; padding: 20px 0; }
-
-        /* System Info Panel */
         .system-info-panel { margin-top: 15px; background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 20px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
         .system-info-title { font-size: 15px; font-weight: bold; color: #00e5ff; display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
         .system-info-title svg { width: 18px; height: 18px; fill: #00e5ff; }
@@ -295,8 +262,6 @@
         .system-info-value.status-time { color: #e74c3c; }
         .system-info-value.status-expired { color: #e74c3c; }
         .system-info-value.status-waiting { color: #f39c12; }
-
-        /* Responsive */
         @media (max-width: 1400px) { .dashboard-grid { grid-template-columns: repeat(2, 1fr); } .system-info-grid { grid-template-columns: 1fr; } }
         @media (max-width: 700px) { .dashboard-grid { grid-template-columns: 1fr; } }
     </style>
@@ -352,10 +317,8 @@
         </div>
 
         <div class="content">
-            <!-- DASHBOARD PAGE -->
             <div class="page-section active" id="page-dashboard">
                 <div class="dashboard-grid">
-                    <!-- Card 1: Redeem Access Key -->
                     <div class="redeem-card">
                         <div class="redeem-card-header">
                             <div class="redeem-card-title">Redeem Access Key</div>
@@ -375,7 +338,6 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: Access Key Running -->
                     <div class="validator-card">
                         <div class="validator-card-header">
                             <div class="validator-title">
@@ -409,7 +371,6 @@
                         </div>
                     </div>
 
-                    <!-- Card 3: Reward Validasi -->
                     <div class="reward-card">
                         <div class="reward-card-header">
                             <div class="reward-card-title">Reward Validasi</div>
@@ -427,7 +388,6 @@
                         </div>
                     </div>
 
-                    <!-- Card 4: My Wallet Balance -->
                     <div class="wallet-card">
                         <div class="wallet-card-header">
                             <div class="wallet-card-title">My Wallet Balance</div>
@@ -462,19 +422,20 @@
                     </div>
                 </div>
 
-                <!-- Log Engine Mastercloud Section -->
                 <div class="log-section">
                     <div class="log-panel">
                         <div class="log-header">
                             <div class="log-title">Log Engine Mastercloud</div>
-                            <button class="btn-clear-log" onclick="clearLog()">Clear Log</button>
+                            <div class="log-header-actions">
+                                <button class="btn-reset-state" onclick="resetStateForTesting()">🔄 Reset State (Testing)</button>
+                                <button class="btn-clear-log" onclick="clearLog()">Clear Log</button>
+                            </div>
                         </div>
                         <div class="log-content" id="logContent">
                             <div class="log-empty">Belum ada log aktivitas.</div>
                         </div>
                     </div>
 
-                    <!-- Informasi Sistem BossX Validator -->
                     <div class="system-info-panel">
                         <div class="system-info-title">
                             <svg viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
@@ -522,7 +483,6 @@
                 </div>
             </div>
 
-            <!-- ACCESS KEY PAGE -->
             <div class="page-section" id="page-accesskey">
                 <div class="page-header">
                     <div>
@@ -641,7 +601,6 @@
     <div class="toast" id="toast">Berhasil!</div>
 
     <script>
-        // ==================== KONSTANTA ====================
         const CONTRACT_DURATION_SECONDS = 40000000;
         const SECONDS_IN_MONTH = 2592000;
         const MONTHLY_REWARD_PERCENT = 0.15;
@@ -673,7 +632,6 @@
         const TICKS_PER_RING = 60;
         const RING_SPEEDS = [360 / 20000, -360 / 28000, 360 / 16000, -360 / 24000, 360 / 12000];
 
-        // ==================== FUNGSI REWARD DINAMIS ====================
         function getRewardPerSecond() {
             if (state.stakeAmount <= 0) return 0;
             const monthlyReward = state.stakeAmount * MONTHLY_REWARD_PERCENT;
@@ -684,7 +642,6 @@
             return state.stakeAmount * MONTHLY_REWARD_PERCENT;
         }
 
-        // ==================== INITIALIZATION ====================
         function toggleSidebar() { document.getElementById('sidebar').classList.toggle('collapsed'); }
         
         function updateClock() {
@@ -708,7 +665,6 @@
             document.getElementById('tab-' + tab).classList.add('active');
         }
 
-        // ==================== ACCESS KEY GENERATION ====================
         function setMax() { 
             const maxStake = Math.floor(state.bossxBalance) - 1;
             document.getElementById('stake-input').value = Math.max(10, maxStake); 
@@ -767,7 +723,7 @@
         }
         function refreshKeys() { updateKeysTable(); showToast('Data berhasil diperbarui!'); }
 
-        // ==================== REDEEM LOGIC ====================
+        // ==================== REDEEM LOGIC (FIXED) ====================
         function handleRedeem() {
             if (state.nodeActive) {
                 showToast('Node sudah aktif. Kontrak masih berjalan.', 'warning');
@@ -793,10 +749,13 @@
                 return;
             }
             
-            const remaining = getRemainingContractTime();
-            if (remaining > 0) {
-                showToast('Kontrak sebelumnya masih berjalan. Tunggu hingga habis.', 'warning');
-                return;
+            // ✅ PERBAIKAN BUG: Hanya blokir jika kontrak SUDAH PERNAH DIMULAI (contractStart !== null)
+            if (state.contractStart !== null) {
+                const remaining = getRemainingContractTime();
+                if (remaining > 0) {
+                    showToast('Kontrak sebelumnya masih berjalan. Tunggu hingga habis.', 'warning');
+                    return;
+                }
             }
             
             found.status = 'REDEEMED';
@@ -844,7 +803,6 @@
             }
         }
 
-        // ==================== CONTRACT TIMER ====================
         function getRemainingContractTime() {
             if (!state.contractStart) return CONTRACT_DURATION_SECONDS;
             const elapsed = (Date.now() - state.contractStart) / 1000;
@@ -856,7 +814,6 @@
             return Math.ceil(seconds).toLocaleString('id-ID') + ' detik';
         }
 
-        // ==================== AUTO STOP 06:00 ====================
         function isBlockedTime() {
             const now = new Date();
             return now.getHours() === 6 && now.getMinutes() === 0 && now.getSeconds() === 0;
@@ -897,15 +854,11 @@
             
             addLog('WARNING', `Auto Stop triggered: ${reason}. Power dial turned OFF. You can turn it ON again at 06:00:01.`);
             showToast(`Sistem auto-stop: ${reason}. Bisa dinyalakan lagi di 06:00:01`, 'warning');
-            
-            // PERUBAHAN: Enable tombol power setelah auto-stop agar user bisa nyalakan lagi
             updatePowerButton();
             updateContractStatus();
         }
 
-        // ==================== POWER DIAL ====================
         function togglePower() {
-            // PERUBAHAN: Jika power sudah ON, tolak klik manual (tidak bisa dimatikan manual)
             if (state.powerOn) {
                 showToast('Power tidak dapat dimatikan manual. Hanya sistem (06:00:00) yang dapat mematikan.', 'warning');
                 return;
@@ -934,7 +887,6 @@
             
             initAudio();
             
-            // POWER ON (hanya bisa ON, tidak bisa OFF manual)
             state.powerOn = true;
             isRunning = true;
             
@@ -967,21 +919,17 @@
             addLog('INFO', `Power dial ON. Reward: ${perSecond.toFixed(8)} BossX/detik. ${contractLabel}. Remaining: ${formatContractTime(remaining)}`);
             showToast('Power Dial aktif! Reward per detik berjalan.');
             
-            // PERUBAHAN: Disable tombol setelah power ON (tidak bisa dimatikan manual)
             updatePowerButton();
             updateContractStatus();
         }
 
-        // PERUBAHAN: Logic tombol power - disabled saat power ON, enabled saat OFF
         function updatePowerButton() {
             const btn = document.getElementById('powerBtn');
             if (!state.nodeActive) {
                 btn.disabled = true;
             } else if (state.powerOn) {
-                // PERUBAHAN: Disable saat power ON (tidak bisa dimatikan manual)
                 btn.disabled = true;
             } else {
-                // Enabled saat node aktif tapi power OFF (bisa dinyalakan)
                 btn.disabled = false;
             }
         }
@@ -1005,7 +953,6 @@
             }
         }
 
-        // ==================== REWARD SYSTEM ====================
         function updateRewardDisplay() { 
             document.getElementById('rewardAmount').textContent = state.rewardValidasi.toFixed(8) + ' BossX';
             const runningRewardEl = document.getElementById('runningReward');
@@ -1039,7 +986,6 @@
             setTimeout(() => { rewardEl.style.transform = 'scale(1)'; }, 300);
         }
 
-        // ==================== MAIN GAME LOOP (setiap detik) ====================
         function gameLoop() {
             const now = new Date();
             const isAutoStop = isBlockedTime();
@@ -1100,7 +1046,6 @@
         }
         setInterval(gameLoop, 1000);
 
-        // ==================== COUNTDOWN KE 06:00 ====================
         function updateCountdownTo6AM() {
             const now = new Date();
             const target = new Date(now);
@@ -1149,7 +1094,63 @@
             }
         }
 
-        // ==================== LOG ENGINE ====================
+        // ==================== RESET STATE FOR TESTING ====================
+        function resetStateForTesting() {
+            if (!confirm('⚠️ Reset semua state untuk testing?\n\nIni akan:\n- Mengembalikan saldo ke 1000 BossX\n- Menghapus semua Access Key\n- Mereset node & kontrak\n- Menghapus semua log\n\nLanjutkan?')) {
+                return;
+            }
+            
+            state = {
+                nodeActive: false,
+                powerOn: false,
+                redeemedKey: '',
+                stakeAmount: 0,
+                contractStart: null,
+                bossxBalance: 1000.00000000,
+                currentReward: 0.00000000,
+                rewardValidasi: 0.00000000,
+                countdownSeconds: 60,
+                logs: []
+            };
+            
+            accessKeys = [];
+            
+            // Stop semua proses berjalan
+            if (state.powerOn) {
+                state.powerOn = false;
+                isRunning = false;
+                const btn = document.getElementById('powerBtn');
+                const center = document.getElementById('centerDisplay');
+                const guideLine = document.getElementById('guideLine');
+                const rings = document.querySelectorAll('.ring');
+                btn.classList.remove('running');
+                center.classList.remove('running');
+                guideLine.classList.remove('active');
+                rings.forEach(ring => {
+                    ring.classList.remove('running');
+                    ring.style.transform = '';
+                    ring.querySelectorAll('.ring-char.highlight').forEach(el => el.classList.remove('highlight'));
+                });
+                if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+                stopClickLoop();
+            }
+            
+            // Reset UI
+            document.getElementById('redeemInput').value = '';
+            updateRedeemButton();
+            updateSystemInfo();
+            updateContractStatus();
+            updateWalletDisplay();
+            updateRewardDisplay();
+            updatePowerButton();
+            updateKeysTable();
+            updateSummary();
+            renderLogs();
+            
+            addLog('INFO', '🔄 State berhasil direset untuk testing.');
+            showToast('State berhasil direset! Saldo dikembalikan ke 1000 BossX.', 'warning');
+        }
+
         function addLog(level, message) {
             const now = new Date();
             const timestamp = now.getFullYear() + '-' + 
@@ -1184,7 +1185,6 @@
             showToast('Log berhasil dihapus');
         }
 
-        // ==================== TOAST ====================
         function showToast(msg, type = 'success') {
             const toast = document.getElementById('toast'); 
             toast.textContent = msg; 
@@ -1194,7 +1194,6 @@
             setTimeout(() => { toast.className = 'toast'; }, 3000);
         }
 
-        // ==================== AUDIO ENGINE ====================
         function initAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -1231,7 +1230,6 @@
         }
         function stopClickLoop() { if (clickInterval) { clearInterval(clickInterval); clickInterval = null; } }
 
-        // ==================== RING INITIALIZATION ====================
         function initRings() {
             const radii = [121, 96, 77, 60, 46];
             const tickRadii = [131, 104, 84, 65, 51];
@@ -1266,7 +1264,6 @@
             animationFrameId = requestAnimationFrame(updateHighlights);
         }
 
-        // ==================== INIT ====================
         initRings();
         updateSystemInfo();
         updateContractStatus();
