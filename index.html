@@ -226,28 +226,48 @@
         .toast.show { opacity: 1; transform: translateY(0); }
         .toast.error { background-color: #e74c3c; }
         .toast.warning { background-color: #f39c12; }
+        
+        /* ===== LOG ENGINE MASTERCLOUD - PERBAIKAN ===== */
         .log-section { margin-top: 20px; }
         .log-panel { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; overflow: hidden; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
         .log-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background-color: rgba(0, 229, 255, 0.05); border-bottom: 1px solid #1a5276; }
+        .log-header-left { display: flex; align-items: center; gap: 15px; }
         .log-title { font-size: 16px; font-weight: bold; color: #00e5ff; }
-        .log-header-actions { display: flex; gap: 10px; }
+        .log-counter { background-color: #1a5276; color: #00e5ff; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+        .log-header-actions { display: flex; gap: 10px; align-items: center; }
+        .log-filter { display: flex; gap: 5px; }
+        .log-filter-btn { background-color: #0d2137; color: #b0bec5; border: 1px solid #1a5276; padding: 4px 12px; border-radius: 4px; font-size: 11px; cursor: pointer; transition: all 0.3s; }
+        .log-filter-btn:hover { background-color: #1a3a5c; }
+        .log-filter-btn.active { background-color: #00e5ff; color: #0a1628; border-color: #00e5ff; }
+        .log-filter-btn.active[data-filter="SUCCESS"] { background-color: #2ecc71; border-color: #2ecc71; }
+        .log-filter-btn.active[data-filter="INFO"] { background-color: #3498db; border-color: #3498db; }
+        .log-filter-btn.active[data-filter="WARNING"] { background-color: #f39c12; border-color: #f39c12; }
+        .log-filter-btn.active[data-filter="ERROR"] { background-color: #e74c3c; border-color: #e74c3c; }
         .btn-clear-log { background-color: #e74c3c; color: #fff; border: none; padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .btn-clear-log:hover { background-color: #c0392b; }
         .btn-reset-state { background-color: #f39c12; color: #fff; border: none; padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .btn-reset-state:hover { background-color: #d68910; }
-        .log-content { background-color: #050a14; padding: 15px; max-height: 250px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 12px; min-height: 100px; }
+        .log-content { background-color: #050a14; padding: 15px; max-height: 300px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 12px; min-height: 100px; scroll-behavior: smooth; }
         .log-content::-webkit-scrollbar { width: 8px; }
         .log-content::-webkit-scrollbar-track { background: #0a1628; border-radius: 4px; }
         .log-content::-webkit-scrollbar-thumb { background: #1a5276; border-radius: 4px; }
         .log-content::-webkit-scrollbar-thumb:hover { background: #2471a3; }
-        .log-entry { padding: 4px 0; border-bottom: 1px solid rgba(26, 82, 118, 0.3); word-break: break-all; }
-        .log-entry:last-child { border-bottom: none; }
-        .log-timestamp { color: #00e5ff; margin-right: 8px; }
-        .log-level-success { color: #2ecc71; }
-        .log-level-info { color: #3498db; }
-        .log-level-warning { color: #f39c12; }
-        .log-level-error { color: #e74c3c; }
-        .log-empty { color: #78909c; font-style: italic; text-align: center; padding: 20px 0; }
+        .log-entry { padding: 8px 12px; margin-bottom: 4px; border-radius: 4px; border-left: 3px solid transparent; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        .log-entry:last-child { margin-bottom: 0; }
+        .log-entry.SUCCESS { background-color: rgba(46, 204, 113, 0.05); border-left-color: #2ecc71; }
+        .log-entry.INFO { background-color: rgba(52, 152, 219, 0.05); border-left-color: #3498db; }
+        .log-entry.WARNING { background-color: rgba(243, 156, 18, 0.05); border-left-color: #f39c12; }
+        .log-entry.ERROR { background-color: rgba(231, 76, 60, 0.05); border-left-color: #e74c3c; }
+        .log-timestamp { color: #78909c; margin-right: 8px; font-size: 11px; }
+        .log-level { font-weight: bold; margin-right: 8px; font-size: 11px; padding: 2px 8px; border-radius: 3px; }
+        .log-level.SUCCESS { color: #2ecc71; background-color: rgba(46, 204, 113, 0.15); }
+        .log-level.INFO { color: #3498db; background-color: rgba(52, 152, 219, 0.15); }
+        .log-level.WARNING { color: #f39c12; background-color: rgba(243, 156, 18, 0.15); }
+        .log-level.ERROR { color: #e74c3c; background-color: rgba(231, 76, 60, 0.15); }
+        .log-message { color: #ecf0f1; word-break: break-all; }
+        .log-empty { color: #78909c; font-style: italic; text-align: center; padding: 40px 0; }
+        
         .system-info-panel { margin-top: 15px; background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; padding: 20px; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
         .system-info-title { font-size: 15px; font-weight: bold; color: #00e5ff; display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
         .system-info-title svg { width: 18px; height: 18px; fill: #00e5ff; }
@@ -422,13 +442,24 @@
                     </div>
                 </div>
 
+                <!-- LOG ENGINE MASTERCLOUD - PERBAIKAN -->
                 <div class="log-section">
                     <div class="log-panel">
                         <div class="log-header">
-                            <div class="log-title">Log Engine Mastercloud</div>
+                            <div class="log-header-left">
+                                <div class="log-title">📋 Log Engine Mastercloud</div>
+                                <div class="log-counter" id="logCounter">0 logs</div>
+                            </div>
                             <div class="log-header-actions">
-                                <button class="btn-reset-state" onclick="resetStateForTesting()">🔄 Reset State (Testing)</button>
-                                <button class="btn-clear-log" onclick="clearLog()">Clear Log</button>
+                                <div class="log-filter">
+                                    <button class="log-filter-btn active" data-filter="ALL" onclick="filterLogs('ALL')">All</button>
+                                    <button class="log-filter-btn" data-filter="SUCCESS" onclick="filterLogs('SUCCESS')">✓ Success</button>
+                                    <button class="log-filter-btn" data-filter="INFO" onclick="filterLogs('INFO')">ℹ Info</button>
+                                    <button class="log-filter-btn" data-filter="WARNING" onclick="filterLogs('WARNING')">⚠ Warning</button>
+                                    <button class="log-filter-btn" data-filter="ERROR" onclick="filterLogs('ERROR')">✗ Error</button>
+                                </div>
+                                <button class="btn-reset-state" onclick="resetStateForTesting()">🔄 Reset</button>
+                                <button class="btn-clear-log" onclick="clearLog()">🗑 Clear</button>
                             </div>
                         </div>
                         <div class="log-content" id="logContent">
@@ -625,6 +656,7 @@
         let audioCtx = null;
         let animationFrameId = null;
         let startTime = 0;
+        let currentLogFilter = 'ALL';
         const CHARS = '0123456789ABCDEFGHIJKLMN'.split('');
         const CHARS_PER_RING = 24;
         const RING_OFFSETS = [0, 6, 12, 18, 3];
@@ -723,7 +755,6 @@
         }
         function refreshKeys() { updateKeysTable(); showToast('Data berhasil diperbarui!'); }
 
-        // ==================== REDEEM LOGIC (FIXED) ====================
         function handleRedeem() {
             if (state.nodeActive) {
                 showToast('Node sudah aktif. Kontrak masih berjalan.', 'warning');
@@ -749,7 +780,6 @@
                 return;
             }
             
-            // ✅ PERBAIKAN BUG: Hanya blokir jika kontrak SUDAH PERNAH DIMULAI (contractStart !== null)
             if (state.contractStart !== null) {
                 const remaining = getRemainingContractTime();
                 if (remaining > 0) {
@@ -1094,7 +1124,95 @@
             }
         }
 
-        // ==================== RESET STATE FOR TESTING ====================
+        // ==================== LOG ENGINE - PERBAIKAN LENGKAP ====================
+        function addLog(level, message) {
+            const now = new Date();
+            const timestamp = now.getFullYear() + '-' + 
+                String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                String(now.getDate()).padStart(2, '0') + ' ' +
+                String(now.getHours()).padStart(2, '0') + ':' + 
+                String(now.getMinutes()).padStart(2, '0') + ':' + 
+                String(now.getSeconds()).padStart(2, '0');
+            
+            state.logs.unshift({ timestamp, level, message });
+            if (state.logs.length > 200) state.logs.pop();
+            
+            saveLogsToStorage();
+            renderLogs();
+        }
+
+        function renderLogs() {
+            const container = document.getElementById('logContent');
+            const counter = document.getElementById('logCounter');
+            
+            // Update counter
+            const totalLogs = state.logs.length;
+            const filteredLogs = currentLogFilter === 'ALL' 
+                ? state.logs 
+                : state.logs.filter(log => log.level === currentLogFilter);
+            
+            counter.textContent = `${filteredLogs.length} / ${totalLogs} logs`;
+            
+            if (filteredLogs.length === 0) {
+                container.innerHTML = '<div class="log-empty">Tidak ada log yang sesuai dengan filter.</div>';
+                return;
+            }
+            
+            container.innerHTML = filteredLogs.map(log => {
+                return `<div class="log-entry ${log.level}">
+                    <span class="log-timestamp">[${log.timestamp}]</span>
+                    <span class="log-level ${log.level}">${log.level}</span>
+                    <span class="log-message">${log.message}</span>
+                </div>`;
+            }).join('');
+            
+            // Auto-scroll ke log terbaru
+            container.scrollTop = 0;
+        }
+
+        function filterLogs(level) {
+            currentLogFilter = level;
+            
+            // Update active button
+            document.querySelectorAll('.log-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === level) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            renderLogs();
+        }
+
+        function saveLogsToStorage() {
+            try {
+                localStorage.setItem('bossx_logs', JSON.stringify(state.logs));
+            } catch (e) {
+                console.error('Failed to save logs:', e);
+            }
+        }
+
+        function loadLogsFromStorage() {
+            try {
+                const savedLogs = localStorage.getItem('bossx_logs');
+                if (savedLogs) {
+                    state.logs = JSON.parse(savedLogs);
+                    renderLogs();
+                }
+            } catch (e) {
+                console.error('Failed to load logs:', e);
+            }
+        }
+
+        function clearLog() {
+            if (!confirm('Hapus semua log?')) return;
+            
+            state.logs = [];
+            saveLogsToStorage();
+            renderLogs();
+            showToast('Log berhasil dihapus');
+        }
+
         function resetStateForTesting() {
             if (!confirm('⚠️ Reset semua state untuk testing?\n\nIni akan:\n- Mengembalikan saldo ke 1000 BossX\n- Menghapus semua Access Key\n- Mereset node & kontrak\n- Menghapus semua log\n\nLanjutkan?')) {
                 return;
@@ -1115,7 +1233,6 @@
             
             accessKeys = [];
             
-            // Stop semua proses berjalan
             if (state.powerOn) {
                 state.powerOn = false;
                 isRunning = false;
@@ -1135,7 +1252,6 @@
                 stopClickLoop();
             }
             
-            // Reset UI
             document.getElementById('redeemInput').value = '';
             updateRedeemButton();
             updateSystemInfo();
@@ -1145,44 +1261,12 @@
             updatePowerButton();
             updateKeysTable();
             updateSummary();
+            
+            saveLogsToStorage();
             renderLogs();
             
             addLog('INFO', '🔄 State berhasil direset untuk testing.');
             showToast('State berhasil direset! Saldo dikembalikan ke 1000 BossX.', 'warning');
-        }
-
-        function addLog(level, message) {
-            const now = new Date();
-            const timestamp = now.getFullYear() + '-' + 
-                String(now.getMonth() + 1).padStart(2, '0') + '-' + 
-                String(now.getDate()).padStart(2, '0') + ' ' +
-                String(now.getHours()).padStart(2, '0') + ':' + 
-                String(now.getMinutes()).padStart(2, '0') + ':' + 
-                String(now.getSeconds()).padStart(2, '0');
-            
-            state.logs.unshift({ timestamp, level, message });
-            if (state.logs.length > 100) state.logs.pop();
-            
-            renderLogs();
-        }
-
-        function renderLogs() {
-            const container = document.getElementById('logContent');
-            if (state.logs.length === 0) {
-                container.innerHTML = '<div class="log-empty">Belum ada log aktivitas.</div>';
-                return;
-            }
-            
-            container.innerHTML = state.logs.map(log => {
-                const levelClass = 'log-level-' + log.level.toLowerCase();
-                return `<div class="log-entry"><span class="log-timestamp">[${log.timestamp}]</span> <span class="${levelClass}">[${log.level}]</span> ${log.message}</div>`;
-            }).join('');
-        }
-
-        function clearLog() {
-            state.logs = [];
-            renderLogs();
-            showToast('Log berhasil dihapus');
         }
 
         function showToast(msg, type = 'success') {
@@ -1264,7 +1348,9 @@
             animationFrameId = requestAnimationFrame(updateHighlights);
         }
 
+        // Load logs dari localStorage saat init
         initRings();
+        loadLogsFromStorage();
         updateSystemInfo();
         updateContractStatus();
         updateWalletDisplay();
