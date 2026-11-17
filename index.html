@@ -611,7 +611,7 @@ const SECONDS_IN_MONTH = 2592000;
 const MONTHLY_REWARD_PERCENT = 0.15;
 const AUTO_CLAIM_INTERVAL = 60;
 const FIXED_DIFFICULTY = 12000;
-const STORAGE_KEY = 'bossx_masternode_state_v5';
+const STORAGE_KEY = 'bossx_masternode_state_v6';
 
 let state = {
     nodeActive: false,
@@ -628,8 +628,7 @@ let state = {
     totalSharesAccepted: 0,
     totalSharesRejected: 0,
     uptimeSeconds: 0,
-    lastSummaryTime: 0,
-    lastHeartbeatTime: 0
+    lastSaveTimestamp: null
 };
 
 let accessKeys = [];
@@ -648,8 +647,7 @@ const TICKS_PER_RING = 60;
 const RING_SPEEDS = [360/22000, -360/20000, 360/28000, -360/16000, 360/24000, -360/12000];
 
 function getRandomNumber(min, max, decimals = 1) {
-    const num = Math.random() * (max - min) + min;
-    return parseFloat(num.toFixed(decimals));
+    return parseFloat((Math.random() * (max - min) + min).toFixed(decimals));
 }
 
 function getRandomInt(min, max) {
@@ -661,7 +659,6 @@ function formatUptime(seconds) {
     const hours = Math.floor((seconds % 86400) / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    
     if (days > 0) return `${days}d ${hours}h ${mins}m ${secs}s`;
     if (hours > 0) return `${hours}h ${mins}m ${secs}s`;
     if (mins > 0) return `${mins}m ${secs}s`;
@@ -796,8 +793,7 @@ function handleRedeem() {
     state.totalSharesAccepted = 0;
     state.totalSharesRejected = 0;
     state.uptimeSeconds = 0;
-    state.lastSummaryTime = 0;
-    state.lastHeartbeatTime = 0;
+    state.lastSaveTimestamp = null;
     
     updateRedeemButton();
     updateSystemInfo();
@@ -805,6 +801,7 @@ function handleRedeem() {
     updateWalletDisplay();
     updateRewardDisplay();
     updatePowerButton();
+    updateCountdownDisplay(); // FIX: Update display
     saveState();
     
     addLog('SUCCESS', `Access Key redeemed: ${key} | Node activated with ${found.stake} BossX. Contract will start on first Power ON.`);
@@ -890,11 +887,10 @@ function stopVisuals() {
     stopClickLoop();
 }
 
-// ===== FUNGSI LOG PROFESIONAL =====
+// ===== LOG PROFESIONAL =====
 function startAllSystemLogs() {
     stopAllSystemLogs();
     
-    // 1. Pool Connection Log (langsung saat power ON)
     addLog('SUCCESS', `Connected to pool: stratum+tcp://bossx-pool.mastercloud.io:3333`);
     setTimeout(() => {
         addLog('SUCCESS', `Authorized worker: miner_8055x.validator1`);
@@ -904,7 +900,6 @@ function startAllSystemLogs() {
         addLog('INFO', `New job received: ${jobId} (Pool: BossXpool)`);
     }, 1200);
     
-    // 2. GPU Monitoring (setiap 35-55 detik)
     const gpuInterval = setInterval(() => {
         if (!state.powerOn || !state.nodeActive) return;
         const hashrate = getRandomNumber(47, 51, 1);
@@ -915,7 +910,6 @@ function startAllSystemLogs() {
     }, getRandomInt(35000, 55000));
     systemLogIntervals.push(gpuInterval);
     
-    // 3. Power Consumption (setiap 50-80 detik)
     const powerInterval = setInterval(() => {
         if (!state.powerOn || !state.nodeActive) return;
         const totalPower = getRandomInt(3280, 3380);
@@ -923,7 +917,6 @@ function startAllSystemLogs() {
     }, getRandomInt(50000, 80000));
     systemLogIntervals.push(powerInterval);
     
-    // 4. Network Latency (setiap 25-45 detik)
     const latencyInterval = setInterval(() => {
         if (!state.powerOn || !state.nodeActive) return;
         const ping = getRandomInt(18, 42);
@@ -932,7 +925,6 @@ function startAllSystemLogs() {
     }, getRandomInt(25000, 45000));
     systemLogIntervals.push(latencyInterval);
     
-    // 5. Worker Heartbeat (setiap 5 menit = 300 detik)
     const heartbeatInterval = setInterval(() => {
         if (!state.powerOn || !state.nodeActive) return;
         const uptime = formatUptime(state.uptimeSeconds);
@@ -940,7 +932,6 @@ function startAllSystemLogs() {
     }, 300000);
     systemLogIntervals.push(heartbeatInterval);
     
-    // 6. Periodic Summary (setiap 1 jam = 3600 detik)
     const summaryInterval = setInterval(() => {
         if (!state.powerOn || !state.nodeActive) return;
         const totalShares = state.totalSharesAccepted + state.totalSharesRejected;
@@ -958,7 +949,6 @@ function startAllSystemLogs() {
     }, 3600000);
     systemLogIntervals.push(summaryInterval);
     
-    // 7. Cooling System Status (setiap 2-3 menit)
     const coolingInterval = setInterval(() => {
         if (!state.powerOn || !state.nodeActive) return;
         const temp = getRandomInt(72, 78);
@@ -967,16 +957,12 @@ function startAllSystemLogs() {
     }, getRandomInt(120000, 180000));
     systemLogIntervals.push(coolingInterval);
     
-    // 8. Job ID Changes (setiap 3-5 menit)
     const jobInterval = setInterval(() => {
         if (!state.powerOn || !state.nodeActive) return;
         const jobId = generateJobId();
         addLog('INFO', `Job ID changed: ${jobId} (Pool: BossXpool)`);
     }, getRandomInt(180000, 300000));
     systemLogIntervals.push(jobInterval);
-    
-    // 9. Share Statistics Update (setiap ada share baru - dipanggil manual)
-    // Akan dipanggil di gameLoop saat auto-claim
 }
 
 function stopAllSystemLogs() {
@@ -1002,15 +988,12 @@ function updateShareStatistics(accepted) {
         state.totalSharesRejected++;
     }
     
-    // Log statistics setiap 10 shares
     if ((state.totalSharesAccepted + state.totalSharesRejected) % 10 === 0) {
         const total = state.totalSharesAccepted + state.totalSharesRejected;
         const rate = ((state.totalSharesAccepted / total) * 100).toFixed(2);
         addLog('INFO', `Share statistics: ${total} total (${state.totalSharesAccepted} accepted, ${state.totalSharesRejected} rejected) | Success rate: ${rate}%`);
     }
 }
-
-// =============================================
 
 function togglePower() {
     if (state.powerOn) {
@@ -1065,7 +1048,7 @@ function togglePower() {
     startTime = 0;
     animationFrameId = requestAnimationFrame(updateHighlights);
     startClickLoop();
-    startAllSystemLogs(); // MULAI SEMUA LOG PROFESIONAL
+    startAllSystemLogs();
     
     setTimeout(() => { playMechanicalClick(); triggerClickFlash(); }, 300);
     if (navigator.vibrate) navigator.vibrate(100);
@@ -1114,7 +1097,9 @@ function updateWalletDisplay() {
     document.getElementById('summary-balance').textContent = state.bossxBalance.toFixed(8) + ' BossX';
 }
 
-function updateCountdownDisplay() { document.getElementById('countdownTimer').textContent = state.countdownSeconds; }
+function updateCountdownDisplay() { 
+    document.getElementById('countdownTimer').textContent = state.countdownSeconds; 
+}
 
 function claimToWallet() {
     if (state.rewardValidasi <= 0) { 
@@ -1148,7 +1133,6 @@ function gameLoop() {
     updateContractDisplay();
     updateContractStatus();
     
-    // Update uptime counter
     if (state.powerOn && state.nodeActive) {
         state.uptimeSeconds++;
     }
@@ -1169,7 +1153,6 @@ function gameLoop() {
                 state.rewardValidasi += state.currentReward;
                 addLog('SUCCESS', `Autoclaim accepted share #${shareNumber} (diff: ${FIXED_DIFFICULTY}) - reward: ${rewardAmount} BossX.`);
                 
-                // Update share statistics
                 updateShareStatistics(true);
                 
                 state.currentReward = 0;
@@ -1199,7 +1182,7 @@ function gameLoop() {
         }
     }
     
-    if (now.getSeconds() % 10 === 0) {
+    if (now.getSeconds() % 5 === 0) {
         saveState();
     }
 }
@@ -1330,8 +1313,7 @@ function resetStateForTesting() {
         totalSharesAccepted: 0,
         totalSharesRejected: 0,
         uptimeSeconds: 0,
-        lastSummaryTime: 0,
-        lastHeartbeatTime: 0
+        lastSaveTimestamp: null
     };
     
     accessKeys = [];
@@ -1348,6 +1330,7 @@ function resetStateForTesting() {
     updateContractStatus();
     updateWalletDisplay();
     updateRewardDisplay();
+    updateCountdownDisplay();
     updatePowerButton();
     updateKeysTable();
     updateSummary();
@@ -1470,20 +1453,52 @@ function updateHighlights(timestamp) {
     animationFrameId = requestAnimationFrame(updateHighlights);
 }
 
+// ===== PERBAIKAN: SaveState dengan timestamp =====
 function saveState() {
     try {
+        state.lastSaveTimestamp = Date.now();
         const data = { state: state, accessKeys: accessKeys };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch (e) { console.error('Save failed:', e); }
 }
 
+// ===== PERBAIKAN: LoadState dengan restore countdown =====
 function loadState() {
     try {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (!saved) return false;
         const data = JSON.parse(saved);
-        if (data.state) state = { ...state, ...data.state };
+        
+        const savedState = data.state || {};
+        const savedCountdown = savedState.countdownSeconds;
+        const savedTimestamp = savedState.lastSaveTimestamp;
+        
+        if (savedState) state = { ...state, ...savedState };
         if (data.accessKeys) accessKeys = data.accessKeys;
+        
+        // PERBAIKAN: Restore countdownSeconds berdasarkan elapsed time
+        if (savedTimestamp && savedCountdown !== undefined && state.powerOn && state.nodeActive) {
+            const elapsedSeconds = Math.floor((Date.now() - savedTimestamp) / 1000);
+            
+            if (elapsedSeconds > 0 && elapsedSeconds < savedCountdown) {
+                // Kurangi countdown dengan waktu yang berlalu
+                state.countdownSeconds = savedCountdown - elapsedSeconds;
+            } else if (elapsedSeconds >= savedCountdown && savedCountdown > 0) {
+                // Hitung berapa auto-claim yang terlewat
+                const totalElapsed = elapsedSeconds;
+                const missedClaims = Math.floor(totalElapsed / AUTO_CLAIM_INTERVAL);
+                const remainingAfterMissed = totalElapsed % AUTO_CLAIM_INTERVAL;
+                
+                // Set countdown ke sisa waktu setelah missed claims
+                state.countdownSeconds = AUTO_CLAIM_INTERVAL - remainingAfterMissed;
+                
+                // Tambahkan log untuk missed claims (TANPA reward, sesuai aturan)
+                if (missedClaims > 0) {
+                    addLog('WARNING', `Session restored: ${missedClaims} auto-claim cycle(s) missed during offline period. Timer reset to ${state.countdownSeconds}s.`);
+                }
+            }
+        }
+        
         return true;
     } catch (e) { console.error('Load failed:', e); return false; }
 }
@@ -1524,10 +1539,10 @@ function init() {
                     startTime = 0;
                     animationFrameId = requestAnimationFrame(updateHighlights);
                     startClickLoop();
-                    startAllSystemLogs(); // MULAI SEMUA LOG PROFESIONAL
+                    startAllSystemLogs();
                     
-                    addLog('INFO', `🔄 Session restored. Mining continues from last saved state.`);
-                    showToast('Session restored! Mining dilanjutkan dari state terakhir.', 'warning');
+                    addLog('INFO', `🔄 Session restored. Mining continues. Countdown: ${state.countdownSeconds}s`);
+                    showToast(`Session restored! Countdown: ${state.countdownSeconds}s`, 'warning');
                 }
             }
         }
@@ -1535,10 +1550,12 @@ function init() {
         addLog('INFO', '🚀 BossX Masternode Platform initialized.');
     }
     
+    // PERBAIKAN: Update semua display setelah load state
     updateSystemInfo();
     updateContractStatus();
     updateWalletDisplay();
     updateRewardDisplay();
+    updateCountdownDisplay(); // FIX: Panggil di sini!
     updatePowerButton();
     updateKeysTable();
     updateSummary();
