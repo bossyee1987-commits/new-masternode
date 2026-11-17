@@ -604,7 +604,7 @@ const SECONDS_IN_MONTH = 2592000;
 const MONTHLY_REWARD_PERCENT = 0.15;
 const AUTO_CLAIM_INTERVAL = 60;
 const FIXED_DIFFICULTY = 12000;
-const STORAGE_KEY = 'bossx_masternode_state_v2';
+const STORAGE_KEY = 'bossx_masternode_state_v3';
 
 let state = {
     nodeActive: false,
@@ -634,36 +634,11 @@ const CLICK_INTERVAL_MS = 60000;
 const TICKS_PER_RING = 60;
 const RING_SPEEDS = [360 / 20000, -360 / 28000, 360 / 16000, -360 / 24000, 360 / 12000];
 
-// ==================== LOCALSTORAGE (NO OFFLINE REWARD) ====================
-function saveState() {
-    try {
-        const data = { state: state, accessKeys: accessKeys };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    } catch (e) { console.error('Save failed:', e); }
-}
-
-function loadState() {
-    try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (!saved) return false;
-        const data = JSON.parse(saved);
-        if (data.state) state = { ...state, ...data.state };
-        if (data.accessKeys) accessKeys = data.accessKeys;
-        return true;
-    } catch (e) { console.error('Load failed:', e); return false; }
-}
-
-// ==================== REWARD FUNCTIONS ====================
 function getRewardPerSecond() {
     if (state.stakeAmount <= 0) return 0;
     return (state.stakeAmount * MONTHLY_REWARD_PERCENT) / SECONDS_IN_MONTH;
 }
 
-function getMonthlyReward() {
-    return state.stakeAmount * MONTHLY_REWARD_PERCENT;
-}
-
-// ==================== UI NAVIGATION ====================
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('collapsed'); }
 
 function updateClock() {
@@ -688,7 +663,6 @@ function switchTab(tab) {
     document.getElementById('tab-' + tab).classList.add('active');
 }
 
-// ==================== ACCESS KEY GENERATION ====================
 function setMax() { 
     const maxStake = Math.floor(state.bossxBalance) - 1;
     document.getElementById('stake-input').value = Math.max(10, maxStake); 
@@ -751,7 +725,6 @@ function copyKey(index) {
 
 function refreshKeys() { updateKeysTable(); showToast('Data berhasil diperbarui!'); }
 
-// ==================== REDEEM LOGIC ====================
 function handleRedeem() {
     if (state.nodeActive) {
         showToast('Node sudah aktif. Kontrak masih berjalan.', 'warning');
@@ -796,9 +769,8 @@ function handleRedeem() {
     updatePowerButton();
     saveState();
     
-    const monthlyReward = getMonthlyReward();
-    const perSecond = getRewardPerSecond();
-    addLog('SUCCESS', `Access Key redeemed: ${key} | Node activated with ${found.stake} BossX. Reward: ${monthlyReward.toFixed(2)} BossX/bulan (${perSecond.toFixed(8)} BossX/detik). Contract will start on first Power ON.`);
+    // PERUBAHAN: Log redeem tanpa info reward bulanan/detik
+    addLog('SUCCESS', `Access Key redeemed: ${key} | Node activated with ${found.stake} BossX. Contract will start on first Power ON.`);
     
     showToast(`Node diaktivasi! Klik Power Dial untuk memulai kontrak & reward.`);
     keyInput.value = '';
@@ -822,7 +794,6 @@ function updateRedeemButton() {
     }
 }
 
-// ==================== CONTRACT TIMER ====================
 function getRemainingContractTime() {
     if (!state.contractStart) return CONTRACT_DURATION_SECONDS;
     const elapsed = (Date.now() - state.contractStart) / 1000;
@@ -834,7 +805,6 @@ function formatContractTime(seconds) {
     return Math.ceil(seconds).toLocaleString('id-ID') + ' detik';
 }
 
-// ==================== AUTO STOP 06:00 ====================
 function isBlockedTime() {
     const now = new Date();
     return now.getHours() === 6 && now.getMinutes() === 0 && now.getSeconds() === 0;
@@ -882,7 +852,6 @@ function stopVisuals() {
     stopClickLoop();
 }
 
-// ==================== POWER DIAL ====================
 function togglePower() {
     if (state.powerOn) {
         showToast('Power tidak dapat dimatikan manual. Hanya sistem (06:00:00) yang dapat mematikan.', 'warning');
@@ -940,9 +909,9 @@ function togglePower() {
     setTimeout(() => { playMechanicalClick(); triggerClickFlash(); }, 300);
     if (navigator.vibrate) navigator.vibrate(100);
     
-    const perSecond = getRewardPerSecond();
+    // PERUBAHAN: Log power ON tanpa info reward per detik
     const contractLabel = isFirstPowerOn ? 'Contract STARTED' : 'Contract RESUMED';
-    addLog('INFO', `Power dial ON. Reward: ${perSecond.toFixed(8)} BossX/detik. ${contractLabel}. Remaining: ${formatContractTime(remaining)}`);
+    addLog('INFO', `Power dial ON. ${contractLabel}. Remaining: ${formatContractTime(remaining)}`);
     showToast('Power Dial aktif! Reward per detik berjalan.');
     
     updatePowerButton();
@@ -974,7 +943,6 @@ function updateContractStatus() {
     }
 }
 
-// ==================== DISPLAY UPDATES ====================
 function updateRewardDisplay() { 
     document.getElementById('rewardAmount').textContent = state.rewardValidasi.toFixed(8) + ' BossX';
     const runningRewardEl = document.getElementById('runningReward');
@@ -1011,7 +979,6 @@ function claimToWallet() {
     setTimeout(() => { rewardEl.style.transform = 'scale(1)'; }, 300);
 }
 
-// ==================== MAIN GAME LOOP (REWARD HANYA SAAT AKTIF) ====================
 function gameLoop() {
     const now = new Date();
     const isAutoStop = isBlockedTime();
@@ -1021,7 +988,6 @@ function gameLoop() {
     updateContractDisplay();
     updateContractStatus();
     
-    // PERUBAHAN: Reward hanya dihitung saat nodeActive AND powerOn AND tidak auto-stop
     if (state.nodeActive && state.powerOn && !isAutoStop) {
         const remaining = getRemainingContractTime();
         
@@ -1046,7 +1012,6 @@ function gameLoop() {
             updateRewardDisplay();
             updateCountdownDisplay();
         } else {
-            // Kontrak habis
             state.powerOn = false;
             state.nodeActive = false;
             state.contractStart = null;
@@ -1065,7 +1030,6 @@ function gameLoop() {
         }
     }
     
-    // Auto-save setiap 10 detik
     if (now.getSeconds() % 10 === 0) {
         saveState();
     }
@@ -1117,7 +1081,6 @@ function updateSystemInfo() {
     }
 }
 
-// ==================== LOG ENGINE ====================
 function addLog(level, message) {
     const now = new Date();
     const timestamp = now.getFullYear() + '-' + 
@@ -1230,7 +1193,6 @@ function showToast(msg, type = 'success') {
     setTimeout(() => { toast.className = 'toast'; }, 3000);
 }
 
-// ==================== AUDIO ENGINE ====================
 function initAudio() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -1271,7 +1233,6 @@ function startClickLoop() {
 
 function stopClickLoop() { if (clickInterval) { clearInterval(clickInterval); clickInterval = null; } }
 
-// ==================== RING INITIALIZATION ====================
 function initRings() {
     const radii = [121, 96, 77, 60, 46];
     const tickRadii = [131, 104, 84, 65, 51];
@@ -1307,26 +1268,39 @@ function updateHighlights(timestamp) {
     animationFrameId = requestAnimationFrame(updateHighlights);
 }
 
-// ==================== INITIALIZATION ====================
+function saveState() {
+    try {
+        const data = { state: state, accessKeys: accessKeys };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) { console.error('Save failed:', e); }
+}
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return false;
+        const data = JSON.parse(saved);
+        if (data.state) state = { ...state, ...data.state };
+        if (data.accessKeys) accessKeys = data.accessKeys;
+        return true;
+    } catch (e) { console.error('Load failed:', e); return false; }
+}
+
 function init() {
     initRings();
     
     const loaded = loadState();
     
     if (loaded) {
-        // PERUBAHAN: Jika power ON saat refresh, lanjutkan mining TANPA reward offline
         if (state.powerOn && state.nodeActive && state.contractStart) {
-            // Cek apakah kontrak sudah expired saat offline
             const remaining = getRemainingContractTime();
             if (remaining <= 0) {
-                // Kontrak habis saat offline
                 state.powerOn = false;
                 state.nodeActive = false;
                 state.contractStart = null;
                 addLog('ERROR', 'Contract expired while offline. Node deactivated. Buy new Access Key to restart.');
                 showToast('Kontrak habis saat offline! Node non-aktif.', 'error');
             } else {
-                // Cek apakah auto-stop 06:00 terjadi saat offline
                 const now = new Date();
                 if (now.getHours() === 6 && now.getMinutes() === 0) {
                     state.powerOn = false;
@@ -1334,7 +1308,6 @@ function init() {
                     addLog('WARNING', `Auto Stop 06:00:00 occurred while offline. Power dial turned OFF.`);
                     showToast('Sistem auto-stop saat offline. Bisa dinyalakan lagi di 06:00:01', 'warning');
                 } else {
-                    // Mining lanjut dari state terakhir (tanpa reward offline)
                     isRunning = true;
                     const btn = document.getElementById('powerBtn');
                     const center = document.getElementById('centerDisplay');
@@ -1350,7 +1323,7 @@ function init() {
                     animationFrameId = requestAnimationFrame(updateHighlights);
                     startClickLoop();
                     
-                    addLog('INFO', `🔄 Session restored. Mining continues from last saved state. No offline reward calculated.`);
+                    addLog('INFO', `🔄 Session restored. Mining continues from last saved state.`);
                     showToast('Session restored! Mining dilanjutkan dari state terakhir.', 'warning');
                 }
             }
