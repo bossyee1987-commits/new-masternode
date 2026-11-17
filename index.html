@@ -227,7 +227,7 @@
         .toast.error { background-color: #e74c3c; }
         .toast.warning { background-color: #f39c12; }
         
-        /* ===== LOG ENGINE MASTERCLOUD - PERBAIKAN ===== */
+        /* ===== LOG ENGINE MASTERCLOUD ===== */
         .log-section { margin-top: 20px; }
         .log-panel { background: linear-gradient(135deg, #051428 0%, #0a1e3d 100%); border: 1px solid #1a5276; border-radius: 12px; overflow: hidden; box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
         .log-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background-color: rgba(0, 229, 255, 0.05); border-bottom: 1px solid #1a5276; }
@@ -442,7 +442,6 @@
                     </div>
                 </div>
 
-                <!-- LOG ENGINE MASTERCLOUD - PERBAIKAN -->
                 <div class="log-section">
                     <div class="log-panel">
                         <div class="log-header">
@@ -636,6 +635,7 @@
         const SECONDS_IN_MONTH = 2592000;
         const MONTHLY_REWARD_PERCENT = 0.15;
         const AUTO_CLAIM_INTERVAL = 60;
+        const FIXED_DIFFICULTY = 12000; // Difficulty tetap untuk semua share
 
         let state = {
             nodeActive: false,
@@ -647,7 +647,8 @@
             currentReward: 0.00000000,
             rewardValidasi: 0.00000000,
             countdownSeconds: 60,
-            logs: []
+            logs: [],
+            shareCount: 0 // PERUBAHAN: Counter share untuk auto-claim
         };
 
         let accessKeys = [];
@@ -799,6 +800,7 @@
             state.currentReward = 0;
             state.rewardValidasi = 0;
             state.countdownSeconds = AUTO_CLAIM_INTERVAL;
+            state.shareCount = 0; // PERUBAHAN: Reset share count saat redeem
             
             updateRedeemButton();
             updateSystemInfo();
@@ -1034,8 +1036,16 @@
                     state.countdownSeconds--;
                     
                     if (state.countdownSeconds <= 0) {
+                        // PERUBAHAN: Increment share count & ubah format log
+                        state.shareCount++;
+                        const shareNumber = String(state.shareCount).padStart(2, '0');
+                        const rewardAmount = state.currentReward.toFixed(8);
+                        
                         state.rewardValidasi += state.currentReward;
-                        addLog('INFO', `Auto-claim: ${state.currentReward.toFixed(8)} BossX moved to Reward Validasi.`);
+                        
+                        // PERUBAHAN: Level SUCCESS dengan format baru
+                        addLog('SUCCESS', `Autoclaim accepted share #${shareNumber} (diff: ${FIXED_DIFFICULTY}) - reward: ${rewardAmount} BossX.`);
+                        
                         state.currentReward = 0;
                         state.countdownSeconds = AUTO_CLAIM_INTERVAL;
                     }
@@ -1124,7 +1134,7 @@
             }
         }
 
-        // ==================== LOG ENGINE - PERBAIKAN LENGKAP ====================
+        // ==================== LOG ENGINE - PERUBAHAN LENGKAP ====================
         function addLog(level, message) {
             const now = new Date();
             const timestamp = now.getFullYear() + '-' + 
@@ -1134,8 +1144,9 @@
                 String(now.getMinutes()).padStart(2, '0') + ':' + 
                 String(now.getSeconds()).padStart(2, '0');
             
-            state.logs.unshift({ timestamp, level, message });
-            if (state.logs.length > 200) state.logs.pop();
+            // PERUBAHAN: Gunakan push() agar log baru di bawah (bukan unshift)
+            state.logs.push({ timestamp, level, message });
+            if (state.logs.length > 200) state.logs.shift(); // Hapus yang paling lama (atas)
             
             saveLogsToStorage();
             renderLogs();
@@ -1145,7 +1156,6 @@
             const container = document.getElementById('logContent');
             const counter = document.getElementById('logCounter');
             
-            // Update counter
             const totalLogs = state.logs.length;
             const filteredLogs = currentLogFilter === 'ALL' 
                 ? state.logs 
@@ -1158,6 +1168,7 @@
                 return;
             }
             
+            // PERUBAHAN: Render dari atas ke bawah (log lama di atas, baru di bawah)
             container.innerHTML = filteredLogs.map(log => {
                 return `<div class="log-entry ${log.level}">
                     <span class="log-timestamp">[${log.timestamp}]</span>
@@ -1166,14 +1177,13 @@
                 </div>`;
             }).join('');
             
-            // Auto-scroll ke log terbaru
-            container.scrollTop = 0;
+            // PERUBAHAN: Auto-scroll ke BAWAH (log terbaru)
+            container.scrollTop = container.scrollHeight;
         }
 
         function filterLogs(level) {
             currentLogFilter = level;
             
-            // Update active button
             document.querySelectorAll('.log-filter-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.dataset.filter === level) {
@@ -1187,6 +1197,7 @@
         function saveLogsToStorage() {
             try {
                 localStorage.setItem('bossx_logs', JSON.stringify(state.logs));
+                localStorage.setItem('bossx_shareCount', state.shareCount.toString());
             } catch (e) {
                 console.error('Failed to save logs:', e);
             }
@@ -1195,10 +1206,14 @@
         function loadLogsFromStorage() {
             try {
                 const savedLogs = localStorage.getItem('bossx_logs');
+                const savedShareCount = localStorage.getItem('bossx_shareCount');
                 if (savedLogs) {
                     state.logs = JSON.parse(savedLogs);
-                    renderLogs();
                 }
+                if (savedShareCount) {
+                    state.shareCount = parseInt(savedShareCount) || 0;
+                }
+                renderLogs();
             } catch (e) {
                 console.error('Failed to load logs:', e);
             }
@@ -1208,6 +1223,7 @@
             if (!confirm('Hapus semua log?')) return;
             
             state.logs = [];
+            state.shareCount = 0;
             saveLogsToStorage();
             renderLogs();
             showToast('Log berhasil dihapus');
@@ -1228,13 +1244,13 @@
                 currentReward: 0.00000000,
                 rewardValidasi: 0.00000000,
                 countdownSeconds: 60,
-                logs: []
+                logs: [],
+                shareCount: 0
             };
             
             accessKeys = [];
             
-            if (state.powerOn) {
-                state.powerOn = false;
+            if (isRunning) {
                 isRunning = false;
                 const btn = document.getElementById('powerBtn');
                 const center = document.getElementById('centerDisplay');
@@ -1348,7 +1364,6 @@
             animationFrameId = requestAnimationFrame(updateHighlights);
         }
 
-        // Load logs dari localStorage saat init
         initRings();
         loadLogsFromStorage();
         updateSystemInfo();
