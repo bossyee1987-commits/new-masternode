@@ -171,7 +171,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .wallet-token-network { font-size: 10px; color: #2ecc71; }
 .wallet-balance { font-size: 18px; font-weight: bold; font-family: 'Courier New', monospace; margin-top: auto; }
 .wallet-balance .currency { font-size: 12px; color: #b0bec5; margin-left: 4px; }
-.validator-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; align-items: center; min-height: 360px; }
+.validator-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; align-items: center; min-height: 380px; }
 .validator-card-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding-bottom: 8px; border-bottom: 1px solid #1a3a5c; }
 .validator-title { font-size: 14px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 8px; }
 .validator-title svg { width: 18px; height: 18px; fill: #f0a500; }
@@ -180,19 +180,21 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .validator-info-value { font-size: 14px; font-weight: bold; color: #00ff88; font-family: 'Courier New', monospace; text-shadow: 0 0 8px rgba(0, 255, 136, 0.4); }
 .validator-info-right { display: flex; flex-direction: column; align-items: flex-end; }
 .validator-countdown-value { font-size: 16px; font-weight: bold; color: #00e5ff; font-family: 'Courier New', monospace; letter-spacing: 1px; text-shadow: 0 0 8px rgba(0, 229, 255, 0.4); }
-.vault-container { position: relative; width: 330px; height: 330px; display: flex; align-items: center; justify-content: center; transform-origin: center center; margin-top: 10px; }
-.guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 165px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
+
+/* ===== PERUBAHAN: Vault container diperbesar ===== */
+.vault-container { position: relative; width: 350px; height: 350px; display: flex; align-items: center; justify-content: center; transform-origin: center center; margin-top: 10px; }
+.guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 175px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
 .guide-line.active { background: linear-gradient(to bottom, rgba(0,255,136,0.6), transparent); }
 .guide-line.click-flash { width: 4px; background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(0,255,136,0.8), transparent); transition: all 0.08s ease-out; }
 .ring { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 1.5s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease; }
-.ring-6 { width: 310px; height: 310px; background: radial-gradient(circle, transparent 42%, #222240 42%, #222240 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.25); }
-.ring-outer { width: 270px; height: 270px; background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.2); }
-.ring-2 { width: 216px; height: 216px; background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.15); }
-.ring-3 { width: 175px; height: 175px; background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
-.ring-4 { width: 136px; height: 136px; background: radial-gradient(circle, transparent 42%, #0d0d22 42%, #0d0d22 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
-.ring-inner { width: 108px; height: 108px; background: radial-gradient(circle, transparent 42%, #0a0a20 42%, #0a0a20 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+.ring-6 { width: 330px; height: 330px; background: radial-gradient(circle, transparent 42%, #222240 42%, #222240 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.25); }
+.ring-outer { width: 264px; height: 264px; background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.2); }
+.ring-2 { width: 211px; height: 211px; background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.15); }
+.ring-3 { width: 172px; height: 172px; background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+.ring-4 { width: 132px; height: 132px; background: radial-gradient(circle, transparent 42%, #0d0d22 42%, #0d0d22 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
+.ring-inner { width: 106px; height: 106px; background: radial-gradient(circle, transparent 42%, #0a0a20 42%, #0a0a20 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
 .ring.running { border-color: rgba(0, 255, 136, 0.4); }
-.ring-6.running { box-shadow: 0 0 30px rgba(0, 255, 136, 0.12), inset 0 0 25px rgba(0, 255, 136, 0.06); }
+.ring-6.running { box-shadow: 0 0 35px rgba(0, 255, 136, 0.15), inset 0 0 30px rgba(0, 255, 136, 0.08); }
 .ring-outer.running { box-shadow: 0 0 25px rgba(0, 255, 136, 0.1), inset 0 0 20px rgba(0, 255, 136, 0.05); }
 .ring-2.running { box-shadow: 0 0 20px rgba(0, 255, 136, 0.08); }
 .ring-3.running { box-shadow: 0 0 15px rgba(0, 255, 136, 0.06); }
@@ -203,9 +205,9 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .ring.running .tick { background: rgba(0, 255, 136, 0.2); }
 .tick.major { width: 2px; height: 8px; background: rgba(100, 100, 150, 0.5); }
 .ring.running .tick.major { background: rgba(0, 255, 136, 0.4); }
-.ring-char { position: absolute; font-size: 11px; font-weight: bold; color: #444466; user-select: none; transition: color 0.5s; letter-spacing: 1px; font-family: 'Courier New', monospace; }
+.ring-char { position: absolute; font-size: 12px; font-weight: bold; color: #444466; user-select: none; transition: color 0.5s; letter-spacing: 1px; font-family: 'Courier New', monospace; }
 .ring.running .ring-char { color: rgba(0, 255, 136, 0.7); text-shadow: 0 0 4px rgba(0, 255, 136, 0.3); }
-.ring-char.highlight { color: #ffffff !important; text-shadow: 0 0 8px #00ff88, 0 0 15px rgba(0, 255, 136, 0.6) !important; font-size: 13px; }
+.ring-char.highlight { color: #ffffff !important; text-shadow: 0 0 8px #00ff88, 0 0 15px rgba(0, 255, 136, 0.6) !important; font-size: 14px; }
 @keyframes spin-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes spin-ccw { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
 .ring.running.spin-1 { animation: spin-cw 22s linear infinite; }
@@ -447,7 +449,8 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                 <div class="log-panel">
                     <div class="log-header">
                         <div class="log-header-left">
-                            <div class="log-title">📋 Log Engine Mastercloud</div>
+                            <!-- PERUBAHAN: Nama diganti -->
+                            <div class="log-title">📋 Log Engine Masternode</div>
                             <div class="log-counter" id="logCounter">0 logs</div>
                         </div>
                         <div class="log-header-actions">
@@ -611,7 +614,7 @@ const SECONDS_IN_MONTH = 2592000;
 const MONTHLY_REWARD_PERCENT = 0.15;
 const AUTO_CLAIM_INTERVAL = 60;
 const FIXED_DIFFICULTY = 12000;
-const STORAGE_KEY = 'bossx_masternode_state_v6';
+const STORAGE_KEY = 'bossx_masternode_state_v7';
 
 let state = {
     nodeActive: false,
@@ -801,7 +804,7 @@ function handleRedeem() {
     updateWalletDisplay();
     updateRewardDisplay();
     updatePowerButton();
-    updateCountdownDisplay(); // FIX: Update display
+    updateCountdownDisplay();
     saveState();
     
     addLog('SUCCESS', `Access Key redeemed: ${key} | Node activated with ${found.stake} BossX. Contract will start on first Power ON.`);
@@ -887,11 +890,10 @@ function stopVisuals() {
     stopClickLoop();
 }
 
-// ===== LOG PROFESIONAL =====
 function startAllSystemLogs() {
     stopAllSystemLogs();
     
-    addLog('SUCCESS', `Connected to pool: stratum+tcp://bossx-pool.mastercloud.io:3333`);
+    addLog('SUCCESS', `Connected to pool: stratum+tcp://bossx-pool.masternode.io:3333`);
     setTimeout(() => {
         addLog('SUCCESS', `Authorized worker: miner_8055x.validator1`);
     }, 500);
@@ -1396,9 +1398,10 @@ function getRandomChars(count) {
     return shuffled.slice(0, count);
 }
 
+// ===== PERUBAHAN: Radii disesuaikan untuk container 350px =====
 function initRings() {
-    const radii = [138, 121, 96, 77, 60, 46];
-    const tickRadii = [148, 131, 104, 84, 65, 51];
+    const radii = [150, 118, 93, 74, 54, 41];
+    const tickRadii = [160, 126, 100, 80, 60, 46];
     for (let r = 0; r < 6; r++) {
         const ring = document.getElementById(`ring-${r}`);
         const radius = radii[r];
@@ -1426,8 +1429,8 @@ function initRings() {
             charEl.className = 'ring-char';
             charEl.textContent = ringChars[i];
             charEl.dataset.index = i;
-            charEl.style.left = `calc(50% + ${x}px - 5px)`;
-            charEl.style.top = `calc(50% + ${y}px - 6px)`;
+            charEl.style.left = `calc(50% + ${x}px - 6px)`;
+            charEl.style.top = `calc(50% + ${y}px - 7px)`;
             ring.appendChild(charEl);
         }
     }
@@ -1453,7 +1456,6 @@ function updateHighlights(timestamp) {
     animationFrameId = requestAnimationFrame(updateHighlights);
 }
 
-// ===== PERBAIKAN: SaveState dengan timestamp =====
 function saveState() {
     try {
         state.lastSaveTimestamp = Date.now();
@@ -1462,7 +1464,6 @@ function saveState() {
     } catch (e) { console.error('Save failed:', e); }
 }
 
-// ===== PERBAIKAN: LoadState dengan restore countdown =====
 function loadState() {
     try {
         const saved = localStorage.getItem(STORAGE_KEY);
@@ -1476,23 +1477,18 @@ function loadState() {
         if (savedState) state = { ...state, ...savedState };
         if (data.accessKeys) accessKeys = data.accessKeys;
         
-        // PERBAIKAN: Restore countdownSeconds berdasarkan elapsed time
         if (savedTimestamp && savedCountdown !== undefined && state.powerOn && state.nodeActive) {
             const elapsedSeconds = Math.floor((Date.now() - savedTimestamp) / 1000);
             
             if (elapsedSeconds > 0 && elapsedSeconds < savedCountdown) {
-                // Kurangi countdown dengan waktu yang berlalu
                 state.countdownSeconds = savedCountdown - elapsedSeconds;
             } else if (elapsedSeconds >= savedCountdown && savedCountdown > 0) {
-                // Hitung berapa auto-claim yang terlewat
                 const totalElapsed = elapsedSeconds;
                 const missedClaims = Math.floor(totalElapsed / AUTO_CLAIM_INTERVAL);
                 const remainingAfterMissed = totalElapsed % AUTO_CLAIM_INTERVAL;
                 
-                // Set countdown ke sisa waktu setelah missed claims
                 state.countdownSeconds = AUTO_CLAIM_INTERVAL - remainingAfterMissed;
                 
-                // Tambahkan log untuk missed claims (TANPA reward, sesuai aturan)
                 if (missedClaims > 0) {
                     addLog('WARNING', `Session restored: ${missedClaims} auto-claim cycle(s) missed during offline period. Timer reset to ${state.countdownSeconds}s.`);
                 }
@@ -1550,12 +1546,11 @@ function init() {
         addLog('INFO', '🚀 BossX Masternode Platform initialized.');
     }
     
-    // PERBAIKAN: Update semua display setelah load state
     updateSystemInfo();
     updateContractStatus();
     updateWalletDisplay();
     updateRewardDisplay();
-    updateCountdownDisplay(); // FIX: Panggil di sini!
+    updateCountdownDisplay();
     updatePowerButton();
     updateKeysTable();
     updateSummary();
