@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BossX - Masternode Platform</title>
-<script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+<script src="https://unpkg.com/lightweight-charts@4.2.1/dist/lightweight-charts.standalone.production.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; background-color: #0a1628; color: #fff; }
@@ -640,7 +640,7 @@ const SECONDS_IN_MONTH = 2592000;
 const MONTHLY_REWARD_PERCENT = 0.15;
 const AUTO_CLAIM_INTERVAL = 60;
 const FIXED_DIFFICULTY = 12000;
-const STORAGE_KEY = 'bossx_masternode_state_final_v4';
+const STORAGE_KEY = 'bossx_masternode_state_final_v5';
 const TRADING_FEE_PERCENT = 0.25;
 
 let state = {
@@ -867,7 +867,7 @@ function processAiInput(text) { const lowerText = text.toLowerCase(); if (lowerT
 function aiQuickAction(action) { let userText = ''; if (action === 'saldo') userText = 'Cek Saldo'; else if (action === 'akumulasi') userText = 'Akumulasi Real-Time'; else if (action === 'aktivasi') userText = 'Aktivasi Hari Ini'; else if (action === 'status') userText = 'Status Node'; addAiMessage(userText, 'user'); setTimeout(() => aiAction(action), 300); }
 function aiAction(action, param = null) { let response = ""; switch(action) { case 'saldo': response = `💰 Laporan Saldo Real-Time:\n\n• Saldo Wallet BossX: ${state.bossxBalance.toFixed(8)} BossX\n• Saldo USDT: ${state.usdtBalance.toFixed(2)} USDT\n• Reward Validasi (Pending): ${state.rewardValidasi.toFixed(8)} BossX\n\nSemua data adalah fakta terkini.`; break; case 'akumulasi': const targetShare = param || state.shareCount; if (targetShare > state.shareCount) { response = `⚠️ Maaf Boss, Share #${targetShare} belum berjalan. Saat ini progress Anda baru di Share #${state.shareCount}. Saya hanya bisa menghitung fakta yang sudah terjadi. Silakan pertahankan keaktifan Anda!`; } else if (state.shareCount === 0) { response = `📊 Belum ada Share yang selesai. Silakan aktifkan Power ON untuk mulai menghasilkan Share.`; } else { const rewardPerShare = getRewardPerSecond() * AUTO_CLAIM_INTERVAL; const total = rewardPerShare * targetShare; response = `📊 Akumulasi Real-Time:\n\nDari Share #01 hingga #${targetShare}, total reward yang sudah terkumpul adalah ${total.toFixed(8)} BossX.`; } break; case 'aktivasi': const today = new Date().toDateString(); const todayActivations = state.activationHistory.filter(a => a.date === today); if (todayActivations.length > 0) { const lastActivation = todayActivations[todayActivations.length - 1].time; response = `⏱️ Aktivasi Hari Ini:\n\nAnda melakukan Power ON hari ini pukul ${lastActivation}. Pertahankan konsistensi Anda, Boss!`; } else { response = `⏱️ Aktivasi Hari Ini:\n\nBelum ada catatan Power ON hari ini. Jangan lupa klik Power ON setelah jam 06:01 ya, Boss!`; } break; case 'status': const remaining = getRemainingContractTime(); const statusText = state.powerOn ? "Berjalan (Locked)" : (state.nodeActive ? "Paused (Auto-Stop)" : "Non-Aktif"); response = `📈 Status Node:\n\n• Status: ${statusText}\n• Sisa Kontrak: ${formatContractTime(remaining)}\n• Uptime Sesi Ini: ${formatUptime(state.uptimeSeconds)}\n• Total Share Tercapai: ${state.shareCount}`; break; } addAiMessage(response, 'bot'); }
 
-// ==================== INTERNAL MARKET (FIXED v4) ====================
+// ==================== INTERNAL MARKET (FIXED v4.2.1) ====================
 function switchMarketPair(pair) {
     currentPair = pair;
     document.querySelectorAll('.market-tab').forEach(tab => tab.classList.remove('active'));
@@ -904,6 +904,7 @@ function initMarket() {
         return;
     }
     
+    // INISIALISASI CHART DENGAN API v4.2.1
     chart = LightweightCharts.createChart(chartContainer, {
         width: chartContainer.clientWidth,
         height: chartContainer.clientHeight,
@@ -920,7 +921,8 @@ function initMarket() {
         timeScale: { borderColor: '#1a5276', timeVisible: true },
     });
     
-    candleSeries = chart.addSeries(LightweightCharts.CandlestickSeries, {
+    // PERBAIKAN: Gunakan addCandlestickSeries() untuk v4
+    candleSeries = chart.addCandlestickSeries({
         upColor: '#2ecc71',
         downColor: '#e74c3c',
         borderVisible: false,
