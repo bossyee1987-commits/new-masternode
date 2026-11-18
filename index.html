@@ -416,6 +416,80 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 @media (max-width: 500px) {
     .ai-chat-panel { width: calc(100vw - 40px); left: -10px; bottom: 75px; }
 }
+
+/* ========================================= */
+/* CSS BARU: BOSSX SMART BROADCAST TICKER */
+/* ========================================= */
+.ticker-container {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(13, 33, 55, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 12px;
+    padding: 12px 0;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.05), inset 0 0 10px rgba(0, 229, 255, 0.05);
+    position: relative;
+}
+
+/* Efek Fade di kiri dan kanan */
+.ticker-container::before, .ticker-container::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 60px;
+    z-index: 2;
+    pointer-events: none;
+}
+.ticker-container::before {
+    left: 0;
+    background: linear-gradient(to right, #0a1628, transparent);
+}
+.ticker-container::after {
+    right: 0;
+    background: linear-gradient(to left, #0a1628, transparent);
+}
+
+.ticker-track {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    animation: ticker-scroll 55s linear infinite;
+}
+
+.ticker-track:hover {
+    animation-play-state: paused;
+    cursor: default;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 0 1.5rem;
+    font-size: 14px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ffffff, #00e5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+.ticker-separator {
+    color: #f39c12;
+    font-size: 16px;
+    vertical-align: middle;
+    margin: 0 10px;
+    text-shadow: 0 0 5px rgba(243, 156, 18, 0.5);
+}
+
+@keyframes ticker-scroll {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
 </style>
 </head>
 <body>
@@ -470,6 +544,35 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 
     <div class="content">
         <div class="page-section active" id="page-dashboard">
+            
+            <!-- ========================================= -->
+            <!-- FITUR BARU: BOSSX SMART BROADCAST TICKER -->
+            <!-- ========================================= -->
+            <div class="ticker-container">
+                <div class="ticker-track">
+                    <span class="ticker-item">📢 Selamat datang di BossX Masternode Platform.</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🌟 Selamat bergabung sebagai Validator Resmi BossX, Boss Fery Muliawan!</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🔒 Sistem node Anda aktif. Reward berjalan berdasarkan keaktifan Power ON harian.</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🚀 Pertahankan konsistensi aktivasi Anda setiap hari setelah jam 06:01 untuk memaksimalkan reward!</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">💎 BossX: The Future of Decentralized Validation.</span>
+                    <span class="ticker-separator">✦</span>
+                    <!-- Duplikasi untuk seamless loop -->
+                    <span class="ticker-item">📢 Selamat datang di BossX Masternode Platform.</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🌟 Selamat bergabung sebagai Validator Resmi BossX, Boss Fery Muliawan!</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🔒 Sistem node Anda aktif. Reward berjalan berdasarkan keaktifan Power ON harian.</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🚀 Pertahankan konsistensi aktivasi Anda setiap hari setelah jam 06:01 untuk memaksimalkan reward!</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">💎 BossX: The Future of Decentralized Validation.</span>
+                </div>
+            </div>
+
             <div class="dashboard-grid">
                 <div class="redeem-card">
                     <div class="redeem-card-header">
@@ -710,7 +813,7 @@ let state = {
     rewardValidasi: 0.00000000, countdownSeconds: 60,
     logs: [], shareCount: 0, totalSharesAccepted: 0,
     totalSharesRejected: 0, uptimeSeconds: 0, lastSaveTimestamp: null,
-    activationHistory: [] // BARU: Untuk melacak waktu aktivasi
+    activationHistory: []
 };
 
 let accessKeys = [];
@@ -979,7 +1082,6 @@ function togglePower() {
     state.powerOnTimestamp = Date.now();
     isRunning = true;
     
-    // CATAT AKTIVASI HARI INI
     const now = new Date();
     state.activationHistory.push({
         timestamp: Date.now(),
@@ -1540,7 +1642,7 @@ function updateShareStatistics(accepted) {
 }
 
 // =========================================
-// LOGIKA BARU: BOSSX AI AGENT
+// LOGIKA: BOSSX AI AGENT
 // =========================================
 
 let isAiChatOpen = false;
