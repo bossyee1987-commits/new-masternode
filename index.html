@@ -320,7 +320,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .ticker-separator { color: #f39c12; font-size: 16px; vertical-align: middle; margin: 0 10px; text-shadow: 0 0 5px rgba(243, 156, 18, 0.5); }
 @keyframes ticker-scroll { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 .market-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; height: 600px; }
-.market-chart-container { background: #0d2137; border: 1px solid #1a5276; border-radius: 10px; padding: 15px; position: relative; }
+.market-chart-container { background: #0d2137; border: 1px solid #1a5276; border-radius: 10px; padding: 15px; position: relative; min-height: 400px; }
 .market-sidebar { display: flex; flex-direction: column; gap: 15px; }
 .order-book-container, .trade-form-container { background: #0d2137; border: 1px solid #1a5276; border-radius: 10px; padding: 15px; flex: 1; display: flex; flex-direction: column; }
 .ob-header, .tf-header { font-size: 14px; font-weight: bold; color: #00e5ff; margin-bottom: 10px; border-bottom: 1px solid #1a5276; padding-bottom: 8px; }
@@ -556,9 +556,9 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
             </div>
 
             <div class="market-tabs">
-                <button class="market-tab active" onclick="switchMarketPair('BTCUSDT')">BTC/USDT</button>
-                <button class="market-tab" onclick="switchMarketPair('TRXUSDT')">TRX/USDT</button>
-                <button class="market-tab" onclick="switchMarketPair('BOSSXUSDT')">BOSSX/USDT</button>
+                <button class="market-tab active" id="tab-BTCUSDT" onclick="switchMarketPair('BTCUSDT', this)">BTC/USDT</button>
+                <button class="market-tab" id="tab-TRXUSDT" onclick="switchMarketPair('TRXUSDT', this)">TRX/USDT</button>
+                <button class="market-tab" id="tab-BOSSXUSDT" onclick="switchMarketPair('BOSSXUSDT', this)">BOSSX/USDT</button>
             </div>
 
             <div class="market-grid">
@@ -640,7 +640,7 @@ const SECONDS_IN_MONTH = 2592000;
 const MONTHLY_REWARD_PERCENT = 0.15;
 const AUTO_CLAIM_INTERVAL = 60;
 const FIXED_DIFFICULTY = 12000;
-const STORAGE_KEY = 'bossx_masternode_state_final_v5';
+const STORAGE_KEY = 'bossx_masternode_state_final_v6';
 const TRADING_FEE_PERCENT = 0.25;
 
 let state = {
@@ -687,7 +687,7 @@ function navigateTo(page, event) {
     document.getElementById('page-' + page).classList.add('active');
     document.getElementById('menu-' + page).classList.add('active');
     if (page === 'market') {
-        setTimeout(() => initMarket(), 100);
+        setTimeout(() => initMarket(), 200);
     }
 }
 
@@ -867,17 +867,29 @@ function processAiInput(text) { const lowerText = text.toLowerCase(); if (lowerT
 function aiQuickAction(action) { let userText = ''; if (action === 'saldo') userText = 'Cek Saldo'; else if (action === 'akumulasi') userText = 'Akumulasi Real-Time'; else if (action === 'aktivasi') userText = 'Aktivasi Hari Ini'; else if (action === 'status') userText = 'Status Node'; addAiMessage(userText, 'user'); setTimeout(() => aiAction(action), 300); }
 function aiAction(action, param = null) { let response = ""; switch(action) { case 'saldo': response = `💰 Laporan Saldo Real-Time:\n\n• Saldo Wallet BossX: ${state.bossxBalance.toFixed(8)} BossX\n• Saldo USDT: ${state.usdtBalance.toFixed(2)} USDT\n• Reward Validasi (Pending): ${state.rewardValidasi.toFixed(8)} BossX\n\nSemua data adalah fakta terkini.`; break; case 'akumulasi': const targetShare = param || state.shareCount; if (targetShare > state.shareCount) { response = `⚠️ Maaf Boss, Share #${targetShare} belum berjalan. Saat ini progress Anda baru di Share #${state.shareCount}. Saya hanya bisa menghitung fakta yang sudah terjadi. Silakan pertahankan keaktifan Anda!`; } else if (state.shareCount === 0) { response = `📊 Belum ada Share yang selesai. Silakan aktifkan Power ON untuk mulai menghasilkan Share.`; } else { const rewardPerShare = getRewardPerSecond() * AUTO_CLAIM_INTERVAL; const total = rewardPerShare * targetShare; response = `📊 Akumulasi Real-Time:\n\nDari Share #01 hingga #${targetShare}, total reward yang sudah terkumpul adalah ${total.toFixed(8)} BossX.`; } break; case 'aktivasi': const today = new Date().toDateString(); const todayActivations = state.activationHistory.filter(a => a.date === today); if (todayActivations.length > 0) { const lastActivation = todayActivations[todayActivations.length - 1].time; response = `⏱️ Aktivasi Hari Ini:\n\nAnda melakukan Power ON hari ini pukul ${lastActivation}. Pertahankan konsistensi Anda, Boss!`; } else { response = `⏱️ Aktivasi Hari Ini:\n\nBelum ada catatan Power ON hari ini. Jangan lupa klik Power ON setelah jam 06:01 ya, Boss!`; } break; case 'status': const remaining = getRemainingContractTime(); const statusText = state.powerOn ? "Berjalan (Locked)" : (state.nodeActive ? "Paused (Auto-Stop)" : "Non-Aktif"); response = `📈 Status Node:\n\n• Status: ${statusText}\n• Sisa Kontrak: ${formatContractTime(remaining)}\n• Uptime Sesi Ini: ${formatUptime(state.uptimeSeconds)}\n• Total Share Tercapai: ${state.shareCount}`; break; } addAiMessage(response, 'bot'); }
 
-// ==================== INTERNAL MARKET (FIXED v4.2.1) ====================
-function switchMarketPair(pair) {
+// ==================== INTERNAL MARKET (FINAL FIXED) ====================
+function switchMarketPair(pair, clickedTabElement = null) {
     currentPair = pair;
+    
+    // Update active tab dengan aman
     document.querySelectorAll('.market-tab').forEach(tab => tab.classList.remove('active'));
-    event.target.classList.add('active');
+    
+    if (clickedTabElement) {
+        clickedTabElement.classList.add('active');
+    } else {
+        // Fallback: cari tab berdasarkan ID
+        const tabId = 'tab-' + pair;
+        const tab = document.getElementById(tabId);
+        if (tab) tab.classList.add('active');
+    }
     
     const coinName = pair.replace('USDT', '');
-    document.getElementById('trade-coin-label').textContent = coinName;
-    document.getElementById('trade-balance-label').textContent = coinName;
+    const tradeCoinLabel = document.getElementById('trade-coin-label');
+    const tradeBalanceLabel = document.getElementById('trade-balance-label');
+    if (tradeCoinLabel) tradeCoinLabel.textContent = coinName;
+    if (tradeBalanceLabel) tradeBalanceLabel.textContent = coinName;
     
-    if (wsConnection) { wsConnection.close(); wsConnection = null; }
+    if (wsConnection) { try { wsConnection.close(); } catch(e) {} wsConnection = null; }
     if (bossxSimInterval) { clearInterval(bossxSimInterval); bossxSimInterval = null; }
     
     if (pair === 'BOSSXUSDT') {
@@ -892,54 +904,61 @@ function initMarket() {
     const chartContainer = document.getElementById('chart-container');
     if (!chartContainer) return;
     
+    // Cleanup chart lama
     if (chart) {
-        chart.remove();
+        try { chart.remove(); } catch(e) {}
         chart = null;
         candleSeries = null;
     }
     chartContainer.innerHTML = '';
     
+    // Cek library
     if (typeof LightweightCharts === 'undefined') {
-        chartContainer.innerHTML = '<div style="color:#e74c3c; padding:20px; text-align:center;">⚠️ Library TradingView belum ter-load. Refresh halaman.</div>';
+        chartContainer.innerHTML = '<div style="color:#e74c3c; padding:40px; text-align:center; font-size:16px;">⚠️ Library TradingView belum ter-load. Periksa koneksi internet dan refresh halaman.</div>';
         return;
     }
     
-    // INISIALISASI CHART DENGAN API v4.2.1
-    chart = LightweightCharts.createChart(chartContainer, {
-        width: chartContainer.clientWidth,
-        height: chartContainer.clientHeight,
-        layout: { 
-            background: { type: 'solid', color: '#0d2137' }, 
-            textColor: '#d1d4dc', 
-        },
-        grid: { 
-            vertLines: { color: '#1a3a5c' }, 
-            horzLines: { color: '#1a3a5c' }, 
-        },
-        crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
-        rightPriceScale: { borderColor: '#1a5276' },
-        timeScale: { borderColor: '#1a5276', timeVisible: true },
-    });
-    
-    // PERBAIKAN: Gunakan addCandlestickSeries() untuk v4
-    candleSeries = chart.addCandlestickSeries({
-        upColor: '#2ecc71',
-        downColor: '#e74c3c',
-        borderVisible: false,
-        wickUpColor: '#2ecc71',
-        wickDownColor: '#e74c3c',
-    });
-    
-    window.addEventListener('resize', () => {
-        if (chart) {
-            chart.applyOptions({ 
-                width: chartContainer.clientWidth, 
-                height: chartContainer.clientHeight 
-            });
-        }
-    });
-    
-    switchMarketPair(currentPair);
+    try {
+        chart = LightweightCharts.createChart(chartContainer, {
+            width: chartContainer.clientWidth,
+            height: chartContainer.clientHeight,
+            layout: { 
+                background: { type: 'solid', color: '#0d2137' }, 
+                textColor: '#d1d4dc', 
+            },
+            grid: { 
+                vertLines: { color: '#1a3a5c' }, 
+                horzLines: { color: '#1a3a5c' }, 
+            },
+            crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+            rightPriceScale: { borderColor: '#1a5276' },
+            timeScale: { borderColor: '#1a5276', timeVisible: true },
+        });
+        
+        // API v4.2.1 - gunakan addCandlestickSeries
+        candleSeries = chart.addCandlestickSeries({
+            upColor: '#2ecc71',
+            downColor: '#e74c3c',
+            borderVisible: false,
+            wickUpColor: '#2ecc71',
+            wickDownColor: '#e74c3c',
+        });
+        
+        window.addEventListener('resize', () => {
+            if (chart && chartContainer) {
+                chart.applyOptions({ 
+                    width: chartContainer.clientWidth, 
+                    height: chartContainer.clientHeight 
+                });
+            }
+        });
+        
+        // Load pair default
+        switchMarketPair(currentPair, document.getElementById('tab-' + currentPair));
+    } catch (e) {
+        console.error('Chart init error:', e);
+        chartContainer.innerHTML = '<div style="color:#e74c3c; padding:40px; text-align:center;">⚠️ Gagal menginisialisasi grafik: ' + e.message + '</div>';
+    }
 }
 
 async function initBinanceMarket(symbol) {
@@ -963,20 +982,24 @@ async function initBinanceMarket(symbol) {
         wsConnection = new WebSocket(`wss://stream.binance.com:9443/ws/${wsSymbol}@kline_1m`);
         
         wsConnection.onmessage = (event) => {
-            const message = JSON.parse(event.data);
-            const kline = message.k;
-            const candle = {
-                time: Math.floor(kline.t / 1000),
-                open: parseFloat(kline.o),
-                high: parseFloat(kline.h),
-                low: parseFloat(kline.l),
-                close: parseFloat(kline.c)
-            };
-            
-            if (candleSeries) {
-                candleSeries.update(candle);
+            try {
+                const message = JSON.parse(event.data);
+                const kline = message.k;
+                const candle = {
+                    time: Math.floor(kline.t / 1000),
+                    open: parseFloat(kline.o),
+                    high: parseFloat(kline.h),
+                    low: parseFloat(kline.l),
+                    close: parseFloat(kline.c)
+                };
+                
+                if (candleSeries) {
+                    candleSeries.update(candle);
+                }
+                updateCurrentPrice(parseFloat(kline.c), parseFloat(kline.o));
+            } catch (e) {
+                console.error('WebSocket parse error:', e);
             }
-            updateCurrentPrice(parseFloat(kline.c), parseFloat(kline.o));
         };
         
         wsConnection.onerror = (error) => {
@@ -987,8 +1010,6 @@ async function initBinanceMarket(symbol) {
         
     } catch (e) {
         console.error("Binance API Error:", e);
-        document.getElementById('chart-container').innerHTML = 
-            '<div style="color:#e74c3c; padding:20px; text-align:center;">⚠️ Gagal memuat data dari Binance. Cek koneksi internet.</div>';
     }
 }
 
@@ -1097,7 +1118,9 @@ function updateTradeFormBalances() {
     const usdtEl = document.getElementById('trade-balance-usdt');
     const coinEl = document.getElementById('trade-balance-coin');
     if (usdtEl) usdtEl.textContent = state.usdtBalance.toFixed(2);
-    if (coinEl) coinEl.textContent = state[coinName + 'Balance'].toFixed(8);
+    if (coinEl && state[coinName + 'Balance'] !== undefined) {
+        coinEl.textContent = state[coinName + 'Balance'].toFixed(8);
+    }
 }
 
 function executeTrade(type) {
