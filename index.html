@@ -640,7 +640,7 @@ const SECONDS_IN_MONTH = 2592000;
 const MONTHLY_REWARD_PERCENT = 0.15;
 const AUTO_CLAIM_INTERVAL = 60;
 const FIXED_DIFFICULTY = 12000;
-const STORAGE_KEY = 'bossx_masternode_state_final_v6';
+const STORAGE_KEY = 'bossx_masternode_state_final_v7';
 const TRADING_FEE_PERCENT = 0.25;
 
 let state = {
@@ -845,25 +845,6 @@ function loadState() {
         const data = JSON.parse(saved);
         if (data.state) state = { ...state, ...data.state };
         if (data.accessKeys) accessKeys = data.accessKeys;
-        
-        const savedTimestamp = state.lastSaveTimestamp;
-        const savedCountdown = state.countdownSeconds;
-        
-        if (savedTimestamp && savedCountdown && state.powerOn && state.nodeActive) {
-            const elapsedSeconds = Math.floor((Date.now() - savedTimestamp) / 1000);
-            
-            if (elapsedSeconds > 0) {
-                if (elapsedSeconds < savedCountdown) {
-                    state.countdownSeconds = savedCountdown - elapsedSeconds;
-                } else {
-                    const totalElapsed = elapsedSeconds;
-                    const remainingAfterMissed = totalElapsed % AUTO_CLAIM_INTERVAL;
-                    state.countdownSeconds = AUTO_CLAIM_INTERVAL - remainingAfterMissed;
-                    if (state.countdownSeconds <= 0) state.countdownSeconds = AUTO_CLAIM_INTERVAL;
-                }
-            }
-        }
-        
         return true;
     } catch (e) { console.error('Load failed:', e); return false; }
 }
@@ -872,16 +853,33 @@ function processOfflineState() {
     if (!state.powerOn || !state.powerOnTimestamp) return;
 
     const now = Date.now();
+    const lastSave = state.lastSaveTimestamp || state.powerOnTimestamp;
     const nextSixAM = getNextSixAM(state.powerOnTimestamp);
-    const effectiveEndTime = Math.min(now, nextSixAM);
-    const elapsedSeconds = Math.floor((effectiveEndTime - state.powerOnTimestamp) / 1000);
-
-    if (elapsedSeconds <= 0) return;
+    
+    const elapsedFromLastSave = Math.floor((now - lastSave) / 1000);
+    const elapsedFromPowerOn = Math.floor((Math.min(now, nextSixAM) - state.powerOnTimestamp) / 1000);
+    
+    if (elapsedFromLastSave <= 0) {
+        if (now < nextSixAM) {
+            isRunning = true;
+            const btn = document.getElementById('powerBtn');
+            const center = document.getElementById('centerDisplay');
+            const guideLine = document.getElementById('guideLine');
+            const rings = document.querySelectorAll('.ring');
+            btn.classList.add('running'); center.classList.add('running');
+            guideLine.classList.add('active');
+            rings.forEach(ring => ring.classList.add('running'));
+            startTime = 0;
+            animationFrameId = requestAnimationFrame(updateHighlights);
+            startClickLoop(); startAllSystemLogs();
+        }
+        return;
+    }
 
     const rewardPerSec = getRewardPerSecond();
     const rewardPerShare = rewardPerSec * AUTO_CLAIM_INTERVAL;
-    const missedShares = Math.floor(elapsedSeconds / AUTO_CLAIM_INTERVAL);
-    const remainingSeconds = elapsedSeconds % AUTO_CLAIM_INTERVAL;
+    const missedShares = Math.floor(elapsedFromLastSave / AUTO_CLAIM_INTERVAL);
+    const remainingSeconds = elapsedFromLastSave % AUTO_CLAIM_INTERVAL;
     
     const pendingReward = remainingSeconds * rewardPerSec;
     state.currentReward += pendingReward;
@@ -891,7 +889,7 @@ function processOfflineState() {
         state.shareCount++;
         const shareNumber = String(state.shareCount).padStart(2, '0');
         const shareReward = rewardPerShare;
-        const shareTimestamp = new Date(state.powerOnTimestamp + (i + 1) * AUTO_CLAIM_INTERVAL * 1000);
+        const shareTimestamp = new Date(lastSave + (i + 1) * AUTO_CLAIM_INTERVAL * 1000);
         state.logs.push({ timestamp: formatTimestamp(shareTimestamp), level: 'SUCCESS', message: `Autoclaim accepted share #${shareNumber} (diff: ${FIXED_DIFFICULTY}) - reward: ${shareReward.toFixed(8)} BossX.` });
         state.rewardValidasi += shareReward;
         state.totalSharesAccepted++;
@@ -900,7 +898,7 @@ function processOfflineState() {
     
     if (missedShares > 0) {
         const restoreTimestamp = new Date(now);
-        state.logs.push({ timestamp: formatTimestamp(restoreTimestamp), level: 'INFO', message: `🔄 Session restored: Processed ${missedShares} offline autoclaim(s) from ${formatDuration(elapsedSeconds)} offline period. Total: ${totalOfflineReward.toFixed(8)} BossX added to Reward Validasi.` });
+        state.logs.push({ timestamp: formatTimestamp(restoreTimestamp), level: 'INFO', message: `🔄 Session restored: Processed ${missedShares} offline autoclaim(s) from ${formatDuration(elapsedFromLastSave)} offline period. Total: ${totalOfflineReward.toFixed(8)} BossX added to Reward Validasi.` });
     }
     
     state.countdownSeconds = AUTO_CLAIM_INTERVAL - remainingSeconds;
