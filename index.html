@@ -248,7 +248,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .btn-clear-log:hover { background-color: #c0392b; }
 .btn-reset-state { background-color: #f39c12; color: #fff; border: none; padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
 .btn-reset-state:hover { background-color: #d68910; }
-.log-content { background-color: #050a14; padding: 15px; max-height: 300px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 12px; min-height: 100px; }
+.log-content { background-color: #050a14; padding: 15px; max-height: 400px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 12px; min-height: 100px; }
 .log-content::-webkit-scrollbar { width: 8px; }
 .log-content::-webkit-scrollbar-track { background: #0a1628; border-radius: 4px; }
 .log-content::-webkit-scrollbar-thumb { background: #1a5276; border-radius: 4px; }
@@ -341,9 +341,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                 <div class="redeem-card">
                     <div class="redeem-card-header">
                         <div class="redeem-card-title">Redeem Access Key</div>
-                        <div class="redeem-card-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
-                        </div>
+                        <div class="redeem-card-icon"><svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg></div>
                     </div>
                     <div class="redeem-action-wrapper">
                         <input type="text" class="redeem-input" id="redeemInput" placeholder="REDEEM KEY">
@@ -363,12 +361,8 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                         </div>
                     </div>
                     <div class="validator-info-row">
-                        <div class="validator-info-left">
-                            <div class="validator-info-value" id="runningReward">0.00000000 BossX</div>
-                        </div>
-                        <div class="validator-info-right">
-                            <div class="validator-countdown-value" id="countdownTo6AM">00:00:00</div>
-                        </div>
+                        <div class="validator-info-left"><div class="validator-info-value" id="runningReward">0.00000000 BossX</div></div>
+                        <div class="validator-info-right"><div class="validator-countdown-value" id="countdownTo6AM">00:00:00</div></div>
                     </div>
                     <div class="vault-container" id="vault">
                         <div class="guide-line" id="guideLine"></div>
@@ -380,10 +374,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                         <div class="ring ring-inner spin-6" id="ring-5"></div>
                         <div class="center" id="centerDisplay">
                             <button class="power-btn" id="powerBtn" onclick="togglePower()" aria-label="Toggle Power" disabled>
-                                <svg class="power-icon" viewBox="0 0 24 24">
-                                    <path d="M12 2 L12 12" stroke-linecap="round"/>
-                                    <path d="M18.36 6.64 A9 9 0 1 1 5.64 6.64" stroke-linecap="round"/>
-                                </svg>
+                                <svg class="power-icon" viewBox="0 0 24 24"><path d="M12 2 L12 12" stroke-linecap="round"/><path d="M18.36 6.64 A9 9 0 1 1 5.64 6.64" stroke-linecap="round"/></svg>
                             </button>
                         </div>
                     </div>
@@ -392,9 +383,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                 <div class="reward-card">
                     <div class="reward-card-header">
                         <div class="reward-card-title">Reward Validasi</div>
-                        <div class="reward-card-icon">
-                            <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
-                        </div>
+                        <div class="reward-card-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg></div>
                     </div>
                     <div class="reward-amount" id="rewardAmount">0.00000000 BossX</div>
                     <div class="reward-action-wrapper">
@@ -409,19 +398,12 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                 <div class="wallet-card">
                     <div class="wallet-card-header">
                         <div class="wallet-card-title">My Wallet Balance</div>
-                        <div class="wallet-card-icon">
-                            <svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-                        </div>
+                        <div class="wallet-card-icon"><svg viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></div>
                     </div>
                     <div class="wallet-subcard">
                         <div class="wallet-subcard-header">
                             <div class="wallet-token-info">
-                                <div class="wallet-token-icon usdt">
-                                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="16" cy="16" r="16" fill="#26A17B"/>
-                                        <path fill="#fff" d="M22.91 17.64c0 2.4-3.09 4.22-6.91 4.22s-6.91-1.82-6.91-4.22c0-2.33 2.91-4.11 6.56-4.22v-2.87h-5.1v-2.4h10.9v2.4h-5.1v2.87c3.65.11 6.56 1.89 6.56 4.22zM16 19.5c2.49 0 4.38-.94 4.38-2.1s-1.89-2.1-4.38-2.1-4.38.94-4.38 2.1 1.89 2.1 4.38 2.1z"/>
-                                    </svg>
-                                </div>
+                                <div class="wallet-token-icon usdt"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="16" fill="#26A17B"/><path fill="#fff" d="M22.91 17.64c0 2.4-3.09 4.22-6.91 4.22s-6.91-1.82-6.91-4.22c0-2.33 2.91-4.11 6.56-4.22v-2.87h-5.1v-2.4h10.9v2.4h-5.1v2.87c3.65.11 6.56 1.89 6.56 4.22zM16 19.5c2.49 0 4.38-.94 4.38-2.1s-1.89-2.1-4.38-2.1-4.38.94-4.38 2.1 1.89 2.1 4.38 2.1z"/></svg></div>
                                 <div class="wallet-token-name">USDT</div>
                             </div>
                             <div class="wallet-token-network">TRC20/BEP20</div>
@@ -431,9 +413,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                     <div class="wallet-subcard">
                         <div class="wallet-subcard-header">
                             <div class="wallet-token-info">
-                                <div class="wallet-token-icon bossx">
-                                    <img src="https://i.ibb.co/qYBkPDH3/Picsart-25-04-01-16-25-47-054.png" alt="BossX Logo">
-                                </div>
+                                <div class="wallet-token-icon bossx"><img src="https://i.ibb.co/qYBkPDH3/Picsart-25-04-01-16-25-47-054.png" alt="BossX Logo"></div>
                                 <div class="wallet-token-name">BOSSX</div>
                             </div>
                             <div class="wallet-token-network">Internal Token</div>
@@ -462,9 +442,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                             <button class="btn-clear-log" onclick="clearLog()">🗑 Clear</button>
                         </div>
                     </div>
-                    <div class="log-content" id="logContent">
-                        <div class="log-empty">Belum ada log aktivitas.</div>
-                    </div>
+                    <div class="log-content" id="logContent"><div class="log-empty">Belum ada log aktivitas.</div></div>
                 </div>
 
                 <div class="system-info-panel">
@@ -493,45 +471,27 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
         <div class="page-section" id="page-accesskey">
             <div class="page-header">
                 <div>
-                    <div class="page-header-title">
-                        <svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
-                        Access Key
-                    </div>
+                    <div class="page-header-title"><svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>Access Key</div>
                     <div class="page-header-subtitle">Generate dan kelola Access Key untuk aktivasi node validator</div>
                 </div>
-                <div class="page-header-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
-                </div>
+                <div class="page-header-icon"><svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg></div>
             </div>
 
             <div class="tabs">
-                <button class="tab-btn active" id="btn-generate" onclick="switchTab('generate')">
-                    <svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>
-                    Generate
-                </button>
-                <button class="tab-btn" id="btn-mykeys" onclick="switchTab('mykeys')">
-                    <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
-                    My Keys
-                    <span class="tab-badge" id="key-badge">0</span>
-                </button>
+                <button class="tab-btn active" id="btn-generate" onclick="switchTab('generate')"><svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>Generate</button>
+                <button class="tab-btn" id="btn-mykeys" onclick="switchTab('mykeys')"><svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>My Keys<span class="tab-badge" id="key-badge">0</span></button>
             </div>
 
             <div class="tab-content active" id="tab-generate">
                 <div class="panel">
-                    <div class="panel-title" style="margin-bottom: 20px;">
-                        <svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>
-                        Generate Access Key
-                    </div>
+                    <div class="panel-title" style="margin-bottom: 20px;"><svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>Generate Access Key</div>
                     <label class="form-label">Jumlah BossX untuk Stake:</label>
                     <div class="input-group">
                         <input type="number" id="stake-input" placeholder="Minimal 10 BossX" min="10" oninput="updateSummary()">
                         <button class="btn-max" onclick="setMax()">MAX</button>
                     </div>
                     <div class="info-box">
-                        <div class="info-box-title">
-                            <svg viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-                            Informasi
-                        </div>
+                        <div class="info-box-title"><svg viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>Informasi</div>
                         <ul>
                             <li><strong>Minimal stake:</strong> 10 BossX</li>
                             <li><strong>Fee transaksi:</strong> 1 BossX (dipotong otomatis)</li>
@@ -546,56 +506,23 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
                         <div class="summary-row"><span class="summary-label">Total Terpotong:</span><span class="summary-value total" id="summary-total">1.00 BossX</span></div>
                         <div class="summary-row"><span class="summary-label">Saldo saat ini:</span><span class="summary-value balance" id="summary-balance">1000.00000000 BossX</span></div>
                     </div>
-                    <button class="btn-generate" onclick="generateKey()">
-                        <svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>
-                        Generate Access Key
-                    </button>
+                    <button class="btn-generate" onclick="generateKey()"><svg viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.63 5.29c-.39-.39-1.02-.39-1.41 0L1.29 18.96c-.39.39-.39 1.02 0 1.41l2.34 2.34c.39.39 1.02.39 1.41 0L16.71 11.04c.39-.39.39-1.02 0-1.41l-2.34-2.34z"/></svg>Generate Access Key</button>
                 </div>
             </div>
 
             <div class="tab-content" id="tab-mykeys">
                 <div class="panel">
                     <div class="panel-header">
-                        <div class="panel-title">
-                            <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
-                            History Access Key
-                        </div>
-                        <button class="btn-refresh" onclick="refreshKeys()" style="display:flex;align-items:center;gap:6px;background-color:#0d2137;border:1px solid #1a5276;color:#fff;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;">
-                            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#fff;"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
-                            Refresh
-                        </button>
+                        <div class="panel-title"><svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>History Access Key</div>
+                        <button class="btn-refresh" onclick="refreshKeys()" style="display:flex;align-items:center;gap:6px;background-color:#0d2137;border:1px solid #1a5276;color:#fff;padding:8px 14px;border-radius:6px;font-size:13px;cursor:pointer;"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#fff;"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>Refresh</button>
                     </div>
                     <div id="keys-table-container">
-                        <table class="key-table">
-                            <thead><tr><th>Access Key</th><th>Stake</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr></thead>
-                            <tbody id="keys-table-body"></tbody>
-                        </table>
+                        <table class="key-table"><thead><tr><th>Access Key</th><th>Stake</th><th>Tanggal</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="keys-table-body"></tbody></table>
                     </div>
                     <div class="stats-grid-small">
-                        <div class="stat-card-small">
-                            <div class="stat-card-small-header">
-                                <span class="stat-card-small-title">Total Keys</span>
-                                <span class="stat-card-small-icon"><svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg></span>
-                            </div>
-                            <div class="stat-card-small-value" id="stat-total">0</div>
-                            <div class="stat-card-small-desc">Access Key dibuat</div>
-                        </div>
-                        <div class="stat-card-small available">
-                            <div class="stat-card-small-header">
-                                <span class="stat-card-small-title">Available</span>
-                                <span class="stat-card-small-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
-                            </div>
-                            <div class="stat-card-small-value" id="stat-available">0</div>
-                            <div class="stat-card-small-desc">Belum diredeem</div>
-                        </div>
-                        <div class="stat-card-small">
-                            <div class="stat-card-small-header">
-                                <span class="stat-card-small-title">Redeemed</span>
-                                <span class="stat-card-small-icon"><svg viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/></svg></span>
-                            </div>
-                            <div class="stat-card-small-value" id="stat-redeemed">0</div>
-                            <div class="stat-card-small-desc">Sudah digunakan</div>
-                        </div>
+                        <div class="stat-card-small"><div class="stat-card-small-header"><span class="stat-card-small-title">Total Keys</span><span class="stat-card-small-icon"><svg viewBox="0 0 24 24"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg></span></div><div class="stat-card-small-value" id="stat-total">0</div><div class="stat-card-small-desc">Access Key dibuat</div></div>
+                        <div class="stat-card-small available"><div class="stat-card-small-header"><span class="stat-card-small-title">Available</span><span class="stat-card-small-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span></div><div class="stat-card-small-value" id="stat-available">0</div><div class="stat-card-small-desc">Belum diredeem</div></div>
+                        <div class="stat-card-small"><div class="stat-card-small-header"><span class="stat-card-small-title">Redeemed</span><span class="stat-card-small-icon"><svg viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/></svg></span></div><div class="stat-card-small-value" id="stat-redeemed">0</div><div class="stat-card-small-desc">Sudah digunakan</div></div>
                     </div>
                 </div>
             </div>
@@ -606,70 +533,46 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 <div class="toast" id="toast">Berhasil!</div>
 
 <script>
+// ==================== KONFIGURASI ====================
 const CONTRACT_DURATION_SECONDS = 40000000;
 const SECONDS_IN_MONTH = 2592000;
 const MONTHLY_REWARD_PERCENT = 0.15;
 const AUTO_CLAIM_INTERVAL = 60;
 const FIXED_DIFFICULTY = 12000;
-const STORAGE_KEY = 'bossx_masternode_state_v10';
+const STORAGE_KEY = 'bossx_masternode_state_final_v2';
 
 let state = {
-    nodeActive: false,
-    powerOn: false,
-    powerOnTimestamp: null, // BARU: Mencatat waktu pasti saat Power ON
-    redeemedKey: '',
-    stakeAmount: 0,
-    contractStart: null,
-    bossxBalance: 1000.00000000,
-    currentReward: 0.00000000,
-    rewardValidasi: 0.00000000,
-    countdownSeconds: 60,
-    logs: [],
-    shareCount: 0,
-    totalSharesAccepted: 0,
-    totalSharesRejected: 0,
-    uptimeSeconds: 0,
-    lastSaveTimestamp: null
+    nodeActive: false, powerOn: false, powerOnTimestamp: null,
+    redeemedKey: '', stakeAmount: 0, contractStart: null,
+    bossxBalance: 1000.00000000, currentReward: 0.00000000,
+    rewardValidasi: 0.00000000, countdownSeconds: 60,
+    logs: [], shareCount: 0, totalSharesAccepted: 0,
+    totalSharesRejected: 0, uptimeSeconds: 0, lastSaveTimestamp: null
 };
 
 let accessKeys = [];
-let isRunning = false;
-let clickInterval = null;
-let audioCtx = null;
-let animationFrameId = null;
-let startTime = 0;
-let currentLogFilter = 'ALL';
+let isRunning = false, clickInterval = null, audioCtx = null;
+let animationFrameId = null, startTime = 0, currentLogFilter = 'ALL';
 let systemLogIntervals = [];
 
 const CHAR_POOL = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-const CHARS_PER_RING = 24;
-const CLICK_INTERVAL_MS = 60000;
-const TICKS_PER_RING = 60;
+const CHARS_PER_RING = 24, CLICK_INTERVAL_MS = 60000, TICKS_PER_RING = 60;
 const RING_SPEEDS = [360/22000, -360/20000, 360/28000, -360/16000, 360/24000, -360/12000];
 
-function getRandomNumber(min, max, decimals = 1) {
-    return parseFloat((Math.random() * (max - min) + min).toFixed(decimals));
-}
-
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+function getRandomNumber(min, max, decimals = 1) { return parseFloat((Math.random() * (max - min) + min).toFixed(decimals)); }
+function getRandomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
 function formatUptime(seconds) {
-    const days = Math.floor(seconds / 86400);
-    const hours = Math.floor((seconds % 86400) / 3600);
-    const mins = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    if (days > 0) return `${days}d ${hours}h ${mins}m ${secs}s`;
-    if (hours > 0) return `${hours}h ${mins}m ${secs}s`;
-    if (mins > 0) return `${mins}m ${secs}s`;
-    return `${secs}s`;
+    const d = Math.floor(seconds / 86400), h = Math.floor((seconds % 86400) / 3600);
+    const m = Math.floor((seconds % 3600) / 60), s = seconds % 60;
+    if (d > 0) return `${d}d ${h}h ${m}m ${s}s`;
+    if (h > 0) return `${h}h ${m}m ${s}s`;
+    if (m > 0) return `${m}m ${s}s`;
+    return `${s}s`;
 }
 
 function formatDuration(seconds) {
-    const h = Math.floor(seconds / 3600);
-    const m = Math.floor((seconds % 3600) / 60);
-    const s = seconds % 60;
+    const h = Math.floor(seconds / 3600), m = Math.floor((seconds % 3600) / 60), s = seconds % 60;
     if (h > 0) return `${h}h ${m}m ${s}s`;
     if (m > 0) return `${m}m ${s}s`;
     return `${s}s`;
@@ -680,6 +583,23 @@ function getRewardPerSecond() {
     return (state.stakeAmount * MONTHLY_REWARD_PERCENT) / SECONDS_IN_MONTH;
 }
 
+function getNextSixAM(timestamp) {
+    const date = new Date(timestamp);
+    date.setHours(6, 0, 0, 0);
+    if (timestamp >= date.getTime()) date.setDate(date.getDate() + 1);
+    return date.getTime();
+}
+
+function formatTimestamp(date) {
+    return date.getFullYear() + '-' +
+        String(date.getMonth() + 1).padStart(2, '0') + '-' +
+        String(date.getDate()).padStart(2, '0') + ' ' +
+        String(date.getHours()).padStart(2, '0') + ':' +
+        String(date.getMinutes()).padStart(2, '0') + ':' +
+        String(date.getSeconds()).padStart(2, '0');
+}
+
+// ==================== NAVIGASI ====================
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('collapsed'); }
 
 function updateClock() {
@@ -704,6 +624,7 @@ function switchTab(tab) {
     document.getElementById('tab-' + tab).classList.add('active');
 }
 
+// ==================== ACCESS KEY ====================
 function setMax() { 
     const maxStake = Math.floor(state.bossxBalance) - 1;
     document.getElementById('stake-input').value = Math.max(10, maxStake); 
@@ -723,8 +644,7 @@ function generateKey() {
     if (stake + 1 > state.bossxBalance) { showToast('Saldo tidak mencukupi', 'error'); return; }
     
     state.bossxBalance -= (stake + 1);
-    updateWalletDisplay();
-    updateSummary();
+    updateWalletDisplay(); updateSummary();
     
     let key = '';
     for (let i = 0; i < 25; i++) key += CHAR_POOL.charAt(Math.floor(Math.random() * CHAR_POOL.length));
@@ -765,11 +685,9 @@ function copyKey(index) {
 
 function refreshKeys() { updateKeysTable(); showToast('Data berhasil diperbarui!'); }
 
+// ==================== REDEEM & POWER ====================
 function handleRedeem() {
-    if (state.nodeActive) {
-        showToast('Node sudah aktif. Kontrak masih berjalan.', 'warning');
-        return;
-    }
+    if (state.nodeActive) { showToast('Node sudah aktif. Kontrak masih berjalan.', 'warning'); return; }
     
     const keyInput = document.getElementById('redeemInput');
     const key = keyInput.value.trim();
@@ -782,10 +700,7 @@ function handleRedeem() {
     
     if (state.contractStart !== null) {
         const remaining = getRemainingContractTime();
-        if (remaining > 0) {
-            showToast('Kontrak sebelumnya masih berjalan. Tunggu hingga habis.', 'warning');
-            return;
-        }
+        if (remaining > 0) { showToast('Kontrak sebelumnya masih berjalan. Tunggu hingga habis.', 'warning'); return; }
     }
     
     found.status = 'REDEEMED';
@@ -806,17 +721,11 @@ function handleRedeem() {
     state.uptimeSeconds = 0;
     state.lastSaveTimestamp = null;
     
-    updateRedeemButton();
-    updateSystemInfo();
-    updateContractStatus();
-    updateWalletDisplay();
-    updateRewardDisplay();
-    updatePowerButton();
-    updateCountdownDisplay();
+    updateRedeemButton(); updateSystemInfo(); updateContractStatus();
+    updateWalletDisplay(); updateRewardDisplay(); updatePowerButton(); updateCountdownDisplay();
     saveState();
     
     addLog('SUCCESS', `Access Key redeemed: ${key} | Node activated with ${found.stake} BossX. Contract will start on first Power ON.`);
-    
     showToast(`Node diaktivasi! Klik Power Dial untuk memulai kontrak & reward.`);
     keyInput.value = '';
 }
@@ -827,13 +736,11 @@ function updateRedeemButton() {
     const icon = document.getElementById('redeemIcon');
     
     if (state.nodeActive) {
-        btn.classList.add('node-active');
-        btn.disabled = true;
+        btn.classList.add('node-active'); btn.disabled = true;
         text.textContent = 'Node Aktiv';
         icon.innerHTML = '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>';
     } else {
-        btn.classList.remove('node-active');
-        btn.disabled = false;
+        btn.classList.remove('node-active'); btn.disabled = false;
         text.textContent = 'Redeem Now';
         icon.innerHTML = '<path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>';
     }
@@ -842,22 +749,10 @@ function updateRedeemButton() {
 function getRemainingContractTime() {
     if (!state.contractStart) return CONTRACT_DURATION_SECONDS;
     const elapsed = (Date.now() - state.contractStart) / 1000;
-    const remaining = CONTRACT_DURATION_SECONDS - elapsed;
-    return Math.max(0, remaining);
+    return Math.max(0, CONTRACT_DURATION_SECONDS - elapsed);
 }
 
-function formatContractTime(seconds) {
-    return Math.ceil(seconds).toLocaleString('id-ID') + ' detik';
-}
-
-function getNextSixAM(timestamp) {
-    const date = new Date(timestamp);
-    date.setHours(6, 0, 0, 0);
-    if (timestamp >= date.getTime()) {
-        date.setDate(date.getDate() + 1);
-    }
-    return date.getTime();
-}
+function formatContractTime(seconds) { return Math.ceil(seconds).toLocaleString('id-ID') + ' detik'; }
 
 function isCurrentTimeBlocked() {
     const now = new Date();
@@ -867,9 +762,7 @@ function isCurrentTimeBlocked() {
 function checkAutoStop() {
     const now = new Date();
     if (now.getHours() === 6 && now.getMinutes() === 0 && now.getSeconds() === 0) {
-        if (state.powerOn) {
-            forcePowerOff('Auto Stop 06:00:00');
-        }
+        if (state.powerOn) forcePowerOff('Auto Stop 06:00:00');
     }
 }
 
@@ -877,13 +770,10 @@ function forcePowerOff(reason) {
     state.powerOn = false;
     state.powerOnTimestamp = null;
     isRunning = false;
-    stopVisuals();
-    stopAllSystemLogs();
+    stopVisuals(); stopAllSystemLogs();
     addLog('WARNING', `Auto Stop triggered: ${reason}. Power dial turned OFF. You can turn it ON again at 06:00:01.`);
     showToast(`Sistem auto-stop: ${reason}. Bisa dinyalakan lagi di 06:00:01`, 'warning');
-    updatePowerButton();
-    updateContractStatus();
-    saveState();
+    updatePowerButton(); updateContractStatus(); saveState();
 }
 
 function stopVisuals() {
@@ -901,152 +791,28 @@ function stopVisuals() {
         ring.querySelectorAll('.ring-char.highlight').forEach(el => el.classList.remove('highlight'));
     });
     
-    if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-        animationFrameId = null;
-    }
+    if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
     stopClickLoop();
 }
 
-function startAllSystemLogs() {
-    stopAllSystemLogs();
-    
-    addLog('SUCCESS', `Connected to pool: stratum+tcp://bossx-pool.masternode.io:3333`);
-    setTimeout(() => {
-        addLog('SUCCESS', `Authorized worker: miner_8055x.validator1`);
-    }, 500);
-    setTimeout(() => {
-        const jobId = generateJobId();
-        addLog('INFO', `New job received: ${jobId} (Pool: BossXpool)`);
-    }, 1200);
-    
-    const gpuInterval = setInterval(() => {
-        if (!state.powerOn || !state.nodeActive) return;
-        const hashrate = getRandomNumber(47, 51, 1);
-        const temp = getRandomInt(74, 80);
-        const fan = getRandomInt(84, 90);
-        const power = getRandomInt(215, 225);
-        addLog('INFO', `GPU#0: ${hashrate} MH/s | Temp: ${temp}°C | Fan: ${fan}% | Power: ${power}W`);
-    }, getRandomInt(35000, 55000));
-    systemLogIntervals.push(gpuInterval);
-    
-    const powerInterval = setInterval(() => {
-        if (!state.powerOn || !state.nodeActive) return;
-        const totalPower = getRandomInt(3280, 3380);
-        addLog('INFO', `Power consumption: ${totalPower}W | Efficiency: ${(getRewardPerSecond() * 3600 / (totalPower/1000)).toFixed(4)} MH/kWh`);
-    }, getRandomInt(50000, 80000));
-    systemLogIntervals.push(powerInterval);
-    
-    const latencyInterval = setInterval(() => {
-        if (!state.powerOn || !state.nodeActive) return;
-        const ping = getRandomInt(18, 42);
-        const status = ping < 30 ? 'stable' : ping < 40 ? 'moderate' : 'high';
-        addLog('INFO', `Network latency: ${ping}ms | Status: ${status}`);
-    }, getRandomInt(25000, 45000));
-    systemLogIntervals.push(latencyInterval);
-    
-    const heartbeatInterval = setInterval(() => {
-        if (!state.powerOn || !state.nodeActive) return;
-        const uptime = formatUptime(state.uptimeSeconds);
-        addLog('INFO', `Worker heartbeat: miner_8055x.validator1 | Uptime: ${uptime} | Status: ACTIVE`);
-    }, 300000);
-    systemLogIntervals.push(heartbeatInterval);
-    
-    const summaryInterval = setInterval(() => {
-        if (!state.powerOn || !state.nodeActive) return;
-        const totalShares = state.totalSharesAccepted + state.totalSharesRejected;
-        const successRate = totalShares > 0 ? ((state.totalSharesAccepted / totalShares) * 100).toFixed(2) : '100.00';
-        const uptime = formatUptime(state.uptimeSeconds);
-        const avgHashrate = getRandomNumber(48, 50, 1);
-        
-        addLog('INFO', `===== 1 Hour Summary =====`);
-        addLog('INFO', `Uptime: ${uptime}`);
-        addLog('INFO', `Shares submitted: ${totalShares} (accepted: ${state.totalSharesAccepted}, rejected: ${state.totalSharesRejected})`);
-        addLog('INFO', `Success rate: ${successRate}%`);
-        addLog('INFO', `Average hashrate: ${avgHashrate} MH/s`);
-        addLog('INFO', `Reward earned: ${state.rewardValidasi.toFixed(8)} BossX (pending claim)`);
-        addLog('INFO', `==========================`);
-    }, 3600000);
-    systemLogIntervals.push(summaryInterval);
-    
-    const coolingInterval = setInterval(() => {
-        if (!state.powerOn || !state.nodeActive) return;
-        const temp = getRandomInt(72, 78);
-        const status = temp < 75 ? 'optimal' : temp < 78 ? 'stable' : 'warning';
-        addLog('INFO', `Cooling system: ${status} | GPU temp: ${temp}°C | Ambient: ${getRandomInt(22, 26)}°C`);
-    }, getRandomInt(120000, 180000));
-    systemLogIntervals.push(coolingInterval);
-    
-    const jobInterval = setInterval(() => {
-        if (!state.powerOn || !state.nodeActive) return;
-        const jobId = generateJobId();
-        addLog('INFO', `Job ID changed: ${jobId} (Pool: BossXpool)`);
-    }, getRandomInt(180000, 300000));
-    systemLogIntervals.push(jobInterval);
-}
-
-function stopAllSystemLogs() {
-    systemLogIntervals.forEach(interval => {
-        if (interval) clearInterval(interval);
-    });
-    systemLogIntervals = [];
-}
-
-function generateJobId() {
-    const chars = '0123456789abcdef';
-    let id = '0x';
-    for (let i = 0; i < 16; i++) {
-        id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
-}
-
-function updateShareStatistics(accepted) {
-    if (accepted) {
-        state.totalSharesAccepted++;
-    } else {
-        state.totalSharesRejected++;
-    }
-    
-    if ((state.totalSharesAccepted + state.totalSharesRejected) % 10 === 0) {
-        const total = state.totalSharesAccepted + state.totalSharesRejected;
-        const rate = ((state.totalSharesAccepted / total) * 100).toFixed(2);
-        addLog('INFO', `Share statistics: ${total} total (${state.totalSharesAccepted} accepted, ${state.totalSharesRejected} rejected) | Success rate: ${rate}%`);
-    }
-}
-
 function togglePower() {
-    if (state.powerOn) {
-        showToast('Power tidak dapat dimatikan manual. Hanya sistem (06:00:00) yang dapat mematikan.', 'warning');
-        return;
-    }
-    
-    if (!state.nodeActive) {
-        showToast('Node belum aktif. Redeem Access Key terlebih dahulu.', 'error');
-        return;
-    }
+    if (state.powerOn) { showToast('Power tidak dapat dimatikan manual. Hanya sistem (06:00:00) yang dapat mematikan.', 'warning'); return; }
+    if (!state.nodeActive) { showToast('Node belum aktif. Redeem Access Key terlebih dahulu.', 'error'); return; }
     
     const remaining = getRemainingContractTime();
     if (remaining <= 0) {
         showToast('Kontrak sudah habis. Beli Access Key baru.', 'error');
-        state.nodeActive = false;
-        state.contractStart = null;
-        updateRedeemButton();
-        updateSystemInfo();
-        updateContractStatus();
-        saveState();
+        state.nodeActive = false; state.contractStart = null;
+        updateRedeemButton(); updateSystemInfo(); updateContractStatus(); saveState();
         return;
     }
     
-    if (isCurrentTimeBlocked()) {
-        showToast('Sistem auto-stop. Silakan coba lagi di 06:00:01', 'warning');
-        return;
-    }
+    if (isCurrentTimeBlocked()) { showToast('Sistem auto-stop. Silakan coba lagi di 06:00:01', 'warning'); return; }
     
     initAudio();
     
     state.powerOn = true;
-    state.powerOnTimestamp = Date.now(); // CATAT WAKTU ON
+    state.powerOnTimestamp = Date.now();
     isRunning = true;
     
     const isFirstPowerOn = !state.contractStart;
@@ -1061,15 +827,13 @@ function togglePower() {
     const guideLine = document.getElementById('guideLine');
     const rings = document.querySelectorAll('.ring');
     
-    btn.classList.add('running');
-    center.classList.add('running');
+    btn.classList.add('running'); center.classList.add('running');
     guideLine.classList.add('active');
     rings.forEach(ring => ring.classList.add('running'));
     
     startTime = 0;
     animationFrameId = requestAnimationFrame(updateHighlights);
-    startClickLoop();
-    startAllSystemLogs();
+    startClickLoop(); startAllSystemLogs();
     
     setTimeout(() => { playMechanicalClick(); triggerClickFlash(); }, 300);
     if (navigator.vibrate) navigator.vibrate(100);
@@ -1078,35 +842,24 @@ function togglePower() {
     addLog('INFO', `Power dial ON. ${contractLabel}. Remaining: ${formatContractTime(remaining)}`);
     showToast('Power Dial aktif! Reward per detik berjalan.');
     
-    updatePowerButton();
-    updateContractStatus();
-    saveState();
+    updatePowerButton(); updateContractStatus(); saveState();
 }
 
 function updatePowerButton() {
-    const btn = document.getElementById('powerBtn');
-    btn.disabled = !state.nodeActive || state.powerOn;
+    document.getElementById('powerBtn').disabled = !state.nodeActive || state.powerOn;
 }
 
 function updateContractStatus() {
     const el = document.getElementById('sysContractStatus');
     if (!el) return;
     
-    if (!state.nodeActive) {
-        el.textContent = 'Non-Aktif';
-        el.className = 'system-info-value status-inactive';
-    } else if (!state.contractStart) {
-        el.textContent = 'Menunggu Power ON';
-        el.className = 'system-info-value status-waiting';
-    } else if (state.powerOn) {
-        el.textContent = 'Berjalan (Locked)';
-        el.className = 'system-info-value status-active';
-    } else {
-        el.textContent = 'Paused (Auto-Stop)';
-        el.className = 'system-info-value status-pending';
-    }
+    if (!state.nodeActive) { el.textContent = 'Non-Aktif'; el.className = 'system-info-value status-inactive'; }
+    else if (!state.contractStart) { el.textContent = 'Menunggu Power ON'; el.className = 'system-info-value status-waiting'; }
+    else if (state.powerOn) { el.textContent = 'Berjalan (Locked)'; el.className = 'system-info-value status-active'; }
+    else { el.textContent = 'Paused (Auto-Stop)'; el.className = 'system-info-value status-pending'; }
 }
 
+// ==================== DISPLAY & CLAIM ====================
 function updateRewardDisplay() { 
     document.getElementById('rewardAmount').textContent = state.rewardValidasi.toFixed(8) + ' BossX';
     const runningRewardEl = document.getElementById('runningReward');
@@ -1118,23 +871,16 @@ function updateWalletDisplay() {
     document.getElementById('summary-balance').textContent = state.bossxBalance.toFixed(8) + ' BossX';
 }
 
-function updateCountdownDisplay() { 
-    document.getElementById('countdownTimer').textContent = state.countdownSeconds; 
-}
+function updateCountdownDisplay() { document.getElementById('countdownTimer').textContent = state.countdownSeconds; }
 
 function claimToWallet() {
-    if (state.rewardValidasi <= 0) { 
-        showToast('Tidak ada reward untuk di-claim', 'warning'); 
-        return; 
-    }
+    if (state.rewardValidasi <= 0) { showToast('Tidak ada reward untuk di-claim', 'warning'); return; }
     
     const claimedAmount = state.rewardValidasi;
     state.bossxBalance += claimedAmount;
     state.rewardValidasi = 0;
     
-    updateRewardDisplay();
-    updateWalletDisplay();
-    updateSummary();
+    updateRewardDisplay(); updateWalletDisplay(); updateSummary();
     
     addLog('SUCCESS', `Claim to Wallet: ${claimedAmount.toFixed(8)} BossX added to balance.`);
     showToast(`Claim berhasil: ${claimedAmount.toFixed(8)} BossX ditambahkan ke wallet!`);
@@ -1145,18 +891,14 @@ function claimToWallet() {
     setTimeout(() => { rewardEl.style.transform = 'scale(1)'; }, 300);
 }
 
+// ==================== GAME LOOP ====================
 function gameLoop() {
     const now = new Date();
     const isAutoStop = isCurrentTimeBlocked();
     
-    checkAutoStop();
-    updateCountdownTo6AM();
-    updateContractDisplay();
-    updateContractStatus();
+    checkAutoStop(); updateCountdownTo6AM(); updateContractDisplay(); updateContractStatus();
     
-    if (state.powerOn && state.nodeActive) {
-        state.uptimeSeconds++;
-    }
+    if (state.powerOn && state.nodeActive) state.uptimeSeconds++;
     
     if (state.nodeActive && state.powerOn && !isAutoStop) {
         const remaining = getRemainingContractTime();
@@ -1181,31 +923,20 @@ function gameLoop() {
                 saveState();
             }
             
-            updateRewardDisplay();
-            updateCountdownDisplay();
+            updateRewardDisplay(); updateCountdownDisplay();
         } else {
-            state.powerOn = false;
-            state.nodeActive = false;
-            state.contractStart = null;
-            isRunning = false;
-            stopVisuals();
-            stopAllSystemLogs();
+            state.powerOn = false; state.nodeActive = false; state.contractStart = null;
+            isRunning = false; stopVisuals(); stopAllSystemLogs();
             
             addLog('ERROR', 'Contract expired (40.000.000 detik habis). Node deactivated permanently. Buy new Access Key to restart.');
             showToast('Kontrak habis! Node non-aktif. Beli Access Key baru.', 'error');
             
-            updateRedeemButton();
-            updatePowerButton();
-            updateSystemInfo();
-            updateContractStatus();
-            updateRewardDisplay();
-            saveState();
+            updateRedeemButton(); updatePowerButton(); updateSystemInfo();
+            updateContractStatus(); updateRewardDisplay(); saveState();
         }
     }
     
-    if (now.getSeconds() % 5 === 0) {
-        saveState();
-    }
+    if (now.getSeconds() % 5 === 0) saveState();
 }
 setInterval(gameLoop, 1000);
 
@@ -1213,58 +944,40 @@ function updateCountdownTo6AM() {
     const now = new Date();
     const target = new Date(now);
     target.setHours(6, 0, 0, 0);
-    if (now >= target) {
-        target.setDate(target.getDate() + 1);
-    }
+    if (now >= target) target.setDate(target.getDate() + 1);
     const diff = target - now;
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    const h = Math.floor(diff / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
     const el = document.getElementById('countdownTo6AM');
-    if (el) el.textContent = `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+    if (el) el.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
 
 function updateContractDisplay() {
     const remaining = getRemainingContractTime();
     const el = document.getElementById('sysContractTime');
     if (el) {
-        if (!state.nodeActive) {
-            el.textContent = '40.000.000 detik (Belum dimulai)';
-            el.className = 'system-info-value status-waiting';
-        } else if (remaining <= 0) {
-            el.textContent = '0 detik (EXPIRED)';
-            el.className = 'system-info-value status-expired';
-        } else {
-            el.textContent = formatContractTime(remaining);
-            el.className = 'system-info-value status-time';
-        }
+        if (!state.nodeActive) { el.textContent = '40.000.000 detik (Belum dimulai)'; el.className = 'system-info-value status-waiting'; }
+        else if (remaining <= 0) { el.textContent = '0 detik (EXPIRED)'; el.className = 'system-info-value status-expired'; }
+        else { el.textContent = formatContractTime(remaining); el.className = 'system-info-value status-time'; }
     }
 }
 
 function updateSystemInfo() {
     const el = document.getElementById('sysNodeStatus');
     if (el) {
-        if (state.nodeActive) {
-            el.textContent = 'Aktif';
-            el.className = 'system-info-value status-active';
-        } else {
-            el.textContent = 'Non-Aktif';
-            el.className = 'system-info-value status-inactive';
-        }
+        if (state.nodeActive) { el.textContent = 'Aktif'; el.className = 'system-info-value status-active'; }
+        else { el.textContent = 'Non-Aktif'; el.className = 'system-info-value status-inactive'; }
     }
 }
 
-function addLog(level, message) {
-    const now = new Date();
-    const timestamp = now.getFullYear() + '-' + 
-        String(now.getMonth() + 1).padStart(2, '0') + '-' + 
-        String(now.getDate()).padStart(2, '0') + ' ' +
-        String(now.getHours()).padStart(2, '0') + ':' + 
-        String(now.getMinutes()).padStart(2, '0') + ':' + 
-        String(now.getSeconds()).padStart(2, '0');
+// ==================== LOG ENGINE ====================
+function addLog(level, message, customTimestamp = null) {
+    const now = customTimestamp || new Date();
+    const timestamp = formatTimestamp(now);
     
     state.logs.push({ timestamp, level, message });
-    if (state.logs.length > 500) state.logs.shift();
+    if (state.logs.length > 2000) state.logs.shift();
     
     renderLogs();
 }
@@ -1274,9 +987,7 @@ function renderLogs() {
     const counter = document.getElementById('logCounter');
     
     const totalLogs = state.logs.length;
-    const filteredLogs = currentLogFilter === 'ALL' 
-        ? state.logs 
-        : state.logs.filter(log => log.level === currentLogFilter);
+    const filteredLogs = currentLogFilter === 'ALL' ? state.logs : state.logs.filter(log => log.level === currentLogFilter);
     
     counter.textContent = `${filteredLogs.length} / ${totalLogs} logs`;
     
@@ -1307,58 +1018,32 @@ function filterLogs(level) {
 
 function clearLog() {
     if (!confirm('Hapus semua log?')) return;
-    state.logs = [];
-    state.shareCount = 0;
-    saveState();
-    renderLogs();
+    state.logs = []; state.shareCount = 0;
+    saveState(); renderLogs();
     showToast('Log berhasil dihapus');
 }
 
 function resetStateForTesting() {
-    if (!confirm('⚠️ Reset semua state untuk testing?\n\nIni akan:\n- Mengembalikan saldo ke 1000 BossX\n- Menghapus semua Access Key\n- Mereset node & kontrak\n- Menghapus semua log\n- Menghentikan mining\n\nLanjutkan?')) {
-        return;
-    }
+    if (!confirm('⚠️ Reset semua state untuk testing?\n\nIni akan:\n- Mengembalikan saldo ke 1000 BossX\n- Menghapus semua Access Key\n- Mereset node & kontrak\n- Menghapus semua log\n- Menghentikan mining\n\nLanjutkan?')) return;
     
     state = {
-        nodeActive: false,
-        powerOn: false,
-        powerOnTimestamp: null,
-        redeemedKey: '',
-        stakeAmount: 0,
-        contractStart: null,
-        bossxBalance: 1000.00000000,
-        currentReward: 0.00000000,
-        rewardValidasi: 0.00000000,
-        countdownSeconds: 60,
-        logs: [],
-        shareCount: 0,
-        totalSharesAccepted: 0,
-        totalSharesRejected: 0,
-        uptimeSeconds: 0,
-        lastSaveTimestamp: null
+        nodeActive: false, powerOn: false, powerOnTimestamp: null,
+        redeemedKey: '', stakeAmount: 0, contractStart: null,
+        bossxBalance: 1000.00000000, currentReward: 0.00000000,
+        rewardValidasi: 0.00000000, countdownSeconds: 60,
+        logs: [], shareCount: 0, totalSharesAccepted: 0,
+        totalSharesRejected: 0, uptimeSeconds: 0, lastSaveTimestamp: null
     };
     
     accessKeys = [];
-    
-    if (isRunning) {
-        isRunning = false;
-        stopVisuals();
-        stopAllSystemLogs();
-    }
+    if (isRunning) { isRunning = false; stopVisuals(); stopAllSystemLogs(); }
     
     document.getElementById('redeemInput').value = '';
-    updateRedeemButton();
-    updateSystemInfo();
-    updateContractStatus();
-    updateWalletDisplay();
-    updateRewardDisplay();
-    updateCountdownDisplay();
-    updatePowerButton();
-    updateKeysTable();
-    updateSummary();
+    updateRedeemButton(); updateSystemInfo(); updateContractStatus();
+    updateWalletDisplay(); updateRewardDisplay(); updateCountdownDisplay();
+    updatePowerButton(); updateKeysTable(); updateSummary();
     
-    saveState();
-    renderLogs();
+    saveState(); renderLogs();
     
     addLog('INFO', '🔄 State berhasil direset untuk testing.');
     showToast('State berhasil direset! Saldo dikembalikan ke 1000 BossX.', 'warning');
@@ -1373,6 +1058,7 @@ function showToast(msg, type = 'success') {
     setTimeout(() => { toast.className = 'toast'; }, 3000);
 }
 
+// ==================== AUDIO & CLICK ====================
 function initAudio() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -1423,15 +1109,13 @@ function initRings() {
     const tickRadii = [176, 141, 118, 98, 78, 60];
     for (let r = 0; r < 6; r++) {
         const ring = document.getElementById(`ring-${r}`);
-        const radius = radii[r];
-        const tickRadius = tickRadii[r];
+        const radius = radii[r], tickRadius = tickRadii[r];
         const ringChars = getRandomChars(CHARS_PER_RING);
         
         for (let i = 0; i < TICKS_PER_RING; i++) {
             const angle = (i * 360 / TICKS_PER_RING) - 90;
             const rad = (angle * Math.PI) / 180;
-            const x = Math.cos(rad) * tickRadius;
-            const y = Math.sin(rad) * tickRadius;
+            const x = Math.cos(rad) * tickRadius, y = Math.sin(rad) * tickRadius;
             const tick = document.createElement('div');
             tick.className = `tick ${i % 5 === 0 ? 'major' : ''}`;
             tick.style.left = `calc(50% + ${x}px - 0.5px)`;
@@ -1442,8 +1126,7 @@ function initRings() {
         for (let i = 0; i < CHARS_PER_RING; i++) {
             const angle = (i * 360 / CHARS_PER_RING) - 90;
             const rad = (angle * Math.PI) / 180;
-            const x = Math.cos(rad) * radius;
-            const y = Math.sin(rad) * radius;
+            const x = Math.cos(rad) * radius, y = Math.sin(rad) * radius;
             const charEl = document.createElement('div');
             charEl.className = 'ring-char';
             charEl.textContent = ringChars[i];
@@ -1475,6 +1158,7 @@ function updateHighlights(timestamp) {
     animationFrameId = requestAnimationFrame(updateHighlights);
 }
 
+// ==================== PERSISTENCE ====================
 function saveState() {
     try {
         state.lastSaveTimestamp = Date.now();
@@ -1488,116 +1172,226 @@ function loadState() {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (!saved) return false;
         const data = JSON.parse(saved);
-        
-        const savedState = data.state || {};
-        const savedCountdown = savedState.countdownSeconds;
-        const savedTimestamp = savedState.lastSaveTimestamp;
-        
-        if (savedState) state = { ...state, ...savedState };
+        if (data.state) state = { ...state, ...data.state };
         if (data.accessKeys) accessKeys = data.accessKeys;
-        
-        if (savedTimestamp && savedCountdown !== undefined && state.powerOn && state.nodeActive) {
-            const elapsedSeconds = Math.floor((Date.now() - savedTimestamp) / 1000);
-            
-            if (elapsedSeconds > 0 && elapsedSeconds < savedCountdown) {
-                state.countdownSeconds = savedCountdown - elapsedSeconds;
-            } else if (elapsedSeconds >= savedCountdown && savedCountdown > 0) {
-                const totalElapsed = elapsedSeconds;
-                const missedClaims = Math.floor(totalElapsed / AUTO_CLAIM_INTERVAL);
-                const remainingAfterMissed = totalElapsed % AUTO_CLAIM_INTERVAL;
-                
-                state.countdownSeconds = AUTO_CLAIM_INTERVAL - remainingAfterMissed;
-                
-                if (missedClaims > 0) {
-                    addLog('WARNING', `Session restored: ${missedClaims} auto-claim cycle(s) missed during offline period. Timer reset to ${state.countdownSeconds}s.`);
-                }
-            }
-        }
-        
         return true;
     } catch (e) { console.error('Load failed:', e); return false; }
 }
 
-// ===== FITUR BARU: Hitung Reward Offline & Auto-Stop =====
+// ==================== PERUBAHAN UTAMA: OFFLINE REWARD DENGAN LOG INDIVIDUAL ====================
 function processOfflineState() {
     if (!state.powerOn || !state.powerOnTimestamp) return;
 
     const now = Date.now();
     const nextSixAM = getNextSixAM(state.powerOnTimestamp);
-    
-    // Reward hanya dihitung maksimal sampai jam 06:00:00 berikutnya
     const effectiveEndTime = Math.min(now, nextSixAM);
     const elapsedSeconds = Math.floor((effectiveEndTime - state.powerOnTimestamp) / 1000);
 
-    if (elapsedSeconds > 0) {
-        const rewardPerSec = getRewardPerSecond();
-        const offlineReward = elapsedSeconds * rewardPerSec;
-        
-        // Tambahkan reward offline langsung ke saldo
-        state.bossxBalance += offlineReward;
-        addLog('SUCCESS', `Offline reward calculated: ${offlineReward.toFixed(8)} BossX added to balance. (Duration: ${formatDuration(elapsedSeconds)})`);
-    }
+    if (elapsedSeconds <= 0) return;
 
-    // Cek apakah kita sudah melewati jam 06:00:00
+    const rewardPerSec = getRewardPerSecond();
+    const rewardPerShare = rewardPerSec * AUTO_CLAIM_INTERVAL; // Reward per 60 detik
+    
+    // Hitung jumlah autoclaim yang terlewat
+    const missedShares = Math.floor(elapsedSeconds / AUTO_CLAIM_INTERVAL);
+    const remainingSeconds = elapsedSeconds % AUTO_CLAIM_INTERVAL;
+    
+    // Tambahkan reward yang belum di-autoclaim ke currentReward
+    const pendingReward = remainingSeconds * rewardPerSec;
+    state.currentReward += pendingReward;
+    
+    // ===== GENERATE LOG AUTOCCLAIM SATU PER SATU =====
+    let totalOfflineReward = 0;
+    
+    for (let i = 0; i < missedShares; i++) {
+        state.shareCount++;
+        const shareNumber = String(state.shareCount).padStart(2, '0');
+        const shareReward = rewardPerShare;
+        
+        // Timestamp hipotetis: kapan share ini "seharusnya" terjadi
+        const shareTimestamp = new Date(state.powerOnTimestamp + (i + 1) * AUTO_CLAIM_INTERVAL * 1000);
+        
+        // Tambahkan log individual dengan timestamp yang sesuai
+        state.logs.push({
+            timestamp: formatTimestamp(shareTimestamp),
+            level: 'SUCCESS',
+            message: `Autoclaim accepted share #${shareNumber} (diff: ${FIXED_DIFFICULTY}) - reward: ${shareReward.toFixed(8)} BossX.`
+        });
+        
+        state.rewardValidasi += shareReward;
+        state.totalSharesAccepted++;
+        totalOfflineReward += shareReward;
+    }
+    
+    // Log ringkasan di akhir (hanya 1 log)
+    if (missedShares > 0) {
+        const restoreTimestamp = new Date(now);
+        state.logs.push({
+            timestamp: formatTimestamp(restoreTimestamp),
+            level: 'INFO',
+            message: `🔄 Session restored: Processed ${missedShares} offline autoclaim(s) from ${formatDuration(elapsedSeconds)} offline period. Total: ${totalOfflineReward.toFixed(8)} BossX added to Reward Validasi.`
+        });
+    }
+    
+    // Reset countdown ke sisa waktu
+    state.countdownSeconds = AUTO_CLAIM_INTERVAL - remainingSeconds;
+    if (state.countdownSeconds <= 0) state.countdownSeconds = AUTO_CLAIM_INTERVAL;
+    
+    // Cek auto-stop
     if (now >= nextSixAM) {
-        // Auto-stop terjadi saat offline
         state.powerOn = false;
         state.powerOnTimestamp = null;
         isRunning = false;
-        stopVisuals();
-        stopAllSystemLogs();
-        addLog('WARNING', 'Auto Stop 06:00:00 occurred while offline. Power dial turned OFF. You can turn it ON again at 06:00:01.');
-        updatePowerButton();
-        updateContractStatus();
-    } else {
-        // Masih sebelum 06:00:00, lanjutkan operasi normal
-        state.powerOnTimestamp = now; // Reset timestamp ke sekarang agar tidak double count
+        stopVisuals(); stopAllSystemLogs();
         
-        // Resume visual dan log
+        const autoStopTimestamp = new Date(nextSixAM);
+        state.logs.push({
+            timestamp: formatTimestamp(autoStopTimestamp),
+            level: 'WARNING',
+            message: 'Auto Stop 06:00:00 occurred while offline. Power dial turned OFF. You can turn it ON again at 06:00:01.'
+        });
+        
+        updatePowerButton(); updateContractStatus();
+    } else {
+        // Masih sebelum 06:00, lanjutkan operasi
+        state.powerOnTimestamp = now;
         isRunning = true;
+        
         const btn = document.getElementById('powerBtn');
         const center = document.getElementById('centerDisplay');
         const guideLine = document.getElementById('guideLine');
         const rings = document.querySelectorAll('.ring');
         
-        btn.classList.add('running');
-        center.classList.add('running');
+        btn.classList.add('running'); center.classList.add('running');
         guideLine.classList.add('active');
         rings.forEach(ring => ring.classList.add('running'));
         
         startTime = 0;
         animationFrameId = requestAnimationFrame(updateHighlights);
-        startClickLoop();
-        startAllSystemLogs();
+        startClickLoop(); startAllSystemLogs();
         
-        addLog('INFO', `🔄 Session restored. Mining continues. Next auto-stop at 06:00:00.`);
+        const restoreTimestamp = new Date(now);
+        state.logs.push({
+            timestamp: formatTimestamp(restoreTimestamp),
+            level: 'INFO',
+            message: `🔄 Session restored. Mining continues. Countdown: ${state.countdownSeconds}s`
+        });
     }
     
     saveState();
+    updateRewardDisplay();
     updateWalletDisplay();
+    updateCountdownDisplay();
+    renderLogs();
 }
 
+// ==================== SYSTEM LOGS (FAKE MINING) ====================
+function startAllSystemLogs() {
+    stopAllSystemLogs();
+    
+    addLog('SUCCESS', `Connected to pool: stratum+tcp://bossx-pool.masternode.io:3333`);
+    setTimeout(() => addLog('SUCCESS', `Authorized worker: miner_8055x.validator1`), 500);
+    setTimeout(() => addLog('INFO', `New job received: ${generateJobId()} (Pool: BossXpool)`), 1200);
+    
+    const gpuInterval = setInterval(() => {
+        if (!state.powerOn || !state.nodeActive) return;
+        const hashrate = getRandomNumber(47, 51, 1), temp = getRandomInt(74, 80);
+        const fan = getRandomInt(84, 90), power = getRandomInt(215, 225);
+        addLog('INFO', `GPU#0: ${hashrate} MH/s | Temp: ${temp}°C | Fan: ${fan}% | Power: ${power}W`);
+    }, getRandomInt(35000, 55000));
+    systemLogIntervals.push(gpuInterval);
+    
+    const powerInterval = setInterval(() => {
+        if (!state.powerOn || !state.nodeActive) return;
+        const totalPower = getRandomInt(3280, 3380);
+        addLog('INFO', `Power consumption: ${totalPower}W | Efficiency: ${(getRewardPerSecond() * 3600 / (totalPower/1000)).toFixed(4)} MH/kWh`);
+    }, getRandomInt(50000, 80000));
+    systemLogIntervals.push(powerInterval);
+    
+    const latencyInterval = setInterval(() => {
+        if (!state.powerOn || !state.nodeActive) return;
+        const ping = getRandomInt(18, 42);
+        const status = ping < 30 ? 'stable' : ping < 40 ? 'moderate' : 'high';
+        addLog('INFO', `Network latency: ${ping}ms | Status: ${status}`);
+    }, getRandomInt(25000, 45000));
+    systemLogIntervals.push(latencyInterval);
+    
+    const heartbeatInterval = setInterval(() => {
+        if (!state.powerOn || !state.nodeActive) return;
+        addLog('INFO', `Worker heartbeat: miner_8055x.validator1 | Uptime: ${formatUptime(state.uptimeSeconds)} | Status: ACTIVE`);
+    }, 300000);
+    systemLogIntervals.push(heartbeatInterval);
+    
+    const summaryInterval = setInterval(() => {
+        if (!state.powerOn || !state.nodeActive) return;
+        const totalShares = state.totalSharesAccepted + state.totalSharesRejected;
+        const successRate = totalShares > 0 ? ((state.totalSharesAccepted / totalShares) * 100).toFixed(2) : '100.00';
+        const avgHashrate = getRandomNumber(48, 50, 1);
+        
+        addLog('INFO', `===== 1 Hour Summary =====`);
+        addLog('INFO', `Uptime: ${formatUptime(state.uptimeSeconds)}`);
+        addLog('INFO', `Shares submitted: ${totalShares} (accepted: ${state.totalSharesAccepted}, rejected: ${state.totalSharesRejected})`);
+        addLog('INFO', `Success rate: ${successRate}%`);
+        addLog('INFO', `Average hashrate: ${avgHashrate} MH/s`);
+        addLog('INFO', `Reward earned: ${state.rewardValidasi.toFixed(8)} BossX (pending claim)`);
+        addLog('INFO', `==========================`);
+    }, 3600000);
+    systemLogIntervals.push(summaryInterval);
+    
+    const coolingInterval = setInterval(() => {
+        if (!state.powerOn || !state.nodeActive) return;
+        const temp = getRandomInt(72, 78);
+        const status = temp < 75 ? 'optimal' : temp < 78 ? 'stable' : 'warning';
+        addLog('INFO', `Cooling system: ${status} | GPU temp: ${temp}°C | Ambient: ${getRandomInt(22, 26)}°C`);
+    }, getRandomInt(120000, 180000));
+    systemLogIntervals.push(coolingInterval);
+    
+    const jobInterval = setInterval(() => {
+        if (!state.powerOn || !state.nodeActive) return;
+        addLog('INFO', `Job ID changed: ${generateJobId()} (Pool: BossXpool)`);
+    }, getRandomInt(180000, 300000));
+    systemLogIntervals.push(jobInterval);
+}
+
+function stopAllSystemLogs() {
+    systemLogIntervals.forEach(interval => { if (interval) clearInterval(interval); });
+    systemLogIntervals = [];
+}
+
+function generateJobId() {
+    const chars = '0123456789abcdef';
+    let id = '0x';
+    for (let i = 0; i < 16; i++) id += chars.charAt(Math.floor(Math.random() * chars.length));
+    return id;
+}
+
+function updateShareStatistics(accepted) {
+    if (accepted) state.totalSharesAccepted++;
+    else state.totalSharesRejected++;
+    
+    if ((state.totalSharesAccepted + state.totalSharesRejected) % 10 === 0) {
+        const total = state.totalSharesAccepted + state.totalSharesRejected;
+        const rate = ((state.totalSharesAccepted / total) * 100).toFixed(2);
+        addLog('INFO', `Share statistics: ${total} total (${state.totalSharesAccepted} accepted, ${state.totalSharesRejected} rejected) | Success rate: ${rate}%`);
+    }
+}
+
+// ==================== INIT ====================
 function init() {
     initRings();
     
     const loaded = loadState();
     
     if (loaded) {
-        // PROSES OFFLINE REWARD & AUTO-STOP SAAT INIT
         processOfflineState();
     } else {
         addLog('INFO', '🚀 BossX Masternode Platform initialized.');
     }
     
-    updateSystemInfo();
-    updateContractStatus();
-    updateWalletDisplay();
-    updateRewardDisplay();
-    updateCountdownDisplay();
-    updatePowerButton();
-    updateKeysTable();
-    updateSummary();
-    renderLogs();
+    updateSystemInfo(); updateContractStatus();
+    updateWalletDisplay(); updateRewardDisplay();
+    updateCountdownDisplay(); updatePowerButton();
+    updateKeysTable(); updateSummary(); renderLogs();
     
     saveState();
 }
