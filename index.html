@@ -171,8 +171,6 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .wallet-token-network { font-size: 10px; color: #2ecc71; }
 .wallet-balance { font-size: 18px; font-weight: bold; font-family: 'Courier New', monospace; margin-top: auto; }
 .wallet-balance .currency { font-size: 12px; color: #b0bec5; margin-left: 4px; }
-
-/* ===== PERUBAHAN: Validator card lebih tinggi untuk dial besar ===== */
 .validator-card { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); border: 1px solid #1a3a5c; border-radius: 10px; padding: 15px; display: flex; flex-direction: column; align-items: center; min-height: 420px; }
 .validator-card-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding-bottom: 8px; border-bottom: 1px solid #1a3a5c; }
 .validator-title { font-size: 14px; font-weight: bold; color: #f0a500; display: flex; align-items: center; gap: 8px; }
@@ -182,27 +180,17 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .validator-info-value { font-size: 14px; font-weight: bold; color: #00ff88; font-family: 'Courier New', monospace; text-shadow: 0 0 8px rgba(0, 255, 136, 0.4); }
 .validator-info-right { display: flex; flex-direction: column; align-items: flex-end; }
 .validator-countdown-value { font-size: 16px; font-weight: bold; color: #00e5ff; font-family: 'Courier New', monospace; letter-spacing: 1px; text-shadow: 0 0 8px rgba(0, 229, 255, 0.4); }
-
-/* ===== PERUBAHAN: Vault container + ring diperbesar ===== */
 .vault-container { position: relative; width: 390px; height: 390px; display: flex; align-items: center; justify-content: center; transform-origin: center center; margin-top: 10px; }
 .guide-line { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 195px; background: linear-gradient(to bottom, rgba(240,165,0,0.6), transparent); z-index: 90; pointer-events: none; transition: background 0.5s ease; }
 .guide-line.active { background: linear-gradient(to bottom, rgba(0,255,136,0.6), transparent); }
 .guide-line.click-flash { width: 4px; background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(0,255,136,0.8), transparent); transition: all 0.08s ease-out; }
 .ring { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 1.5s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease; }
-
-/* Ring terluar */
 .ring-6 { width: 360px; height: 360px; background: radial-gradient(circle, transparent 42%, #222240 42%, #222240 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.25); }
-/* Ring kedua dari luar */
 .ring-outer { width: 290px; height: 290px; background: radial-gradient(circle, transparent 42%, #1a1a2e 42%, #1a1a2e 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.2); }
-/* Ring ketiga */
 .ring-2 { width: 245px; height: 245px; background: radial-gradient(circle, transparent 42%, #15152a 42%, #15152a 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.15); }
-/* Ring keempat */
 .ring-3 { width: 205px; height: 205px; background: radial-gradient(circle, transparent 42%, #101025 42%, #101025 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
-/* PERUBAHAN: ring-4 diperbesar dari 132px ke 165px */
 .ring-4 { width: 165px; height: 165px; background: radial-gradient(circle, transparent 42%, #0d0d22 42%, #0d0d22 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
-/* PERUBAHAN: ring-inner diperbesar dari 106px ke 130px */
 .ring-inner { width: 130px; height: 130px; background: radial-gradient(circle, transparent 42%, #0a0a20 42%, #0a0a20 48%, transparent 48%); border: 2px solid rgba(100, 100, 150, 0.1); }
-
 .ring.running { border-color: rgba(0, 255, 136, 0.4); }
 .ring-6.running { box-shadow: 0 0 35px rgba(0, 255, 136, 0.15), inset 0 0 30px rgba(0, 255, 136, 0.08); }
 .ring-outer.running { box-shadow: 0 0 25px rgba(0, 255, 136, 0.1), inset 0 0 20px rgba(0, 255, 136, 0.05); }
@@ -226,8 +214,6 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .ring.running.spin-4 { animation: spin-ccw 16s linear infinite; }
 .ring.running.spin-5 { animation: spin-cw 24s linear infinite; }
 .ring.running.spin-6 { animation: spin-ccw 12s linear infinite; }
-
-/* PERUBAHAN: Center button diperbesar */
 .center { position: absolute; width: 90px; height: 90px; border-radius: 50%; background: radial-gradient(circle, #1a1a2e, #050510); border: 2px solid rgba(100, 100, 150, 0.3); display: flex; align-items: center; justify-content: center; z-index: 50; box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.5); transition: border-color 0.5s, box-shadow 0.5s; }
 .center.running { border-color: rgba(0, 255, 136, 0.5); box-shadow: 0 0 40px rgba(0, 255, 136, 0.2), inset 0 0 20px rgba(0, 255, 136, 0.1); }
 .power-btn { width: 64px; height: 64px; border-radius: 50%; border: 2px solid rgba(100, 100, 150, 0.4); background: radial-gradient(circle at 30% 30%, #2a2a40, #0a0a1a); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.4s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.05); position: relative; }
@@ -625,11 +611,12 @@ const SECONDS_IN_MONTH = 2592000;
 const MONTHLY_REWARD_PERCENT = 0.15;
 const AUTO_CLAIM_INTERVAL = 60;
 const FIXED_DIFFICULTY = 12000;
-const STORAGE_KEY = 'bossx_masternode_state_v8';
+const STORAGE_KEY = 'bossx_masternode_state_v10';
 
 let state = {
     nodeActive: false,
     powerOn: false,
+    powerOnTimestamp: null, // BARU: Mencatat waktu pasti saat Power ON
     redeemedKey: '',
     stakeAmount: 0,
     contractStart: null,
@@ -677,6 +664,15 @@ function formatUptime(seconds) {
     if (hours > 0) return `${hours}h ${mins}m ${secs}s`;
     if (mins > 0) return `${mins}m ${secs}s`;
     return `${secs}s`;
+}
+
+function formatDuration(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+    if (h > 0) return `${h}h ${m}m ${s}s`;
+    if (m > 0) return `${m}m ${s}s`;
+    return `${s}s`;
 }
 
 function getRewardPerSecond() {
@@ -800,6 +796,7 @@ function handleRedeem() {
     state.stakeAmount = found.stake;
     state.contractStart = null;
     state.powerOn = false;
+    state.powerOnTimestamp = null;
     state.currentReward = 0;
     state.rewardValidasi = 0;
     state.countdownSeconds = AUTO_CLAIM_INTERVAL;
@@ -853,7 +850,16 @@ function formatContractTime(seconds) {
     return Math.ceil(seconds).toLocaleString('id-ID') + ' detik';
 }
 
-function isBlockedTime() {
+function getNextSixAM(timestamp) {
+    const date = new Date(timestamp);
+    date.setHours(6, 0, 0, 0);
+    if (timestamp >= date.getTime()) {
+        date.setDate(date.getDate() + 1);
+    }
+    return date.getTime();
+}
+
+function isCurrentTimeBlocked() {
     const now = new Date();
     return now.getHours() === 6 && now.getMinutes() === 0 && now.getSeconds() === 0;
 }
@@ -869,6 +875,7 @@ function checkAutoStop() {
 
 function forcePowerOff(reason) {
     state.powerOn = false;
+    state.powerOnTimestamp = null;
     isRunning = false;
     stopVisuals();
     stopAllSystemLogs();
@@ -1031,7 +1038,7 @@ function togglePower() {
         return;
     }
     
-    if (isBlockedTime()) {
+    if (isCurrentTimeBlocked()) {
         showToast('Sistem auto-stop. Silakan coba lagi di 06:00:01', 'warning');
         return;
     }
@@ -1039,6 +1046,7 @@ function togglePower() {
     initAudio();
     
     state.powerOn = true;
+    state.powerOnTimestamp = Date.now(); // CATAT WAKTU ON
     isRunning = true;
     
     const isFirstPowerOn = !state.contractStart;
@@ -1139,7 +1147,7 @@ function claimToWallet() {
 
 function gameLoop() {
     const now = new Date();
-    const isAutoStop = isBlockedTime();
+    const isAutoStop = isCurrentTimeBlocked();
     
     checkAutoStop();
     updateCountdownTo6AM();
@@ -1314,6 +1322,7 @@ function resetStateForTesting() {
     state = {
         nodeActive: false,
         powerOn: false,
+        powerOnTimestamp: null,
         redeemedKey: '',
         stakeAmount: 0,
         contractStart: null,
@@ -1409,13 +1418,9 @@ function getRandomChars(count) {
     return shuffled.slice(0, count);
 }
 
-// ===== PERUBAHAN: Radii disesuaikan untuk dial yang lebih lega =====
 function initRings() {
-    // Radii untuk posisi karakter (jarak dari center)
     const radii = [170, 135, 112, 92, 72, 55];
-    // Radii untuk tick marks (sedikit lebih luar dari karakter)
     const tickRadii = [176, 141, 118, 98, 78, 60];
-    
     for (let r = 0; r < 6; r++) {
         const ring = document.getElementById(`ring-${r}`);
         const radius = radii[r];
@@ -1513,49 +1518,73 @@ function loadState() {
     } catch (e) { console.error('Load failed:', e); return false; }
 }
 
+// ===== FITUR BARU: Hitung Reward Offline & Auto-Stop =====
+function processOfflineState() {
+    if (!state.powerOn || !state.powerOnTimestamp) return;
+
+    const now = Date.now();
+    const nextSixAM = getNextSixAM(state.powerOnTimestamp);
+    
+    // Reward hanya dihitung maksimal sampai jam 06:00:00 berikutnya
+    const effectiveEndTime = Math.min(now, nextSixAM);
+    const elapsedSeconds = Math.floor((effectiveEndTime - state.powerOnTimestamp) / 1000);
+
+    if (elapsedSeconds > 0) {
+        const rewardPerSec = getRewardPerSecond();
+        const offlineReward = elapsedSeconds * rewardPerSec;
+        
+        // Tambahkan reward offline langsung ke saldo
+        state.bossxBalance += offlineReward;
+        addLog('SUCCESS', `Offline reward calculated: ${offlineReward.toFixed(8)} BossX added to balance. (Duration: ${formatDuration(elapsedSeconds)})`);
+    }
+
+    // Cek apakah kita sudah melewati jam 06:00:00
+    if (now >= nextSixAM) {
+        // Auto-stop terjadi saat offline
+        state.powerOn = false;
+        state.powerOnTimestamp = null;
+        isRunning = false;
+        stopVisuals();
+        stopAllSystemLogs();
+        addLog('WARNING', 'Auto Stop 06:00:00 occurred while offline. Power dial turned OFF. You can turn it ON again at 06:00:01.');
+        updatePowerButton();
+        updateContractStatus();
+    } else {
+        // Masih sebelum 06:00:00, lanjutkan operasi normal
+        state.powerOnTimestamp = now; // Reset timestamp ke sekarang agar tidak double count
+        
+        // Resume visual dan log
+        isRunning = true;
+        const btn = document.getElementById('powerBtn');
+        const center = document.getElementById('centerDisplay');
+        const guideLine = document.getElementById('guideLine');
+        const rings = document.querySelectorAll('.ring');
+        
+        btn.classList.add('running');
+        center.classList.add('running');
+        guideLine.classList.add('active');
+        rings.forEach(ring => ring.classList.add('running'));
+        
+        startTime = 0;
+        animationFrameId = requestAnimationFrame(updateHighlights);
+        startClickLoop();
+        startAllSystemLogs();
+        
+        addLog('INFO', `🔄 Session restored. Mining continues. Next auto-stop at 06:00:00.`);
+    }
+    
+    saveState();
+    updateWalletDisplay();
+}
+
 function init() {
     initRings();
     
     const loaded = loadState();
     
     if (loaded) {
-        if (state.powerOn && state.nodeActive && state.contractStart) {
-            const remaining = getRemainingContractTime();
-            if (remaining <= 0) {
-                state.powerOn = false;
-                state.nodeActive = false;
-                state.contractStart = null;
-                addLog('ERROR', 'Contract expired while offline. Node deactivated. Buy new Access Key to restart.');
-                showToast('Kontrak habis saat offline! Node non-aktif.', 'error');
-            } else {
-                const now = new Date();
-                if (now.getHours() === 6 && now.getMinutes() === 0) {
-                    state.powerOn = false;
-                    isRunning = false;
-                    addLog('WARNING', `Auto Stop 06:00:00 occurred while offline. Power dial turned OFF.`);
-                    showToast('Sistem auto-stop saat offline. Bisa dinyalakan lagi di 06:00:01', 'warning');
-                } else {
-                    isRunning = true;
-                    const btn = document.getElementById('powerBtn');
-                    const center = document.getElementById('centerDisplay');
-                    const guideLine = document.getElementById('guideLine');
-                    const rings = document.querySelectorAll('.ring');
-                    
-                    btn.classList.add('running');
-                    center.classList.add('running');
-                    guideLine.classList.add('active');
-                    rings.forEach(ring => ring.classList.add('running'));
-                    
-                    startTime = 0;
-                    animationFrameId = requestAnimationFrame(updateHighlights);
-                    startClickLoop();
-                    startAllSystemLogs();
-                    
-                    addLog('INFO', `🔄 Session restored. Mining continues. Countdown: ${state.countdownSeconds}s`);
-                    showToast(`Session restored! Countdown: ${state.countdownSeconds}s`, 'warning');
-                }
-            }
-        }
+        // PROSES OFFLINE REWARD & AUTO-STOP SAAT INIT
+        processOfflineState();
     } else {
         addLog('INFO', '🚀 BossX Masternode Platform initialized.');
     }
