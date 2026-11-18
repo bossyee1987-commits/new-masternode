@@ -320,7 +320,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .ticker-separator { color: #f39c12; font-size: 16px; vertical-align: middle; margin: 0 10px; text-shadow: 0 0 5px rgba(243, 156, 18, 0.5); }
 @keyframes ticker-scroll { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
 .market-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; height: 600px; }
-.market-chart-container { background: #0d2137; border: 1px solid #1a5276; border-radius: 10px; padding: 15px; position: relative; min-height: 400px; }
+.market-chart-container { background: #0d2137; border: 1px solid #1a5276; border-radius: 10px; padding: 15px; position: relative; }
 .market-sidebar { display: flex; flex-direction: column; gap: 15px; }
 .order-book-container, .trade-form-container { background: #0d2137; border: 1px solid #1a5276; border-radius: 10px; padding: 15px; flex: 1; display: flex; flex-direction: column; }
 .ob-header, .tf-header { font-size: 14px; font-weight: bold; color: #00e5ff; margin-bottom: 10px; border-bottom: 1px solid #1a5276; padding-bottom: 8px; }
@@ -556,9 +556,9 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
             </div>
 
             <div class="market-tabs">
-                <button class="market-tab active" id="tab-BTCUSDT" onclick="switchMarketPair('BTCUSDT', this)">BTC/USDT</button>
-                <button class="market-tab" id="tab-TRXUSDT" onclick="switchMarketPair('TRXUSDT', this)">TRX/USDT</button>
-                <button class="market-tab" id="tab-BOSSXUSDT" onclick="switchMarketPair('BOSSXUSDT', this)">BOSSX/USDT</button>
+                <button class="market-tab active" onclick="switchMarketPair('BTCUSDT', this)">BTC/USDT</button>
+                <button class="market-tab" onclick="switchMarketPair('TRXUSDT', this)">TRX/USDT</button>
+                <button class="market-tab" onclick="switchMarketPair('BOSSXUSDT', this)">BOSSX/USDT</button>
             </div>
 
             <div class="market-grid">
@@ -687,7 +687,7 @@ function navigateTo(page, event) {
     document.getElementById('page-' + page).classList.add('active');
     document.getElementById('menu-' + page).classList.add('active');
     if (page === 'market') {
-        setTimeout(() => initMarket(), 200);
+        setTimeout(() => initMarket(), 100);
     }
 }
 
@@ -837,18 +837,105 @@ function initRings() { const radii = [170, 135, 112, 92, 72, 55]; const tickRadi
 function updateHighlights(timestamp) { if (!isRunning) return; if (!startTime) startTime = timestamp; const elapsed = timestamp - startTime; const rings = document.querySelectorAll('.ring'); rings.forEach((ring, r) => { const oldHighlight = ring.querySelector('.ring-char.highlight'); if (oldHighlight) oldHighlight.classList.remove('highlight'); let currentAngle = (elapsed * RING_SPEEDS[r]) % 360; if (currentAngle < 0) currentAngle += 360; const anglePerChar = 360 / CHARS_PER_RING; let rawIndex = -currentAngle / anglePerChar; let highlightIndex = Math.round(rawIndex) % CHARS_PER_RING; if (highlightIndex < 0) highlightIndex += CHARS_PER_RING; const chars = ring.querySelectorAll('.ring-char'); if (chars[highlightIndex]) chars[highlightIndex].classList.add('highlight'); }); animationFrameId = requestAnimationFrame(updateHighlights); }
 
 function saveState() { try { state.lastSaveTimestamp = Date.now(); const data = { state: state, accessKeys: accessKeys }; localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (e) { console.error('Save failed:', e); } }
-function loadState() { try { const saved = localStorage.getItem(STORAGE_KEY); if (!saved) return false; const data = JSON.parse(saved); if (data.state) state = { ...state, ...data.state }; if (data.accessKeys) accessKeys = data.accessKeys; return true; } catch (e) { console.error('Load failed:', e); return false; } }
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return false;
+        const data = JSON.parse(saved);
+        if (data.state) state = { ...state, ...data.state };
+        if (data.accessKeys) accessKeys = data.accessKeys;
+        
+        const savedTimestamp = state.lastSaveTimestamp;
+        const savedCountdown = state.countdownSeconds;
+        
+        if (savedTimestamp && savedCountdown && state.powerOn && state.nodeActive) {
+            const elapsedSeconds = Math.floor((Date.now() - savedTimestamp) / 1000);
+            
+            if (elapsedSeconds > 0) {
+                if (elapsedSeconds < savedCountdown) {
+                    state.countdownSeconds = savedCountdown - elapsedSeconds;
+                } else {
+                    const totalElapsed = elapsedSeconds;
+                    const remainingAfterMissed = totalElapsed % AUTO_CLAIM_INTERVAL;
+                    state.countdownSeconds = AUTO_CLAIM_INTERVAL - remainingAfterMissed;
+                    if (state.countdownSeconds <= 0) state.countdownSeconds = AUTO_CLAIM_INTERVAL;
+                }
+            }
+        }
+        
+        return true;
+    } catch (e) { console.error('Load failed:', e); return false; }
+}
+
 function processOfflineState() {
     if (!state.powerOn || !state.powerOnTimestamp) return;
-    const now = Date.now(); const nextSixAM = getNextSixAM(state.powerOnTimestamp); const effectiveEndTime = Math.min(now, nextSixAM); const elapsedSeconds = Math.floor((effectiveEndTime - state.powerOnTimestamp) / 1000);
+
+    const now = Date.now();
+    const nextSixAM = getNextSixAM(state.powerOnTimestamp);
+    const effectiveEndTime = Math.min(now, nextSixAM);
+    const elapsedSeconds = Math.floor((effectiveEndTime - state.powerOnTimestamp) / 1000);
+
     if (elapsedSeconds <= 0) return;
-    const rewardPerSec = getRewardPerSecond(); const rewardPerShare = rewardPerSec * AUTO_CLAIM_INTERVAL; const missedShares = Math.floor(elapsedSeconds / AUTO_CLAIM_INTERVAL); const remainingSeconds = elapsedSeconds % AUTO_CLAIM_INTERVAL;
-    const pendingReward = remainingSeconds * rewardPerSec; state.currentReward += pendingReward; let totalOfflineReward = 0;
-    for (let i = 0; i < missedShares; i++) { state.shareCount++; const shareNumber = String(state.shareCount).padStart(2, '0'); const shareReward = rewardPerShare; const shareTimestamp = new Date(state.powerOnTimestamp + (i + 1) * AUTO_CLAIM_INTERVAL * 1000); state.logs.push({ timestamp: formatTimestamp(shareTimestamp), level: 'SUCCESS', message: `Autoclaim accepted share #${shareNumber} (diff: ${FIXED_DIFFICULTY}) - reward: ${shareReward.toFixed(8)} BossX.` }); state.rewardValidasi += shareReward; state.totalSharesAccepted++; totalOfflineReward += shareReward; }
-    if (missedShares > 0) { const restoreTimestamp = new Date(now); state.logs.push({ timestamp: formatTimestamp(restoreTimestamp), level: 'INFO', message: `🔄 Session restored: Processed ${missedShares} offline autoclaim(s) from ${formatDuration(elapsedSeconds)} offline period. Total: ${totalOfflineReward.toFixed(8)} BossX added to Reward Validasi.` }); }
-    state.countdownSeconds = AUTO_CLAIM_INTERVAL - remainingSeconds; if (state.countdownSeconds <= 0) state.countdownSeconds = AUTO_CLAIM_INTERVAL;
-    if (now >= nextSixAM) { state.powerOn = false; state.powerOnTimestamp = null; isRunning = false; stopVisuals(); stopAllSystemLogs(); const autoStopTimestamp = new Date(nextSixAM); state.logs.push({ timestamp: formatTimestamp(autoStopTimestamp), level: 'WARNING', message: 'Auto Stop 06:00:00 occurred while offline. Power dial turned OFF. You can turn it ON again at 06:00:01.' }); updatePowerButton(); updateContractStatus(); } else { state.powerOnTimestamp = now; isRunning = true; const btn = document.getElementById('powerBtn'); const center = document.getElementById('centerDisplay'); const guideLine = document.getElementById('guideLine'); const rings = document.querySelectorAll('.ring'); btn.classList.add('running'); center.classList.add('running'); guideLine.classList.add('active'); rings.forEach(ring => ring.classList.add('running')); startTime = 0; animationFrameId = requestAnimationFrame(updateHighlights); startClickLoop(); startAllSystemLogs(); const restoreTimestamp = new Date(now); state.logs.push({ timestamp: formatTimestamp(restoreTimestamp), level: 'INFO', message: `🔄 Session restored. Mining continues. Countdown: ${state.countdownSeconds}s` }); }
-    saveState(); updateRewardDisplay(); updateWalletDisplay(); updateCountdownDisplay(); renderLogs();
+
+    const rewardPerSec = getRewardPerSecond();
+    const rewardPerShare = rewardPerSec * AUTO_CLAIM_INTERVAL;
+    const missedShares = Math.floor(elapsedSeconds / AUTO_CLAIM_INTERVAL);
+    const remainingSeconds = elapsedSeconds % AUTO_CLAIM_INTERVAL;
+    
+    const pendingReward = remainingSeconds * rewardPerSec;
+    state.currentReward += pendingReward;
+    let totalOfflineReward = 0;
+    
+    for (let i = 0; i < missedShares; i++) {
+        state.shareCount++;
+        const shareNumber = String(state.shareCount).padStart(2, '0');
+        const shareReward = rewardPerShare;
+        const shareTimestamp = new Date(state.powerOnTimestamp + (i + 1) * AUTO_CLAIM_INTERVAL * 1000);
+        state.logs.push({ timestamp: formatTimestamp(shareTimestamp), level: 'SUCCESS', message: `Autoclaim accepted share #${shareNumber} (diff: ${FIXED_DIFFICULTY}) - reward: ${shareReward.toFixed(8)} BossX.` });
+        state.rewardValidasi += shareReward;
+        state.totalSharesAccepted++;
+        totalOfflineReward += shareReward;
+    }
+    
+    if (missedShares > 0) {
+        const restoreTimestamp = new Date(now);
+        state.logs.push({ timestamp: formatTimestamp(restoreTimestamp), level: 'INFO', message: `🔄 Session restored: Processed ${missedShares} offline autoclaim(s) from ${formatDuration(elapsedSeconds)} offline period. Total: ${totalOfflineReward.toFixed(8)} BossX added to Reward Validasi.` });
+    }
+    
+    state.countdownSeconds = AUTO_CLAIM_INTERVAL - remainingSeconds;
+    if (state.countdownSeconds <= 0) state.countdownSeconds = AUTO_CLAIM_INTERVAL;
+    
+    if (now >= nextSixAM) {
+        state.powerOn = false;
+        state.powerOnTimestamp = null;
+        isRunning = false;
+        stopVisuals(); stopAllSystemLogs();
+        const autoStopTimestamp = new Date(nextSixAM);
+        state.logs.push({ timestamp: formatTimestamp(autoStopTimestamp), level: 'WARNING', message: 'Auto Stop 06:00:00 occurred while offline. Power dial turned OFF. You can turn it ON again at 06:00:01.' });
+        updatePowerButton(); updateContractStatus();
+    } else {
+        state.powerOnTimestamp = now;
+        isRunning = true;
+        const btn = document.getElementById('powerBtn');
+        const center = document.getElementById('centerDisplay');
+        const guideLine = document.getElementById('guideLine');
+        const rings = document.querySelectorAll('.ring');
+        btn.classList.add('running'); center.classList.add('running');
+        guideLine.classList.add('active');
+        rings.forEach(ring => ring.classList.add('running'));
+        startTime = 0;
+        animationFrameId = requestAnimationFrame(updateHighlights);
+        startClickLoop(); startAllSystemLogs();
+        const restoreTimestamp = new Date(now);
+        state.logs.push({ timestamp: formatTimestamp(restoreTimestamp), level: 'INFO', message: `🔄 Session restored. Mining continues. Countdown: ${state.countdownSeconds}s` });
+    }
+    
+    saveState();
+    updateRewardDisplay();
+    updateWalletDisplay();
+    updateCountdownDisplay();
+    renderLogs();
 }
 
 function startAllSystemLogs() { stopAllSystemLogs(); addLog('SUCCESS', `Connected to pool: stratum+tcp://bossx-pool.masternode.io:3333`); setTimeout(() => addLog('SUCCESS', `Authorized worker: miner_8055x.validator1`), 500); setTimeout(() => addLog('INFO', `New job received: ${generateJobId()} (Pool: BossXpool)`), 1200); const gpuInterval = setInterval(() => { if (!state.powerOn || !state.nodeActive) return; const hashrate = getRandomNumber(47, 51, 1), temp = getRandomInt(74, 80); const fan = getRandomInt(84, 90), power = getRandomInt(215, 225); addLog('INFO', `GPU#0: ${hashrate} MH/s | Temp: ${temp}°C | Fan: ${fan}% | Power: ${power}W`); }, getRandomInt(35000, 55000)); systemLogIntervals.push(gpuInterval); const powerInterval = setInterval(() => { if (!state.powerOn || !state.nodeActive) return; const totalPower = getRandomInt(3280, 3380); addLog('INFO', `Power consumption: ${totalPower}W | Efficiency: ${(getRewardPerSecond() * 3600 / (totalPower/1000)).toFixed(4)} MH/kWh`); }, getRandomInt(50000, 80000)); systemLogIntervals.push(powerInterval); const latencyInterval = setInterval(() => { if (!state.powerOn || !state.nodeActive) return; const ping = getRandomInt(18, 42); const status = ping < 30 ? 'stable' : ping < 40 ? 'moderate' : 'high'; addLog('INFO', `Network latency: ${ping}ms | Status: ${status}`); }, getRandomInt(25000, 45000)); systemLogIntervals.push(latencyInterval); const heartbeatInterval = setInterval(() => { if (!state.powerOn || !state.nodeActive) return; addLog('INFO', `Worker heartbeat: miner_8055x.validator1 | Uptime: ${formatUptime(state.uptimeSeconds)} | Status: ACTIVE`); }, 300000); systemLogIntervals.push(heartbeatInterval); const summaryInterval = setInterval(() => { if (!state.powerOn || !state.nodeActive) return; const totalShares = state.totalSharesAccepted + state.totalSharesRejected; const successRate = totalShares > 0 ? ((state.totalSharesAccepted / totalShares) * 100).toFixed(2) : '100.00'; const avgHashrate = getRandomNumber(48, 50, 1); addLog('INFO', `===== 1 Hour Summary =====`); addLog('INFO', `Uptime: ${formatUptime(state.uptimeSeconds)}`); addLog('INFO', `Shares submitted: ${totalShares} (accepted: ${state.totalSharesAccepted}, rejected: ${state.totalSharesRejected})`); addLog('INFO', `Success rate: ${successRate}%`); addLog('INFO', `Average hashrate: ${avgHashrate} MH/s`); addLog('INFO', `Reward earned: ${state.rewardValidasi.toFixed(8)} BossX (pending claim)`); addLog('INFO', `==========================`); }, 3600000); systemLogIntervals.push(summaryInterval); const coolingInterval = setInterval(() => { if (!state.powerOn || !state.nodeActive) return; const temp = getRandomInt(72, 78); const status = temp < 75 ? 'optimal' : temp < 78 ? 'stable' : 'warning'; addLog('INFO', `Cooling system: ${status} | GPU temp: ${temp}°C | Ambient: ${getRandomInt(22, 26)}°C`); }, getRandomInt(120000, 180000)); systemLogIntervals.push(coolingInterval); const jobInterval = setInterval(() => { if (!state.powerOn || !state.nodeActive) return; addLog('INFO', `Job ID changed: ${generateJobId()} (Pool: BossXpool)`); }, getRandomInt(180000, 300000)); systemLogIntervals.push(jobInterval); }
@@ -867,150 +954,73 @@ function processAiInput(text) { const lowerText = text.toLowerCase(); if (lowerT
 function aiQuickAction(action) { let userText = ''; if (action === 'saldo') userText = 'Cek Saldo'; else if (action === 'akumulasi') userText = 'Akumulasi Real-Time'; else if (action === 'aktivasi') userText = 'Aktivasi Hari Ini'; else if (action === 'status') userText = 'Status Node'; addAiMessage(userText, 'user'); setTimeout(() => aiAction(action), 300); }
 function aiAction(action, param = null) { let response = ""; switch(action) { case 'saldo': response = `💰 Laporan Saldo Real-Time:\n\n• Saldo Wallet BossX: ${state.bossxBalance.toFixed(8)} BossX\n• Saldo USDT: ${state.usdtBalance.toFixed(2)} USDT\n• Reward Validasi (Pending): ${state.rewardValidasi.toFixed(8)} BossX\n\nSemua data adalah fakta terkini.`; break; case 'akumulasi': const targetShare = param || state.shareCount; if (targetShare > state.shareCount) { response = `⚠️ Maaf Boss, Share #${targetShare} belum berjalan. Saat ini progress Anda baru di Share #${state.shareCount}. Saya hanya bisa menghitung fakta yang sudah terjadi. Silakan pertahankan keaktifan Anda!`; } else if (state.shareCount === 0) { response = `📊 Belum ada Share yang selesai. Silakan aktifkan Power ON untuk mulai menghasilkan Share.`; } else { const rewardPerShare = getRewardPerSecond() * AUTO_CLAIM_INTERVAL; const total = rewardPerShare * targetShare; response = `📊 Akumulasi Real-Time:\n\nDari Share #01 hingga #${targetShare}, total reward yang sudah terkumpul adalah ${total.toFixed(8)} BossX.`; } break; case 'aktivasi': const today = new Date().toDateString(); const todayActivations = state.activationHistory.filter(a => a.date === today); if (todayActivations.length > 0) { const lastActivation = todayActivations[todayActivations.length - 1].time; response = `⏱️ Aktivasi Hari Ini:\n\nAnda melakukan Power ON hari ini pukul ${lastActivation}. Pertahankan konsistensi Anda, Boss!`; } else { response = `⏱️ Aktivasi Hari Ini:\n\nBelum ada catatan Power ON hari ini. Jangan lupa klik Power ON setelah jam 06:01 ya, Boss!`; } break; case 'status': const remaining = getRemainingContractTime(); const statusText = state.powerOn ? "Berjalan (Locked)" : (state.nodeActive ? "Paused (Auto-Stop)" : "Non-Aktif"); response = `📈 Status Node:\n\n• Status: ${statusText}\n• Sisa Kontrak: ${formatContractTime(remaining)}\n• Uptime Sesi Ini: ${formatUptime(state.uptimeSeconds)}\n• Total Share Tercapai: ${state.shareCount}`; break; } addAiMessage(response, 'bot'); }
 
-// ==================== INTERNAL MARKET (FINAL FIXED) ====================
-function switchMarketPair(pair, clickedTabElement = null) {
+function switchMarketPair(pair, clickedTab) {
     currentPair = pair;
-    
-    // Update active tab dengan aman
     document.querySelectorAll('.market-tab').forEach(tab => tab.classList.remove('active'));
-    
-    if (clickedTabElement) {
-        clickedTabElement.classList.add('active');
+    if (clickedTab) {
+        clickedTab.classList.add('active');
     } else {
-        // Fallback: cari tab berdasarkan ID
-        const tabId = 'tab-' + pair;
-        const tab = document.getElementById(tabId);
-        if (tab) tab.classList.add('active');
+        const pairText = pair.replace('USDT', '/USDT');
+        document.querySelectorAll('.market-tab').forEach(tab => {
+            if (tab.textContent.trim() === pairText) tab.classList.add('active');
+        });
     }
-    
     const coinName = pair.replace('USDT', '');
-    const tradeCoinLabel = document.getElementById('trade-coin-label');
-    const tradeBalanceLabel = document.getElementById('trade-balance-label');
-    if (tradeCoinLabel) tradeCoinLabel.textContent = coinName;
-    if (tradeBalanceLabel) tradeBalanceLabel.textContent = coinName;
-    
-    if (wsConnection) { try { wsConnection.close(); } catch(e) {} wsConnection = null; }
+    document.getElementById('trade-coin-label').textContent = coinName;
+    document.getElementById('trade-balance-label').textContent = coinName;
+    if (wsConnection) { wsConnection.close(); wsConnection = null; }
     if (bossxSimInterval) { clearInterval(bossxSimInterval); bossxSimInterval = null; }
-    
-    if (pair === 'BOSSXUSDT') {
-        initBossxSimulation();
-    } else {
-        initBinanceMarket(pair);
-    }
+    if (pair === 'BOSSXUSDT') initBossxSimulation();
+    else initBinanceMarket(pair);
     updateTradeFormBalances();
 }
 
 function initMarket() {
     const chartContainer = document.getElementById('chart-container');
     if (!chartContainer) return;
-    
-    // Cleanup chart lama
-    if (chart) {
-        try { chart.remove(); } catch(e) {}
-        chart = null;
-        candleSeries = null;
-    }
+    if (chart) { chart.remove(); chart = null; candleSeries = null; }
     chartContainer.innerHTML = '';
-    
-    // Cek library
     if (typeof LightweightCharts === 'undefined') {
-        chartContainer.innerHTML = '<div style="color:#e74c3c; padding:40px; text-align:center; font-size:16px;">⚠️ Library TradingView belum ter-load. Periksa koneksi internet dan refresh halaman.</div>';
+        chartContainer.innerHTML = '<div style="color:#e74c3c; padding:20px; text-align:center;">⚠️ Library TradingView belum ter-load. Refresh halaman.</div>';
         return;
     }
-    
-    try {
-        chart = LightweightCharts.createChart(chartContainer, {
-            width: chartContainer.clientWidth,
-            height: chartContainer.clientHeight,
-            layout: { 
-                background: { type: 'solid', color: '#0d2137' }, 
-                textColor: '#d1d4dc', 
-            },
-            grid: { 
-                vertLines: { color: '#1a3a5c' }, 
-                horzLines: { color: '#1a3a5c' }, 
-            },
-            crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
-            rightPriceScale: { borderColor: '#1a5276' },
-            timeScale: { borderColor: '#1a5276', timeVisible: true },
-        });
-        
-        // API v4.2.1 - gunakan addCandlestickSeries
-        candleSeries = chart.addCandlestickSeries({
-            upColor: '#2ecc71',
-            downColor: '#e74c3c',
-            borderVisible: false,
-            wickUpColor: '#2ecc71',
-            wickDownColor: '#e74c3c',
-        });
-        
-        window.addEventListener('resize', () => {
-            if (chart && chartContainer) {
-                chart.applyOptions({ 
-                    width: chartContainer.clientWidth, 
-                    height: chartContainer.clientHeight 
-                });
-            }
-        });
-        
-        // Load pair default
-        switchMarketPair(currentPair, document.getElementById('tab-' + currentPair));
-    } catch (e) {
-        console.error('Chart init error:', e);
-        chartContainer.innerHTML = '<div style="color:#e74c3c; padding:40px; text-align:center;">⚠️ Gagal menginisialisasi grafik: ' + e.message + '</div>';
-    }
+    chart = LightweightCharts.createChart(chartContainer, {
+        width: chartContainer.clientWidth,
+        height: chartContainer.clientHeight,
+        layout: { background: { type: 'solid', color: '#0d2137' }, textColor: '#d1d4dc' },
+        grid: { vertLines: { color: '#1a3a5c' }, horzLines: { color: '#1a3a5c' } },
+        crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+        rightPriceScale: { borderColor: '#1a5276' },
+        timeScale: { borderColor: '#1a5276', timeVisible: true },
+    });
+    candleSeries = chart.addCandlestickSeries({
+        upColor: '#2ecc71', downColor: '#e74c3c',
+        borderVisible: false, wickUpColor: '#2ecc71', wickDownColor: '#e74c3c',
+    });
+    window.addEventListener('resize', () => {
+        if (chart) chart.applyOptions({ width: chartContainer.clientWidth, height: chartContainer.clientHeight });
+    });
+    switchMarketPair(currentPair);
 }
 
 async function initBinanceMarket(symbol) {
     try {
         const response = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1m&limit=1000`);
         const data = await response.json();
-        
-        const candles = data.map(d => ({
-            time: Math.floor(d[0] / 1000),
-            open: parseFloat(d[1]),
-            high: parseFloat(d[2]),
-            low: parseFloat(d[3]),
-            close: parseFloat(d[4])
-        }));
-        
-        if (candleSeries) {
-            candleSeries.setData(candles);
-        }
-        
+        const candles = data.map(d => ({ time: Math.floor(d[0] / 1000), open: parseFloat(d[1]), high: parseFloat(d[2]), low: parseFloat(d[3]), close: parseFloat(d[4]) }));
+        if (candleSeries) candleSeries.setData(candles);
         const wsSymbol = symbol.toLowerCase();
         wsConnection = new WebSocket(`wss://stream.binance.com:9443/ws/${wsSymbol}@kline_1m`);
-        
         wsConnection.onmessage = (event) => {
-            try {
-                const message = JSON.parse(event.data);
-                const kline = message.k;
-                const candle = {
-                    time: Math.floor(kline.t / 1000),
-                    open: parseFloat(kline.o),
-                    high: parseFloat(kline.h),
-                    low: parseFloat(kline.l),
-                    close: parseFloat(kline.c)
-                };
-                
-                if (candleSeries) {
-                    candleSeries.update(candle);
-                }
-                updateCurrentPrice(parseFloat(kline.c), parseFloat(kline.o));
-            } catch (e) {
-                console.error('WebSocket parse error:', e);
-            }
+            const message = JSON.parse(event.data);
+            const kline = message.k;
+            const candle = { time: Math.floor(kline.t / 1000), open: parseFloat(kline.o), high: parseFloat(kline.h), low: parseFloat(kline.l), close: parseFloat(kline.c) };
+            if (candleSeries) candleSeries.update(candle);
+            updateCurrentPrice(parseFloat(kline.c), parseFloat(kline.o));
         };
-        
-        wsConnection.onerror = (error) => {
-            console.error('WebSocket Error:', error);
-        };
-        
+        wsConnection.onerror = (error) => console.error('WebSocket Error:', error);
         fetchOrderBook(symbol);
-        
-    } catch (e) {
-        console.error("Binance API Error:", e);
-    }
+    } catch (e) { console.error("Binance API Error:", e); }
 }
 
 async function fetchOrderBook(symbol) {
@@ -1018,18 +1028,14 @@ async function fetchOrderBook(symbol) {
         const response = await fetch(`https://api.binance.com/api/v3/depth?symbol=${symbol}&limit=10`);
         const data = await response.json();
         renderOrderBook(data.asks, data.bids, false);
-    } catch (e) {
-        console.error("Order Book Error:", e);
-    }
+    } catch (e) { console.error("Order Book Error:", e); }
 }
 
 function initBossxSimulation() {
     if (!candleSeries) return;
-    
     const candles = [];
     let time = Math.floor(Date.now() / 1000) - (1000 * 60);
     let price = 1.00;
-    
     for (let i = 0; i < 1000; i++) {
         const open = price;
         const close = price + (Math.random() - 0.5) * 0.02;
@@ -1038,27 +1044,15 @@ function initBossxSimulation() {
         candles.push({ time: time + (i * 60), open, high, low, close });
         price = close;
     }
-    
     candleSeries.setData(candles);
     bossxPrice = price;
     updateCurrentPrice(bossxPrice, bossxPrice);
     generateFakeOrderBook(bossxPrice);
-    
     bossxSimInterval = setInterval(() => {
         const change = (Math.random() - 0.5) * 0.005;
         bossxPrice = Math.max(0.1, bossxPrice + change);
         const time = Math.floor(Date.now() / 1000);
-        
-        if (candleSeries) {
-            candleSeries.update({ 
-                time: time, 
-                open: bossxPrice, 
-                high: bossxPrice, 
-                low: bossxPrice, 
-                close: bossxPrice 
-            });
-        }
-        
+        if (candleSeries) candleSeries.update({ time: time, open: bossxPrice, high: bossxPrice, low: bossxPrice, close: bossxPrice });
         updateCurrentPrice(bossxPrice, bossxPrice - change);
         generateFakeOrderBook(bossxPrice);
     }, 2000);
@@ -1077,13 +1071,11 @@ function renderOrderBook(asks, bids, isSimulated) {
     const tbody = document.getElementById('order-book-body');
     if (!tbody) return;
     tbody.innerHTML = '';
-    
     asks.slice().reverse().forEach(ask => {
         const tr = document.createElement('tr');
         tr.innerHTML = `<td class="ob-ask">${parseFloat(ask[0]).toFixed(isSimulated ? 4 : 2)}</td><td>${parseFloat(ask[1]).toFixed(4)}</td><td>${(ask[0]*ask[1]).toFixed(2)}</td>`;
         tbody.appendChild(tr);
     });
-    
     bids.forEach(bid => {
         const tr = document.createElement('tr');
         tr.innerHTML = `<td class="ob-bid">${parseFloat(bid[0]).toFixed(isSimulated ? 4 : 2)}</td><td>${parseFloat(bid[1]).toFixed(4)}</td><td>${(bid[0]*bid[1]).toFixed(2)}</td>`;
@@ -1098,9 +1090,7 @@ function updateCurrentPrice(price, open) {
         el.className = 'current-price ' + (price >= open ? 'price-up' : 'price-down');
     }
     const priceInput = document.getElementById('trade-price');
-    if (priceInput) {
-        priceInput.value = price.toFixed(price < 10 ? 4 : 2);
-    }
+    if (priceInput) priceInput.value = price.toFixed(price < 10 ? 4 : 2);
     currentMarketPrice = price;
 }
 
@@ -1118,48 +1108,32 @@ function updateTradeFormBalances() {
     const usdtEl = document.getElementById('trade-balance-usdt');
     const coinEl = document.getElementById('trade-balance-coin');
     if (usdtEl) usdtEl.textContent = state.usdtBalance.toFixed(2);
-    if (coinEl && state[coinName + 'Balance'] !== undefined) {
-        coinEl.textContent = state[coinName + 'Balance'].toFixed(8);
-    }
+    if (coinEl) coinEl.textContent = state[coinName + 'Balance'].toFixed(8);
 }
 
 function executeTrade(type) {
     const price = parseFloat(document.getElementById('trade-price').value);
     const amount = parseFloat(document.getElementById('trade-amount').value);
-    if (!price || !amount || price <= 0 || amount <= 0) { 
-        showToast('Harga atau jumlah tidak valid.', 'error'); 
-        return; 
-    }
-    
+    if (!price || !amount || price <= 0 || amount <= 0) { showToast('Harga atau jumlah tidak valid.', 'error'); return; }
     const total = price * amount;
     const fee = total * (TRADING_FEE_PERCENT / 100);
     const coinName = currentPair.replace('USDT', '').toLowerCase();
-    
     if (type === 'buy') {
         const totalCost = total + fee;
-        if (state.usdtBalance < totalCost) { 
-            showToast(`Saldo USDT tidak mencukupi. Dibutuhkan ${totalCost.toFixed(2)} USDT.`, 'error'); 
-            return; 
-        }
+        if (state.usdtBalance < totalCost) { showToast(`Saldo USDT tidak mencukupi. Dibutuhkan ${totalCost.toFixed(2)} USDT.`, 'error'); return; }
         state.usdtBalance -= totalCost;
         state[coinName + 'Balance'] += amount;
         addLog('SUCCESS', `[MARKET] BUY ${amount} ${coinName.toUpperCase()} @ ${price} USDT. Fee: ${fee.toFixed(2)} USDT.`);
         showToast(`Berhasil membeli ${amount} ${coinName.toUpperCase()}!`, 'success');
     } else {
-        if (state[coinName + 'Balance'] < amount) { 
-            showToast(`Saldo ${coinName.toUpperCase()} tidak mencukupi.`, 'error'); 
-            return; 
-        }
+        if (state[coinName + 'Balance'] < amount) { showToast(`Saldo ${coinName.toUpperCase()} tidak mencukupi.`, 'error'); return; }
         const totalReceived = total - fee;
         state[coinName + 'Balance'] -= amount;
         state.usdtBalance += totalReceived;
         addLog('SUCCESS', `[MARKET] SELL ${amount} ${coinName.toUpperCase()} @ ${price} USDT. Fee: ${fee.toFixed(2)} USDT.`);
         showToast(`Berhasil menjual ${amount} ${coinName.toUpperCase()}!`, 'success');
     }
-    
-    saveState(); 
-    updateWalletDisplay(); 
-    updateTradeFormBalances();
+    saveState(); updateWalletDisplay(); updateTradeFormBalances();
 }
 
 function init() {
