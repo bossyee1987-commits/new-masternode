@@ -42,10 +42,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 .search-bar svg { width: 18px; height: 18px; fill: #00e5ff; flex-shrink: 0; }
 .search-bar input { background: transparent; border: none; outline: none; color: #fff; font-size: 14px; width: 100%; }
 .search-bar input::placeholder { color: #78909c; }
-.header-right { display: flex; align-items: center; gap: 15px; min-width: 320px; justify-content: flex-end; }
-.market-btn { display: flex; align-items: center; gap: 8px; background-color: transparent; border: 1px solid #2ecc71; color: #2ecc71; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
-.market-btn:hover { background-color: rgba(46, 204, 113, 0.1); }
-.market-btn svg { width: 16px; height: 16px; fill: #2ecc71; }
+.header-right { display: flex; align-items: center; gap: 15px; min-width: 250px; justify-content: flex-end; } /* Lebar disesuaikan karena Market Open dihapus */
 .notif-btn { position: relative; background: none; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; justify-content: center; }
 .notif-btn svg { width: 22px; height: 22px; fill: #fff; }
 .notif-badge { position: absolute; top: 2px; right: 2px; background-color: #e74c3c; color: #fff; font-size: 10px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
@@ -312,7 +309,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 @media (max-width: 700px) { .dashboard-grid { grid-template-columns: 1fr; } }
 
 /* ========================================= */
-/* CSS BARU: BOSSX AI AGENT */
+/* CSS: BOSSX AI AGENT */
 /* ========================================= */
 .ai-agent-container { position: fixed; bottom: 30px; left: 30px; z-index: 9999; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
@@ -416,6 +413,80 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 @media (max-width: 500px) {
     .ai-chat-panel { width: calc(100vw - 40px); left: -10px; bottom: 75px; }
 }
+
+/* ========================================= */
+/* CSS: BOSSX SMART BROADCAST TICKER */
+/* ========================================= */
+.ticker-container {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(13, 33, 55, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 12px;
+    padding: 12px 0;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.05), inset 0 0 10px rgba(0, 229, 255, 0.05);
+    position: relative;
+}
+
+.ticker-container::before, .ticker-container::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 60px;
+    z-index: 2;
+    pointer-events: none;
+}
+.ticker-container::before {
+    left: 0;
+    background: linear-gradient(to right, #0a1628, transparent);
+}
+.ticker-container::after {
+    right: 0;
+    background: linear-gradient(to left, #0a1628, transparent);
+}
+
+.ticker-track {
+    display: inline-block;
+    white-space: nowrap;
+    padding-left: 100%;
+    /* PERUBAHAN: Durasi diperlambat dari 55s menjadi 100s agar lebih nyaman dibaca */
+    animation: ticker-scroll 100s linear infinite; 
+}
+
+.ticker-track:hover {
+    animation-play-state: paused;
+    cursor: default;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 0 1.5rem;
+    font-size: 14px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ffffff, #00e5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+.ticker-separator {
+    color: #f39c12;
+    font-size: 16px;
+    vertical-align: middle;
+    margin: 0 10px;
+    text-shadow: 0 0 5px rgba(243, 156, 18, 0.5);
+}
+
+@keyframes ticker-scroll {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
 </style>
 </head>
 <body>
@@ -450,10 +521,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
             </div>
         </div>
         <div class="header-right">
-            <button class="market-btn">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                Market Open
-            </button>
+            <!-- PERUBAHAN: Tombol Market Open Dihapus -->
             <button class="notif-btn" title="Notifikasi">
                 <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
                 <span class="notif-badge">3</span>
@@ -470,6 +538,33 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
 
     <div class="content">
         <div class="page-section active" id="page-dashboard">
+            
+            <!-- FITUR: BOSSX SMART BROADCAST TICKER -->
+            <div class="ticker-container">
+                <div class="ticker-track">
+                    <span class="ticker-item">📢 Selamat datang di BossX Masternode Platform.</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🌟 Selamat bergabung sebagai Validator Resmi BossX, Boss Fery Muliawan!</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🔒 Sistem node Anda aktif. Reward berjalan berdasarkan keaktifan Power ON harian.</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🚀 Pertahankan konsistensi aktivasi Anda setiap hari setelah jam 06:01 untuk memaksimalkan reward!</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">💎 BossX: The Future of Decentralized Validation.</span>
+                    <span class="ticker-separator">✦</span>
+                    <!-- Duplikasi untuk seamless loop -->
+                    <span class="ticker-item">📢 Selamat datang di BossX Masternode Platform.</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🌟 Selamat bergabung sebagai Validator Resmi BossX, Boss Fery Muliawan!</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🔒 Sistem node Anda aktif. Reward berjalan berdasarkan keaktifan Power ON harian.</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">🚀 Pertahankan konsistensi aktivasi Anda setiap hari setelah jam 06:01 untuk memaksimalkan reward!</span>
+                    <span class="ticker-separator">✦</span>
+                    <span class="ticker-item">💎 BossX: The Future of Decentralized Validation.</span>
+                </div>
+            </div>
+
             <div class="dashboard-grid">
                 <div class="redeem-card">
                     <div class="redeem-card-header">
@@ -657,9 +752,7 @@ body { font-family: Arial, sans-serif; display: flex; min-height: 100vh; backgro
     </div>
 </div>
 
-<!-- ========================================= -->
 <!-- HTML: BOSSX AI AGENT -->
-<!-- ========================================= -->
 <div class="ai-agent-container">
     <div id="ai-chat-panel" class="ai-chat-panel hidden">
         <div class="ai-header">
@@ -710,7 +803,7 @@ let state = {
     rewardValidasi: 0.00000000, countdownSeconds: 60,
     logs: [], shareCount: 0, totalSharesAccepted: 0,
     totalSharesRejected: 0, uptimeSeconds: 0, lastSaveTimestamp: null,
-    activationHistory: [] // BARU: Untuk melacak waktu aktivasi
+    activationHistory: []
 };
 
 let accessKeys = [];
@@ -979,7 +1072,6 @@ function togglePower() {
     state.powerOnTimestamp = Date.now();
     isRunning = true;
     
-    // CATAT AKTIVASI HARI INI
     const now = new Date();
     state.activationHistory.push({
         timestamp: Date.now(),
@@ -1350,7 +1442,7 @@ function loadState() {
     } catch (e) { console.error('Load failed:', e); return false; }
 }
 
-// ==================== OFFLINE REWARD (INDIVIDUAL LOGS) ====================
+// ==================== OFFLINE REWARD ====================
 function processOfflineState() {
     if (!state.powerOn || !state.powerOnTimestamp) return;
 
@@ -1448,7 +1540,7 @@ function processOfflineState() {
     renderLogs();
 }
 
-// ==================== SYSTEM LOGS (FAKE MINING) ====================
+// ==================== SYSTEM LOGS ====================
 function startAllSystemLogs() {
     stopAllSystemLogs();
     
@@ -1540,7 +1632,7 @@ function updateShareStatistics(accepted) {
 }
 
 // =========================================
-// LOGIKA BARU: BOSSX AI AGENT
+// LOGIKA: BOSSX AI AGENT
 // =========================================
 
 let isAiChatOpen = false;
